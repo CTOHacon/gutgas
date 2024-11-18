@@ -1,0 +1,22 @@
+{
+    "apps": [
+        {
+            "name": "gutgas-inertia-ssr",
+            "script": "artisan",
+            "args": [
+                "inertia:start-ssr"
+            ],
+            "instances": "1",
+            "wait_ready": true,
+            "autorestart": true,
+            "restart_delay": 5000,
+            "max_memory_restart": "1G",
+            "interpreter": "php",
+            "watch": true,
+            "error_file": "log/err.log",
+            "out_file": "log/out.log",
+            "log_file": "log/combined.log",
+            "time": true
+        }
+    ]
+}

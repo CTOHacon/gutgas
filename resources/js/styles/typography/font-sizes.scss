@@ -1,0 +1,89 @@
+@import '../variables.scss';
+
+.fs-h1 {
+	font-weight: 800;
+	font-size: 4.5rem;
+	@media (max-width: $tablet-width) {
+		font-size: 3.5rem;
+	}
+	@media (max-width: $mobile-width) {
+		font-size: 2.5rem;
+	}
+}
+
+.fs-h2 {
+	font-weight: 800;
+	font-size: 3.5rem;
+	line-height: 107%;
+	letter-spacing: normal;
+	@media (max-width: $tablet-width) {
+		font-size: 2.5rem;
+	}
+	@media (max-width: $mobile-width) {
+		font-size: 2rem;
+	}
+}
+.fs-h3 {
+	font-weight: 800;
+	font-size: 2.5rem;
+	line-height: 124%;
+	letter-spacing: normal;
+	@media (max-width: $tablet-width) {
+		font-size: 2rem;
+	}
+	@media (max-width: $mobile-width) {
+		font-size: 1.5rem;
+	}
+}
+.fs-h4 {
+	font-weight: 800;
+	font-size: 2rem;
+	line-height: 100%;
+	@media (max-width: $tablet-width) {
+		font-size: 1.5rem;
+	}
+	@media (max-width: $mobile-width) {
+		font-size: 1.25rem;
+	}
+}
+.fs-h5 {
+	font-weight: 800;
+	font-size: 1.75rem;
+	line-height: 100%;
+	letter-spacing: -0.2px;
+	@media (max-width: $tablet-width) {
+		font-size: 1.25rem;
+	}
+}
+.fs-large {
+	font-size: 1.5rem;
+	strong {
+		font-weight: 600;
+		color: #f24942;
+	}
+	@media (max-width: $tablet-width) {
+		font-size: 1.25rem;
+	}
+}
+.fs-semi-large {
+	font-size: 1.25rem;
+	@media (max-width: $tablet-width) {
+		font-size: 1.125rem;
+	}
+}
+.fs-medium {
+	font-size: 1.125rem;
+	@media (max-width: $tablet-width) {
+		font-size: 1rem;
+	}
+}
+.fs-regular {
+	font-size: 1rem;
+}
+.fs-small {
+	font-size: 0.875rem;
+}
+.fs-semi-small {
+	font-size: 12px;
+	letter-spacing: -0.12px;
+}

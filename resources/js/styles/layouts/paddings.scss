@@ -1,0 +1,130 @@
+$allowedDirections: ('t', 'b', 'l', 'r', 'h', 'v');
+$paddings: (
+	0: '*',
+	8: '*',
+	12: (
+		'h',
+		'v'
+	),
+	16: (
+		'*'
+	),
+	20: (
+		'h',
+		'v'
+	),
+	24: (
+		'h',
+		'v',
+		'b',
+		'l'
+	),
+	32: (
+		'v',
+		'r'
+	),
+	36: (
+		't',
+		'v'
+	),
+	40: (
+		'*'
+	),
+	44: (
+		'h'
+	),
+	48: (
+		'v',
+		'b'
+	),
+	56: (
+		't'
+	),
+	78: '*',
+	88: (
+		'v',
+		'h'
+	),
+	116: (
+		't',
+		'b'
+	)
+);
+@mixin paddingPropertiesByDirection($value, $direction) {
+	@if $direction == 't' {
+		padding-top: #{$value}px;
+	} @else if $direction == 'b' {
+		padding-bottom: #{$value}px;
+	} @else if $direction == 'l' {
+		padding-left: #{$value}px;
+	} @else if $direction == 'r' {
+		padding-right: #{$value}px;
+	} @else if $direction == 'h' {
+		padding-left: #{$value}px;
+		padding-right: #{$value}px;
+	} @else if $direction == 'v' {
+		padding-top: #{$value}px;
+		padding-bottom: #{$value}px;
+	}
+}
+@mixin paddingClassesSet($key, $value, $directions) {
+	@if $directions == '*' {
+		.p-#{$key} {
+			padding: #{$value}px;
+		}
+		@each $direction in $allowedDirections {
+			.p#{$direction}-#{$key} {
+				@include paddingPropertiesByDirection($value, $direction);
+			}
+		}
+	} @else {
+		@each $direction in $directions {
+			.p#{$direction}-#{$key} {
+				@include paddingPropertiesByDirection($value, $direction);
+			}
+		}
+	}
+}
+@each $padding, $directions in $paddings {
+	@include paddingClassesSet($padding, $padding, $directions);
+}
+
+@media (max-width: $small-desktop-width) {
+	@each $padding, $directions in $paddings {
+		$value: $padding;
+		@if $padding >= 64 {
+			$value: $padding * 0.5;
+		} @else if $padding >= 32 {
+			$value: $padding * 0.7;
+		}
+		@include paddingClassesSet($padding, $value, $directions);
+	}
+}
+
+@media (max-width: $tablet-width) {
+	@each $padding, $directions in $paddings {
+		$value: $padding;
+		@if $padding >= 64 {
+			$value: $padding * 0.4;
+		} @else if $padding >= 32 {
+			$value: $padding * 0.6;
+		} @else if $padding >= 16 {
+			$value: $padding * 0.8;
+		}
+		@include paddingClassesSet($padding, $value, $directions);
+	}
+}
+
+@media (max-width: $mobile-width) {
+	@each $padding, $directions in $paddings {
+		$value: $padding;
+		@if $padding >= 64 {
+			$value: $padding * 0.3;
+		} @else if $padding >= 32 {
+			$value: $padding * 0.5;
+		} @else if $padding >= 16 {
+			$value: $padding * 0.7;
+		}
+		@include paddingClassesSet($padding, $value, $directions);
+	}
+}

@@ -1,0 +1,76 @@
+@import '../variables.scss';
+
+strong,
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-weight: 700;
+}
+
+a {
+	color: #f24942;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+h1,
+h2 {
+	font-size: 2rem;
+	margin-bottom: 3rem;
+	line-height: 124%;
+	color: #fff;
+	@media (max-width: $tablet-width) {
+		font-size: 1.5em;
+		margin-bottom: 2rem;
+	}
+	@media (max-width: $mobile-width) {
+		font-size: 1.25em;
+		margin-bottom: 1.5rem;
+	}
+}
+h3 {
+	font-size: 1.5em;
+	margin-bottom: 2rem;
+	@media (max-width: $tablet-width) {
+		font-size: 1.25em;
+		margin-bottom: 1.5rem;
+	}
+}
+h4 {
+	font-size: 1.25em;
+	margin-bottom: 1.5rem;
+	@media (max-width: $tablet-width) {
+		font-size: 1.125em;
+		margin-bottom: 1.25rem;
+	}
+}
+ul {
+	padding-left: 1em;
+	margin-bottom: 1.5rem;
+	li {
+		list-style-type: disc;
+	}
+}
+ol {
+	padding-left: 1em;
+	margin-bottom: 1.5rem;
+	li {
+		list-style-type: decimal;
+	}
+}
+
+p {
+	margin-bottom: 1em;
+}
+
+strong {
+	color: #fff;
+	opacity: 0.7;
+}
+
+& > *:last-child {
+	margin-bottom: 0 !important;
+}

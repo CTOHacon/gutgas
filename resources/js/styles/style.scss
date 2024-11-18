@@ -1,0 +1,53 @@
+@import 'reset.scss';
+@import 'variables.scss';
+@import 'typography.scss';
+@import 'colors.scss';
+@import 'border.scss';
+
+@import 'layouts/**/*.scss';
+@import 'components/**/*.scss';
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
+
+#app {
+	height: 100%;
+}
+html {
+	@media (max-width: $tablet-width) {
+		font-size: 14px;
+	}
+	color: #fff;
+	background: #0f0f10;
+	overflow-x: hidden;
+	scroll-behavior: auto;
+}
+body {
+	font-family: 'Mulish', sans-serif;
+	letter-spacing: -0.01em;
+	height: 100%;
+	line-height: 1.33;
+	font-weight: 400;
+	overflow-x: clip;
+	* {
+		line-height: inherit;
+	}
+}
+
+.lock {
+	overflow: hidden;
+}
+
+// scroll bar 2px width. Background color is #F24942
+::-webkit-scrollbar {
+	width: 2px;
+}
+::-webkit-scrollbar-track {
+	background: #0f0f10;
+}
+::-webkit-scrollbar-thumb {
+	background: #f24942;
+}
+// for firefox
+* {
+	scrollbar-color: #f24942 #0f0f10;
+	scrollbar-width: thin;
+}

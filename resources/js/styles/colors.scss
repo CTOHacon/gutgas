@@ -1,0 +1,36 @@
+.background-semi-black {
+	background: #1a1a1a;
+}
+.background-black {
+	background: #000;
+}
+
+.color-white {
+	color: #fff;
+}
+
+.color-danger {
+	color: #f24942;
+}
+.color-success {
+	color: #58b18c;
+}
+.color-secondary {
+	color: #828282;
+}
+.color-typography-secondary {
+	color: #828282;
+	strong,
+	h2,
+	h3,
+	h4,
+	h5 {
+		color: #fff;
+	}
+}
+.color-typography-primary {
+	color: #fff;
+	strong {
+		color: #f24942;
+	}
+}

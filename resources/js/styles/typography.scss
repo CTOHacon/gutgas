@@ -1,0 +1,45 @@
+@import 'typography/font-sizes.scss';
+@import 'typography/font-weights.scss';
+@import 'typography/line-heights.scss';
+@import 'typography/letter-spacings.scss';
+@import 'variables.scss';
+
+.strong-fw-600 {
+	strong {
+		font-weight: 600;
+	}
+}
+.strong-fw-700 {
+	strong {
+		font-weight: 700;
+	}
+}
+
+.underline {
+	text-decoration: underline;
+}
+.hover-underline {
+	&:hover {
+		text-decoration: underline;
+	}
+}
+.text-center {
+	text-align: center;
+}
+.text-left {
+	text-align: left;
+}
+.text-right {
+	text-align: right;
+}
+
+.fs-typography-content {
+	font-size: 15px;
+	font-weight: 300;
+	@media (max-width: $mobile-width) {
+		font-size: 14px;
+	}
+}
+.typography-content {
+	@import 'typography/plain-content-styles.scss';
+}

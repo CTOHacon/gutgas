@@ -1,0 +1,8 @@
+.plain-content-ql-editor .ql-editor,
+.plain-content-ql-editor .ProseMirror {
+	@import '../typography/plain-content-styles.scss';
+	@import '../layouts/margins.scss';
+	* {
+		color: initial !important;
+	}
+}

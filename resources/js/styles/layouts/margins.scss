@@ -1,0 +1,157 @@
+$allowedDirections: ('t', 'b', 'l', 'r', 'h', 'v');
+
+$margins: (
+	4: (
+		'b'
+	),
+	8: '*',
+	12: '*',
+	16: '*',
+	20: (
+		'b'
+	),
+	24: (
+		't',
+		'b'
+	),
+	32: (
+		't',
+		'l',
+		'b'
+	),
+	40: (
+		'v',
+		't',
+		'b'
+	),
+	48: (
+		'b'
+	),
+	60: (
+		'b'
+	),
+	68: (
+		'b'
+	),
+	72: (
+		'b',
+		't'
+	),
+	88: (
+		't',
+		'b'
+	),
+	116: (
+		'b'
+	),
+	163: (
+		'b'
+	)
+);
+@mixin marginPropertiesByDirection($value, $direction) {
+	@if $direction == 't' {
+		margin-top: #{$value}px !important;
+	} @else if $direction == 'b' {
+		margin-bottom: #{$value}px !important;
+	} @else if $direction == 'l' {
+		margin-left: #{$value}px !important;
+	} @else if $direction == 'r' {
+		margin-right: #{$value}px !important;
+	} @else if $direction == 'h' {
+		margin-left: #{$value}px !important;
+		margin-right: #{$value}px !important;
+	} @else if $direction == 'v' {
+		margin-top: #{$value}px !important;
+		margin-bottom: #{$value}px !important;
+	}
+}
+@mixin marginClassesSet($key, $value, $directions) {
+	@if $directions == '*' {
+		@each $direction in $allowedDirections {
+			.m#{$direction}-#{$key} {
+				@include marginPropertiesByDirection($value, $direction);
+			}
+		}
+	} @else {
+		@each $direction in $directions {
+			.m#{$direction}-#{$key} {
+				@include marginPropertiesByDirection($value, $direction);
+			}
+		}
+	}
+}
+
+@each $margin, $directions in $margins {
+	@include marginClassesSet($margin, $margin, $directions);
+}
+
+@media (max-width: $small-desktop-width) {
+	@each $margin, $directions in $margins {
+		$value: $margin;
+		@if $margin >= 64 {
+			$value: $margin * 0.7;
+		} @else if $margin >= 32 {
+			$value: $margin * 0.9;
+		}
+		@include marginClassesSet($margin, $value, $directions);
+	}
+}
+
+@media (max-width: $tablet-width) {
+	@each $margin, $directions in $margins {
+		$value: $margin;
+		@if $margin >= 64 {
+			$value: $margin * 0.5;
+		} @else if $margin >= 24 {
+			$value: $margin * 0.7;
+		}
+		@include marginClassesSet($margin, $value, $directions);
+	}
+}
+
+@media (max-width: $mobile-width) {
+	@each $margin, $directions in $margins {
+		$value: $margin;
+		@if $margin >= 64 {
+			$value: $margin * 0.4;
+		} @else if $margin >= 24 {
+			$value: $margin * 0.6;
+		} @else if $margin >= 16 {
+			$value: $margin * 0.7;
+		}
+		@include marginClassesSet($margin, $value, $directions);
+	}
+}
+
+.no-mb-margin {
+	margin-bottom: 0 !important;
+}
+.no-mt-margin {
+	margin-top: 0 !important;
+}
+.no-ml-margin {
+	margin-left: 0 !important;
+}
+.no-mr-margin {
+	margin-right: 0 !important;
+}
+.no-mx-margin {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+.no-my-margin {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+.mt-auto {
+	margin-top: auto !important;
+}
+.mb-auto {
+	margin-bottom: auto !important;
+}
+.ml-auto {
+	margin-left: auto !important;
+}
+.mr-auto {
+	margin-right: auto !important;
+}
