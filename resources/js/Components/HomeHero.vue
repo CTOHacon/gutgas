@@ -50,7 +50,7 @@ const props = defineProps<{
 	flex-direction: column;
 }
 .inner {
-	min-height: 100vh;
+	min-height: 800px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

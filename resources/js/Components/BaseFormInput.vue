@@ -20,9 +20,6 @@
 		<input
 			v-else
 			class="input"
-			v-maska
-			:data-maska="mask"
-			data-maska-eager
 			:value="modelValue"
 			@input="(event: Event) => {
 				emit('update:modelValue', (event.target as HTMLInputElement).value);
@@ -38,7 +35,6 @@
 import BaseFormField from './BaseFormField.vue';
 
 import { ref } from 'vue';
-import { vMaska } from 'maska';
 
 const props = defineProps<{
 	modelValue: string;
