@@ -1,5 +1,5 @@
 <template>
-	<div
+	<button
 		class="products-group-card"
 		:class="{
 			active: active
@@ -25,7 +25,7 @@
 			{{ name }}
 		</Link>
 		<span class="name fs-medium" v-else>{{ name }}</span>
-	</div>
+	</button>
 </template>
 
 <script setup lang="ts">
