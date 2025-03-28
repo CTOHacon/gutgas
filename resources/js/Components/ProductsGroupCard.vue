@@ -90,9 +90,6 @@ onMounted(() => {
 }
 
 .products-group-card:not(.active):hover {
-	.icon-default {
-		opacity: 0;
-	}
 	.icon-hover {
 		opacity: 1;
 	}
