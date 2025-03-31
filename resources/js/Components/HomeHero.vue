@@ -44,6 +44,10 @@ const props = defineProps<{
 	background: url('@/assets/hero-home-background.jpg') no-repeat center center;
 	background-size: cover;
 	position: relative;
+	padding-top: 80px;
+	@media (max-width: $large-mobile-width) {
+		padding-top: 20px;
+	}
 }
 .container {
 	display: flex;
