@@ -73,7 +73,7 @@ const { isCartModalOpened } = useCart();
 .desktop-header {
 	transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 	background-color: rgba(15, 15, 16, 0.8);
-	backdrop-filter: blur(5px);
+	backdrop-filter: blur(16px);
 	// background: radial-gradient(
 	// 	49.34% 105.48% at 50% 100%,
 	// 	#000 0%,

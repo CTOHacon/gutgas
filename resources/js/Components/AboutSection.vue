@@ -72,7 +72,7 @@ const props = defineProps<{
 	content?: string;
 }>();
 
-const initialRotation = ref<number>(500);
+const initialRotation = ref<number>(360);
 
 const innerRef = ref<HTMLElement | null>(null);
 const balonTranslateX = ref<number>(-30); // vw

@@ -11,7 +11,7 @@
 		<HomeHero
 			:title="getMeta(page.meta, 'heroTitle')"
 			:subtitle="getMeta(page.meta, 'heroSubTitle')"
-			class="mb-60 mb-116"
+			class="mb-60"
 		/>
 
 		<AboutSection
