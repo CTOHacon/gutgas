@@ -28,7 +28,7 @@ const { __ } = useTranslations();
 const topRef = ref<HTMLElement | null>(null);
 const innerRef = ref<HTMLElement | null>(null);
 
-const visible = ref<boolean>(true);
+const visible = ref<boolean>(false);
 
 onMounted(() => {
 	visible.value = window.scrollY === 0;
@@ -52,7 +52,6 @@ defineExpose({ innerRef });
 	overflow: hidden;
 	position: relative;
 	z-index: 1;
-	transition: height 0.2s ease-in-out;
 	@media (max-width: $tablet-width) {
 		display: none;
 	}
