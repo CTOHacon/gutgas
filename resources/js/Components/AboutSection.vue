@@ -78,26 +78,62 @@ const innerRef = ref<HTMLElement | null>(null);
 const balonTranslateX = ref<number>(-30); // vw
 const balonRotate = ref<number>(-initialRotation.value); // deg
 
+// Target values for smooth animation
+const targetTranslateX = ref<number>(-30);
+const targetRotate = ref<number>(-initialRotation.value);
+
+// Animation settings
+const animationFrameId = ref<number | null>(null);
+const damping = 0.05; // Lower values = smoother but slower animation
+
 const viewportPercentage = useViewportPercentage(innerRef, {
 	treshold: 0.8
 });
 
-const updatePositions = () => {
-	balonTranslateX.value = -30 + 30 * (viewportPercentage.value / 100);
-	balonRotate.value =
+// Calculate target positions based on scroll
+const updateTargetPositions = () => {
+	targetTranslateX.value = -30 + 30 * (viewportPercentage.value / 100);
+	targetRotate.value =
 		-initialRotation.value +
 		initialRotation.value * (viewportPercentage.value / 100);
 };
+
+// Animate smoothly toward target values
+const animate = () => {
+	// Apply smooth damping
+	balonTranslateX.value +=
+		(targetTranslateX.value - balonTranslateX.value) * damping;
+	balonRotate.value += (targetRotate.value - balonRotate.value) * damping;
+
+	// Continue animation loop
+	animationFrameId.value = requestAnimationFrame(animate);
+};
+
 onMounted(() => {
 	// if match max-width: 768px initialRotation = 300
 	if (window.matchMedia('(max-width: 768px)').matches) {
 		initialRotation.value = 200;
+		targetRotate.value = -initialRotation.value;
+		balonRotate.value = -initialRotation.value;
 	}
-	updatePositions();
-	window.addEventListener('scroll', updatePositions);
+
+	// Set initial positions
+	updateTargetPositions();
+
+	// Start animation loop
+	animate();
+
+	// Update targets on scroll
+	window.addEventListener('scroll', updateTargetPositions);
 });
+
 onUnmounted(() => {
-	window.removeEventListener('scroll', updatePositions);
+	window.removeEventListener('scroll', updateTargetPositions);
+
+	// Clean up animation frame
+	if (animationFrameId.value !== null) {
+		cancelAnimationFrame(animationFrameId.value);
+	}
 });
 </script>
 
@@ -230,7 +266,7 @@ onUnmounted(() => {
 	}
 	&,
 	img {
-		transition: transform 0.3s cubic-bezier(0.17, 0.84, 0.42, 0.98);
+		transition: none; /* Removed for smoother RAF animation */
 	}
 }
 .is-visible .balon {
