@@ -86,16 +86,25 @@ const targetRotate = ref<number>(-initialRotation.value);
 const animationFrameId = ref<number | null>(null);
 const damping = 0.05; // Lower values = smoother but slower animation
 
+// Track maximum viewport percentage reached to prevent backwards animation
+const maxViewportPercentage = ref<number>(0);
 const viewportPercentage = useViewportPercentage(innerRef, {
 	treshold: 0.8
 });
 
 // Calculate target positions based on scroll
 const updateTargetPositions = () => {
-	targetTranslateX.value = -30 + 30 * (viewportPercentage.value / 100);
+	// Update the max percentage if current is higher
+	maxViewportPercentage.value = Math.max(
+		maxViewportPercentage.value,
+		viewportPercentage.value
+	);
+
+	// Use the max percentage to calculate animation values
+	targetTranslateX.value = -30 + 30 * (maxViewportPercentage.value / 100);
 	targetRotate.value =
 		-initialRotation.value +
-		initialRotation.value * (viewportPercentage.value / 100);
+		initialRotation.value * (maxViewportPercentage.value / 100);
 };
 
 // Animate smoothly toward target values
