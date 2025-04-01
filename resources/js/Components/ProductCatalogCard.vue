@@ -83,8 +83,13 @@ const inCart = computed(() => isInCart(props.product));
 	flex-direction: column;
 	padding: 16px 10px 0 10px;
 	text-align: center;
+	transition: background 0.3s ease-in-out;
+
 	&.featured {
 		background: linear-gradient(180deg, #570705 0%, rgba(0, 0, 0, 0) 100%);
+	}
+	&:hover {
+		background: #151515;
 	}
 }
 .head {
