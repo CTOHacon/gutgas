@@ -88,8 +88,11 @@ const inCart = computed(() => isInCart(props.product));
 	&.featured {
 		background: linear-gradient(180deg, #570705 0%, rgba(0, 0, 0, 0) 100%);
 	}
-	&:hover {
+	&:not(.active):hover {
 		background: #151515;
+		.image {
+			opacity: 1;
+		}
 	}
 }
 .head {
@@ -131,7 +134,7 @@ const inCart = computed(() => isInCart(props.product));
 	max-height: 100%;
 	height: min-content;
 	width: auto;
-	opacity: 0.95;
+	opacity: 0.7;
 	transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 	position: relative;
 	z-index: 1;
