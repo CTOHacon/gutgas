@@ -39,7 +39,7 @@ When an order is created through `OrderController@store`, the system automatical
 
 1. Saves the order to database
 2. Sends receipt email to customer (`client_email`)
-3. Sends notification email to admin (`sale@gutgas.eu`)
+3. Sends notification email to admin (configured via `ADMIN_EMAIL` env variable)
 4. Sends Telegram notification (existing functionality)
 
 ### Manual Email Sending
@@ -119,12 +119,15 @@ MAIL_PASSWORD=your-password
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=your-email@domain.com
 MAIL_FROM_NAME="Your Store Name"
+
+# Admin email for receiving order notifications
+ADMIN_EMAIL="admin@yourdomain.com"
 ```
 
 ### Email Addresses
 
 - Customer receipts: Sent to `order.client_email`
-- Admin notifications: Sent to `sale@gutgas.eu`
+- Admin notifications: Sent to address configured in `ADMIN_EMAIL` environment variable
 - From address: `form-manager@gutgas.eu` (admin) or config setting (customer)
 
 ## Error Handling
@@ -139,12 +142,19 @@ Comprehensive tests are included:
 
 - `tests/Unit/EmailServiceTest.php` - Service functionality
 - `tests/Unit/EmailTemplateTest.php` - Template rendering
+- `tests/Unit/AdminEmailConfigTest.php` - Admin email configuration
 - `tests/Feature/OrderCreationTest.php` - Integration tests
 - `tests/Feature/CompleteOrderFlowTest.php` - End-to-end flow
 
 Run tests with:
 ```bash
 php artisan test --filter=Email
+```
+
+For testing with different admin emails:
+```bash
+# Set custom admin email for testing
+ADMIN_EMAIL="test-admin@example.com" php artisan test
 ```
 
 ## Localization

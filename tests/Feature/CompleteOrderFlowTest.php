@@ -85,7 +85,7 @@ class CompleteOrderFlowTest extends TestCase
 
         // Verify admin notification email was sent
         Mail::assertSent(\Illuminate\Mail\Mailable::class, function ($mail) {
-            return $mail->hasTo('sale@gutgas.eu');
+            return $mail->hasTo(env('ADMIN_EMAIL', 'sale@gutgas.eu'));
         });
     }
 

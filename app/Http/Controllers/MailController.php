@@ -10,17 +10,17 @@ class MailController extends Controller
     public function consultationMail(Request $request)
     {
         $data = request()->validate([
-            'name' => 'required|string|max:255|min:3',
+            'name'     => 'required|string|max:255|min:3',
             // phone should be +38 (###) ###-##-## where # is a digit
-            'phone' => 'required|regex:/^\+38 \(\d{3}\) \d{3}-\d{2}-\d{2}$/',
-            'email' => 'nullable|email',
+            'phone'    => 'required|regex:/^\+38 \(\d{3}\) \d{3}-\d{2}-\d{2}$/',
+            'email'    => 'nullable|email',
             'question' => 'nullable|string'
         ]);
 
         try {
             Mail::send('emails.consultation', $data, function ($message) {
                 $message->from('form-manager@gutgas.eu', 'Gutgas Sale manager');
-                $message->to('sale@gutgas.eu');
+                $message->to(env('ADMIN_EMAIL', 'sale@gutgas.eu'));
                 $message->subject('Заявка на консультацію');
             });
         } catch (\Exception $e) {
@@ -40,11 +40,11 @@ class MailController extends Controller
         $messageText .= "\n\n`" . date('d/m/Y') . "    " . date('H:i') . "`";
 
         $data = [
-            'chat_id' => env('TELEGRAM_CHAT_ID'),
-            'text' => $messageText,
+            'chat_id'    => env('TELEGRAM_CHAT_ID'),
+            'text'       => $messageText,
             'parse_mode' => 'Markdown'
         ];
-        $url = "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage?" . http_build_query($data);
+        $url  = "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage?" . http_build_query($data);
         file_get_contents($url);
 
         return redirect()->route('thankYou');
@@ -58,7 +58,7 @@ class MailController extends Controller
 
         Mail::send('emails.consultation', $data, function ($message) {
             $message->from('form-manager@gutgas.eu', 'Gutgas Sale manager');
-            $message->to('sale@gutgas.eu');
+            $message->to(env('ADMIN_EMAIL', 'sale@gutgas.eu'));
             $message->subject('Заявка на дзвінок');
         });
 
@@ -68,13 +68,14 @@ class MailController extends Controller
         $messageText .= "\n\n`" . date('d/m/Y') . "    " . date('H:i') . "`";
 
         $data = [
-            'chat_id' => env('TELEGRAM_CHAT_ID'),
-            'text' => $messageText,
+            'chat_id'    => env('TELEGRAM_CHAT_ID'),
+            'text'       => $messageText,
             'parse_mode' => 'Markdown'
         ];
-        $url = "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage?" . http_build_query($data);
+        $url  = "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage?" . http_build_query($data);
         file_get_contents($url);
 
         return redirect()->route('thankYou');
     }
+
 }

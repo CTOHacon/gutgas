@@ -50,7 +50,7 @@ class EmailService implements EmailServiceInterface
 
             Mail::send('emails.newOrder', $emailData, function ($message) use ($order) {
                 $message->from('form-manager@gutgas.eu', 'Gutgas Sale manager');
-                $message->to('sale@gutgas.eu');
+                $message->to(env('ADMIN_EMAIL', 'sale@gutgas.eu'));
                 $message->subject('$$$ Нове Замовлення #' . $order->id . ' $$$');
             });
 
