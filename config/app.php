@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'GutGas'),
+    'name'            => env('APP_NAME', 'GutGas'),
 
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ return [
     */
 
     // 'env' => env('APP_ENV', 'production'),
-    'env' => env('APP_ENV', 'production'),
+    'env'             => env('APP_ENV', 'production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', true),
+    'debug'           => (bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -57,9 +57,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url'             => env('APP_URL', 'http://localhost'),
 
-    'asset_url' => env('ASSET_URL'),
+    'asset_url'       => env('ASSET_URL'),
 
     /*
     |--------------------------------------------------------------------------
@@ -72,7 +72,7 @@ return [
     |
     */
 
-    'timezone' => 'Europe/Kiev',
+    'timezone'        => 'Europe/Kiev',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,9 +85,9 @@ return [
     |
     */
 
-    'locale' => 'ua',
+    'locale'          => 'ua',
 
-    'locales' => [
+    'locales'         => [
         'ua' => 'uk-UA',
         'ru' => 'ru-UA',
     ],
@@ -116,7 +116,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale'    => 'en_US',
 
     /*
     |--------------------------------------------------------------------------
@@ -129,9 +129,9 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key'             => env('APP_KEY'),
 
-    'cipher' => 'AES-256-CBC',
+    'cipher'          => 'AES-256-CBC',
 
     /*
     |--------------------------------------------------------------------------
@@ -146,7 +146,7 @@ return [
     |
     */
 
-    'maintenance' => [
+    'maintenance'     => [
         'driver' => 'file',
         // 'store'  => 'redis',
     ],
@@ -162,19 +162,20 @@ return [
     |
     */
 
-    'providers' => ServiceProvider::defaultProviders()->merge([
-            /*
-             * Package Service Providers...
-             */
+    'providers'       => ServiceProvider::defaultProviders()->merge([
+        /*
+         * Package Service Providers...
+         */
 
-            /*
-             * Application Service Providers...
-             */
+        /*
+         * Application Service Providers...
+         */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-            // App\Providers\BroadcastServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\EmailServiceProvider::class,
 
         Spatie\Permission\PermissionServiceProvider::class,
         PermissionsServiceProvider::class,
@@ -194,10 +195,10 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
+    'aliases'         => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Meta' => Zoha\Meta\Facades\MetaFacade::class,
+        'Meta'  => Zoha\Meta\Facades\MetaFacade::class,
     ])->toArray(),
 
 ];

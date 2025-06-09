@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Order\StoreRequest;
+use App\Interfaces\EmailServiceInterface;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +12,13 @@ use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
+    protected EmailServiceInterface $emailService;
+
+    public function __construct(EmailServiceInterface $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +37,7 @@ class OrderController extends Controller
             ->orWhere('id', $search);
 
         return Inertia::render('Admin/Order/Index', [
-            'orders' => $orders->paginate(10),
+            'orders'         => $orders->paginate(10),
             'showCompleated' => $request->get('show_compleated'),
         ]);
     }
@@ -57,49 +65,12 @@ class OrderController extends Controller
         }
         DB::commit();
 
-        $data['order_id'] = $order->id;
+        // Send emails using the service
+        $this->emailService->sendOrderNotification($order);
+        $this->emailService->sendOrderConfirmation($order);
 
-        try {
-            Mail::send('emails.newOrder', $data, function ($message) {
-                $message->from('form-manager@gutgas.eu', 'Gutgas Sale manager');
-                $message->to('sale@gutgas.eu');
-                // $message->to('borysenko.alexander@gmail.com');
-                $message->subject('$$$ Нове Замовлення $$$');
-            });
-        } catch (\Exception $e) {
-        }
-
-        try {
-            $totalPrice = 0;
-            foreach ($order->cart_content as $product) {
-                $totalPrice += $product['price'] * $product['quantity'];
-            }
-
-            $messageText = "**✅ Нове замовлення №{$order->id}**\n\n";
-            $messageText .= "👤 {$order->client_name}\n";
-            $messageText .= "💰 {$totalPrice}\n\n";
-            $messageText .= "📞 {$order->client_phone}\n";
-            $messageText .= "📩 [{$order->client_email}](mailto:{$order->client_email})\n\n";
-            $messageText .= "———————————————\n\n";
-            $messageText .= "__💬: {$order->client_message}__\n";
-            $messageText .= "__🚚: {$order->shipping_message}__\n\n";
-            $messageText .= "🛒\n";
-            $counter = 1;
-            foreach ($order->cart_content as $product) {
-                $counter++;
-                $messageText .= "{$counter}. {$product['name'][app()->getLocale()]} - {$product['quantity']} шт. - {$product['price']}грн/шт.\n";
-            }
-            $messageText .= "\n\n`" . date('d/m/Y') . "    " . date('H:i') . "`";
-            $data = [
-                'chat_id' => env('TELEGRAM_CHAT_ID'),
-                'text' => $messageText,
-                'parse_mode' => 'Markdown'
-            ];
-            $url = "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage?" . http_build_query($data);
-
-            file_get_contents($url);
-        } catch (\Exception $e) {
-        }
+        // Send Telegram notification
+        $this->sendTelegramNotification($order);
 
         return redirect()->route('thankYou')
             ->with('order', $order)->with('thankYouTranslations', trans('thank-you'));
@@ -162,4 +133,48 @@ class OrderController extends Controller
             throw $e;
         }
     }
+
+    /**
+     * Send Telegram notification for new order
+     *
+     * @param Order $order
+     * @return void
+     */
+    private function sendTelegramNotification(Order $order): void
+    {
+        try {
+            $totalPrice = 0;
+            foreach ($order->cart_content as $product) {
+                $totalPrice += $product['price'] * $product['quantity'];
+            }
+
+            $messageText = "**✅ Нове замовлення №{$order->id}**\n\n";
+            $messageText .= "👤 {$order->client_name}\n";
+            $messageText .= "💰 {$totalPrice}\n\n";
+            $messageText .= "📞 {$order->client_phone}\n";
+            $messageText .= "📩 [{$order->client_email}](mailto:{$order->client_email})\n\n";
+            $messageText .= "———————————————\n\n";
+            $messageText .= "__💬: {$order->client_message}__\n";
+            $messageText .= "__🚚: {$order->shipping_message}__\n\n";
+            $messageText .= "🛒\n";
+            $counter     = 1;
+            foreach ($order->cart_content as $product) {
+                $counter++;
+                $messageText .= "{$counter}. {$product['name'][app()->getLocale()]} - {$product['quantity']} шт. - {$product['price']}грн/шт.\n";
+            }
+            $messageText .= "\n\n`" . date('d/m/Y') . "    " . date('H:i') . "`";
+
+            $data = [
+                'chat_id'    => env('TELEGRAM_CHAT_ID'),
+                'text'       => $messageText,
+                'parse_mode' => 'Markdown'
+            ];
+            $url  = "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage?" . http_build_query($data);
+
+            file_get_contents($url);
+        } catch (\Exception $e) {
+            // Log error but don't fail the order creation
+        }
+    }
+
 }

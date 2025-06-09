@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'orderConfirmationSubject' => 'Order Confirmation #:order_id',
+    'orderReceiptTitle'        => 'Order Confirmation',
+    'orderReceiptSubtitle'     => 'Thank you for your order!',
+    'orderNumber'              => 'Order Number',
+    'orderDate'                => 'Order Date',
+    'customerName'             => 'Customer Name',
+    'customerEmail'            => 'Email',
+    'customerPhone'            => 'Phone',
+    'customerMessage'          => 'Message',
+    'shippingInstructions'     => 'Shipping Instructions',
+    'orderItems'               => 'Order Items',
+    'productName'              => 'Product',
+    'productSku'               => 'SKU',
+    'quantity'                 => 'Quantity',
+    'unitPrice'                => 'Unit Price',
+    'totalPrice'               => 'Total',
+    'orderTotal'               => 'Order Total',
+    'thankYouMessage'          => 'Thank you for your order!',
+    'contactMessage'           => 'We will contact you as soon as possible to confirm your order and arrange delivery.',
+    'companyName'              => 'Gutgas',
+    'companyContact'           => 'Email: info@gutgas.eu | Phone: 0 (800) 35-35-05',
+];

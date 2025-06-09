@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'orderConfirmationSubject' => 'Подтверждение заказа №:order_id',
+    'orderReceiptTitle'        => 'Подтверждение заказа',
+    'orderReceiptSubtitle'     => 'Спасибо за ваш заказ!',
+    'orderNumber'              => 'Номер заказа',
+    'orderDate'                => 'Дата заказа',
+    'customerName'             => 'Имя клиента',
+    'customerEmail'            => 'Email',
+    'customerPhone'            => 'Телефон',
+    'customerMessage'          => 'Сообщение',
+    'shippingInstructions'     => 'Инструкции по доставке',
+    'orderItems'               => 'Товары в заказе',
+    'productName'              => 'Товар',
+    'productSku'               => 'Артикул',
+    'quantity'                 => 'Количество',
+    'unitPrice'                => 'Цена за единицу',
+    'totalPrice'               => 'Итого',
+    'orderTotal'               => 'Сумма заказа',
+    'thankYouMessage'          => 'Спасибо за ваш заказ!',
+    'contactMessage'           => 'Мы свяжемся с вами в ближайшее время для подтверждения заказа и организации доставки.',
+    'companyName'              => 'Gutgas',
+    'companyContact'           => 'Email: info@gutgas.eu | Телефон: 0 (800) 35-35-05',
+];

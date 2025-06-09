@@ -15,4 +15,5 @@ class Order extends Model
     protected $casts = [
         'cart_content' => 'json',
     ];
+
 }
