@@ -42,12 +42,13 @@ const hasDiscount = computed(() => {
 	width: fit-content;
 	&::before {
 		content: '';
-		background: #fff;
+		background: currentColor;
 		height: max(0.125rem, 2px);
 		position: absolute;
 		left: -0.1875rem;
 		right: -0.1875rem;
 		top: calc(50% - max(0.125rem, 2px) / 2);
+		transform: rotate(-10deg);
 	}
 }
 </style>

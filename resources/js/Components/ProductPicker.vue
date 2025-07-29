@@ -181,10 +181,11 @@ const hasDiscount = computed(() => {
 	&::before {
 		content: '';
 		position: absolute;
-		height: 0.125rem;
+		height: 2px;
 		left: -0.125rem;
 		right: -0.125rem;
 		top: calc(50% - 0.0625rem);
+		transform: rotate(-10deg);
 		background: #fff;
 	}
 }
