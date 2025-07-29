@@ -181,7 +181,7 @@ const hasDiscount = computed(() => {
 		height: 0.125rem;
 		left: -0.125rem;
 		right: -0.125rem;
-		top: cal(50% - 0.0625rem);
+		top: calc(50% - 0.0625rem);
 		background: #fff;
 	}
 }
