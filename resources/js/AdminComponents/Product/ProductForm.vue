@@ -38,14 +38,34 @@
 					/>
 					<FormError :error="form.errors.sku" />
 				</div>
-				<div class="mb-2">
-					<label class="form-label">Ціна (грн)</label>
-					<input
-						class="form-control"
-						v-model="form.price"
-						placeholder="Ціна"
-					/>
-					<FormError :error="form.errors.price" />
+				<div class="row g-2 mb-2">
+					<div class="col-4">
+						<label class="form-label">Ціна (грн)</label>
+						<input
+							class="form-control"
+							v-model="form.price"
+							placeholder="Ціна"
+						/>
+						<FormError :error="form.errors.price" />
+					</div>
+					<div class="col-4">
+						<label class="form-label">Стара Ціна (грн)</label>
+						<input
+							class="form-control"
+							v-model="form.old_price"
+							placeholder="Стара Ціна"
+						/>
+						<FormError :error="form.errors.old_price" />
+					</div>
+					<div class="col-4">
+						<label class="form-label">Етикетка Ціни</label>
+						<input
+							class="form-control"
+							v-model="form.price_label"
+							placeholder="Етикетка Ціни"
+						/>
+						<FormError :error="form.errors.price_label" />
+					</div>
 				</div>
 				<div class="">
 					<label class="form-label">Кількість У Наявності</label>

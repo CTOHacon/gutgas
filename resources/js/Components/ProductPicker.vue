@@ -13,6 +13,12 @@
 			<div
 				class="f- justify-between align-center price-quantity pv-12 pl-16 pr-40"
 			>
+				<ProductSpecialStatusBar
+					v-if="product.price_label"
+					class="price-quantity__special-status-bar"
+				>
+					{{ _t(product.price_label) }}
+				</ProductSpecialStatusBar>
 				<template v-if="productInCart">
 					<BaseQuantityField
 						:max="999"
@@ -23,13 +29,28 @@
 								setProductQuantity(product, newQuantity)
 						"
 					/>
+					<p class="price">
+						<span class="old-price" v-if="hasDiscount">
+							{{ product.old_price }}
+							<span class="price__currency">
+								{{ __('uah') }}
+							</span>
+						</span>
+						<span
+							class="current-price"
+							:class="{ _discount: hasDiscount }"
+						>
+							{{ product.price }}
+							<span class="price__currency">
+								{{ __('uah') }}
+							</span>
+						</span>
+					</p>
 					<div class="fw-800 text-right lh-100">
 						<p class="fs-semi-large">
 							{{ productInCart.price * productInCart.quantity }}
 						</p>
-						<p class="fs-semi-small color-secondary">
-							{{ __('uah') }}
-						</p>
+						<p class="fs-semi-small color-secondary"></p>
 					</div>
 				</template>
 				<template v-else>
@@ -89,6 +110,7 @@ import BaseButton from './BaseButton.vue';
 import { TProduct } from '@/types/TProduct';
 import useCart from '@/composables/cart';
 import { computed } from 'vue';
+import ProductSpecialStatusBar from './ProductSpecialStatusBar.vue';
 
 const { __, _t } = useTranslations();
 const { isCartModalOpened } = useCart();
@@ -111,6 +133,10 @@ const onAddToCart = () => {
 		isCartModalOpened.value = true;
 	}
 };
+
+const hasDiscount = computed(() => {
+	return props.product.old_price && props.product.old_price > 0;
+});
 </script>
 
 <style scoped lang="scss">
@@ -122,5 +148,53 @@ const onAddToCart = () => {
 	border: 1px solid #202020;
 	border-left: none;
 	border-right: none;
+	position: relative;
+	&__special-status-bar {
+		position: absolute;
+		right: 0;
+		top: -9px;
+	}
+}
+
+.price {
+	display: flex;
+	gap: 1.5rem;
+	&__currency {
+		font-family: 'Mulish';
+		font-weight: 800;
+		font-size: 0.875rem;
+		line-height: 124%;
+		opacity: 0.4;
+		margin-top: 0.125rem;
+	}
+}
+.old-price {
+	position: relative;
+	font-weight: 700;
+	font-size: 1.125rem;
+	line-height: 100%;
+	text-align: center;
+	color: #838d97;
+	&::before {
+		content: '';
+		position: absolute;
+		height: 0.125rem;
+		left: -0.125rem;
+		right: -0.125rem;
+		top: cal(50% - 0.0625rem);
+		background: #fff;
+	}
+}
+.current-price {
+	font-weight: 700;
+	font-size: 1.25rem;
+	line-height: 124%;
+	color: #fff;
+
+	&._discount {
+		text-decoration: line-through;
+		font-weight: 800;
+		color: #f24942;
+	}
 }
 </style>

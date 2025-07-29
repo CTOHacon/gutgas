@@ -8,6 +8,9 @@
 			type
 		]"
 	>
+		<ProductSpecialStatusBar v-if="product.price_label" class="price-label">
+			{{ _t(product.price_label) }}
+		</ProductSpecialStatusBar>
 		<Link
 			:href="
 				product.seo_entity
@@ -25,7 +28,17 @@
 			<template v-if="+product.stock">
 				<div class="default-content">
 					<h3 class="name fs-medium mb-8">{{ _t(product.name) }}</h3>
-					<p class="price">₴{{ product.price }}</p>
+					<p class="price">
+						<span class="old-price" v-if="hasDiscount">
+							₴{{ product.old_price }}
+						</span>
+						<span
+							class="current-price"
+							:class="{ _discount: hasDiscount }"
+						>
+							₴{{ product.price }}
+						</span>
+					</p>
 				</div>
 				<div class="hover-content">
 					<p class="price mb-8">₴{{ product.price }}</p>
@@ -59,6 +72,7 @@ import useCart from '@/composables/cart';
 import { computed } from 'vue';
 import getMediaFileUrl from '@/modules/helpers/getMediaFileUrl';
 import { Link, usePage } from '@inertiajs/vue3';
+import ProductSpecialStatusBar from './ProductSpecialStatusBar.vue';
 
 const { _t, __ } = useTranslations();
 
@@ -73,6 +87,10 @@ const imageUrl = props.product.media_file
 
 const { addProductToCart, removeProductFromCart, isInCart } = useCart();
 const inCart = computed(() => isInCart(props.product));
+
+const hasDiscount = computed(() => {
+	return props.product.old_price && props.product.old_price > 0;
+});
 </script>
 
 <style scoped lang="scss">
@@ -84,7 +102,7 @@ const inCart = computed(() => isInCart(props.product));
 	padding: 16px 10px 0 10px;
 	text-align: center;
 	transition: background 0.3s ease-in-out;
-
+	position: relative;
 	&.featured {
 		background: linear-gradient(180deg, #570705 0%, rgba(0, 0, 0, 0) 100%);
 	}
@@ -94,6 +112,11 @@ const inCart = computed(() => isInCart(props.product));
 			opacity: 1;
 		}
 	}
+}
+.price-label {
+	position: absolute;
+	right: 0.625rem;
+	top: 1rem;
 }
 .head {
 	background: radial-gradient(
@@ -178,6 +201,29 @@ const inCart = computed(() => isInCart(props.product));
 	line-height: 1.5rem;
 	letter-spacing: 0.05em;
 	font-weight: 700;
+	text-align: center;
+}
+.old-price {
+	position: relative;
+	display: block;
+	margin-bottom: 0.125rem;
+	font-size: 0.875rem;
+	line-height: 100%;
+	color: #838d97;
+	&::before {
+		content: '';
+		background: #fff;
+		height: max(0.125rem, 2px);
+		position: absolute;
+		left: -0.1875rem;
+		right: -0.1875rem;
+		top: calc(50% - max(0.125rem, 2px) / 2);
+	}
+}
+.current-price {
+	&._discount {
+		color: #f24942;
+	}
 }
 .name {
 	color: #bdbdbd;

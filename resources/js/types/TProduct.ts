@@ -13,6 +13,8 @@ export interface TProduct {
 	stock: number;
 	category_id: number | null;
 	description: ITranslate<string>;
+	old_price: number | null;
+	price_label: ITranslate<string> | null;
 	media_file: IMediaFile | null;
 	sorting_index: number;
 	productPage?: TProductPage | null;
@@ -28,6 +30,8 @@ export type TProductForm = {
 	stock: number | null;
 	category_id: number | null;
 	description: string;
+	old_price: number | null;
+	price_label: ITranslate<string> | null;
 	media_file: IMediaFile | null;
 	sorting_index: number;
 	attributes: number[];

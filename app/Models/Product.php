@@ -13,9 +13,16 @@ class Product extends Model
 
     protected $guarded = [];
 
-    public $translatable = ['name', 'description'];
+    public $translatable = [
+        'name',
+        'description',
+        'price_label'
+    ];
 
-    public $with = ['mediaFile.thumbnail', 'seoEntity:slug'];
+    public $with = [
+        'mediaFile.thumbnail',
+        'seoEntity:slug'
+    ];
 
     // CATEGORIES
     public function category()
@@ -64,7 +71,6 @@ class Product extends Model
                     }
                 ])->get();
     }
-
 
     // PRODUCT PAGE
     public function productPage()
@@ -121,44 +127,45 @@ class Product extends Model
 
     public function generateStructuredData()
     {
-        $attributes = $this->attributes()->get();
+        $attributes                  = $this->attributes()->get();
         $attributesForStructuredData = [];
         foreach ($attributes as $attribute) {
             $attributesForStructuredData[] = [
-                'name' => $attribute->attributeGroup->name,
+                'name'  => $attribute->attributeGroup->name,
                 'value' => $attribute->name
             ];
         }
         return [
-            "@context" => "https://schema.org/",
-            "@type" => "Product",
-            "name" => $this->name,
-            "image" => [
+            "@context"           => "https://schema.org/",
+            "@type"              => "Product",
+            "name"               => $this->name,
+            "image"              => [
                 url($this->mediaFile->thumbnail->url)
             ],
-            "description" => $this->description,
-            "sku" => $this->sku,
-            "mpn" => $this->sku,
-            "brand" => [
+            "description"        => $this->description,
+            "sku"                => $this->sku,
+            "mpn"                => $this->sku,
+            "brand"              => [
                 "@type" => "Brand",
-                "name" => "Gutgas"
+                "name"  => "Gutgas"
             ],
-            "offers" => [
-                "@type" => "Offer",
-                "url" => url(app()->currentLocale() . '/' . $this->seoEntity->slug),
+            "offers"             => [
+                "@type"         => "Offer",
+                "url"           => url(app()->currentLocale() . '/' . $this->seoEntity->slug),
                 "priceCurrency" => "UAH",
-                "price" => $this->price,
-                "availability" => $this->stock > 0 ?
+                "price"         => $this->price,
+                "availability"  => $this->stock > 0 ?
                     "https://schema.org/InStock" :
                     "https://schema.org/OutOfStock",
             ],
             "additionalProperty" => array_map(function ($attribute) {
                 return [
                     "@type" => "PropertyValue",
-                    "name" => $attribute['name'],
+                    "name"  => $attribute['name'],
                     "value" => $attribute['value']
                 ];
             }, $attributesForStructuredData)
         ];
     }
+
 }

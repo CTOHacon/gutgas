@@ -26,84 +26,93 @@ class StoreRequest extends FormRequest
             $productId = $this->product->id;
         }
         return [
-            'name' => [
+            'name'                       => [
                 'required',
                 'string',
                 'max:255',
             ],
-            'sku' => [
+            'sku'                        => [
                 'required',
                 'string',
                 'max:255',
                 'unique:products,sku' . ',' . $productId,
             ],
-            'price' => [
+            'price'                      => [
                 'required',
                 'integer',
                 'min:0',
             ],
-            'stock' => [
+            'stock'                      => [
                 'required',
                 'integer',
                 'min:0',
             ],
-            'description' => [
+            'description'                => [
                 'nullable',
                 'string',
             ],
-            'category_id' => [
+            'old_price'                  => [
+                'nullable',
+                'integer',
+                'min:0',
+            ],
+            'price_label'                => [
+                'nullable',
+                'string',
+            ],
+            'category_id'                => [
                 'nullable',
                 'integer',
                 'exists:categories,id',
             ],
-            'attributes' => [
+            'attributes'                 => [
                 'nullable',
                 'array',
             ],
-            'attributes.*' => [
+            'attributes.*'               => [
                 'integer',
                 'exists:attributes,id',
             ],
-            'product_filter_values' => [
+            'product_filter_values'      => [
                 'nullable',
                 'array',
             ],
-            'product_filter_values.*' => [
+            'product_filter_values.*'    => [
                 'integer',
                 'exists:product_filter_values,id',
             ],
-            'media_file' => [
+            'media_file'                 => [
                 'nullable',
                 'array',
             ],
-            'sorting_index' => [
+            'sorting_index'              => [
                 'nullable',
                 'integer',
             ],
-            'media_file.id' => [
+            'media_file.id'              => [
                 'nullable',
                 'integer',
                 'exists:media_files,id',
             ],
-            'media_files' => [
+            'media_files'                => [
                 'nullable',
                 'array',
             ],
-            'media_files.*.id' => [
+            'media_files.*.id'           => [
                 'nullable',
                 'integer',
                 'exists:media_files,id',
             ],
 
-            'products_groups' => [
+            'products_groups'            => [
                 'nullable',
                 'array',
             ],
-            'products_groups.*' => [
+            'products_groups.*'          => [
                 'integer',
                 'exists:products_groups,id',
             ],
-            'required_products_groups' => [
+            'required_products_groups'   => [
                 'nullable',
                 'array',
             ],
@@ -113,4 +122,5 @@ class StoreRequest extends FormRequest
             ],
         ];
     }
+
 }

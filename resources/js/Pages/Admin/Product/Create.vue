@@ -52,6 +52,8 @@ const form = useForm<TProductForm>({
 	price: null,
 	stock: null,
 	description: '',
+	old_price: null,
+	price_label: null,
 	media_file: null,
 	category_id: null,
 	sorting_index: 0,
