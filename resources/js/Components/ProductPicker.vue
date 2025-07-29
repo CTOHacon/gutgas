@@ -151,6 +151,7 @@ const hasDiscount = computed(() => {
 	align-items: center;
 	gap: 1.5rem;
 	margin-left: auto;
+	color: #fff;
 	&__currency {
 		font-family: 'Mulish';
 		font-weight: 800;
@@ -191,6 +192,5 @@ const hasDiscount = computed(() => {
 	font-weight: 700;
 	font-size: 1.25rem;
 	line-height: 124%;
-	color: #fff;
 }
 </style>
