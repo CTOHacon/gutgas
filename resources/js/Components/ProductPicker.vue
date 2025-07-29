@@ -44,7 +44,7 @@
 					</span>
 					<span
 						class="current-price price__item"
-						:class="{ _discount: hasDiscount }"
+						:class="{ 'color-danger': hasDiscount }"
 					>
 						<span class="price__value">
 							{{ product.price }}
@@ -148,7 +148,7 @@ const hasDiscount = computed(() => {
 
 .price {
 	display: flex;
-
+	align-items: center;
 	gap: 1.5rem;
 	margin-left: auto;
 	&__currency {
@@ -176,7 +176,7 @@ const hasDiscount = computed(() => {
 	text-align: center;
 	color: #838d97;
 }
-.old-price__value {
+.old-price .price__value {
 	&::before {
 		content: '';
 		position: absolute;
@@ -192,10 +192,5 @@ const hasDiscount = computed(() => {
 	font-size: 1.25rem;
 	line-height: 124%;
 	color: #fff;
-
-	&._discount {
-		font-weight: 800;
-		color: #f24942;
-	}
 }
 </style>

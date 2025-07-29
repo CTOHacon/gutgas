@@ -3,7 +3,7 @@
 		<span class="old-price" v-if="hasDiscount">
 			₴{{ product.old_price }}
 		</span>
-		<span class="current-price" :class="{ _discount: hasDiscount }">
+		<span class="current-price" :class="{ 'color-danger': hasDiscount }">
 			₴{{ product.price }}
 		</span>
 	</p>
@@ -32,11 +32,6 @@ const hasDiscount = computed(() => {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
-.current-price {
-	&._discount {
-		color: #f24942;
-	}
 }
 .old-price {
 	position: relative;
