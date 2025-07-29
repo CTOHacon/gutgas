@@ -65,7 +65,7 @@ const generalForm = useForm<TProductForm>({
 	stock: props.product.stock,
 	description: _t(props.product.description),
 	old_price: props.product.old_price,
-	price_label: props.product.price_label,
+	price_label: _t(props.product.price_label),
 	media_file: props.product.media_file,
 	sorting_index: props.product.sorting_index,
 	category_id: props.product.category_id,
