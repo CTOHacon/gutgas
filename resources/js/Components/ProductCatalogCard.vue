@@ -28,20 +28,10 @@
 			<template v-if="+product.stock">
 				<div class="default-content">
 					<h3 class="name fs-medium mb-8">{{ _t(product.name) }}</h3>
-					<p class="price">
-						<span class="old-price" v-if="hasDiscount">
-							₴{{ product.old_price }}
-						</span>
-						<span
-							class="current-price"
-							:class="{ _discount: hasDiscount }"
-						>
-							₴{{ product.price }}
-						</span>
-					</p>
+					<ProductCatalogCardPrice :product="product" />
 				</div>
 				<div class="hover-content">
-					<p class="price mb-8">₴{{ product.price }}</p>
+					<ProductCatalogCardPrice :product="product" />
 					<ProductCatalogCardCartButton
 						:active="inCart"
 						@click="
@@ -73,6 +63,7 @@ import { computed } from 'vue';
 import getMediaFileUrl from '@/modules/helpers/getMediaFileUrl';
 import { Link, usePage } from '@inertiajs/vue3';
 import ProductSpecialStatusBar from './ProductSpecialStatusBar.vue';
+import ProductCatalogCardPrice from './ProductCatalogCardPrice.vue';
 
 const { _t, __ } = useTranslations();
 
@@ -87,10 +78,6 @@ const imageUrl = props.product.media_file
 
 const { addProductToCart, removeProductFromCart, isInCart } = useCart();
 const inCart = computed(() => isInCart(props.product));
-
-const hasDiscount = computed(() => {
-	return props.product.old_price && props.product.old_price > 0;
-});
 </script>
 
 <style scoped lang="scss">
@@ -196,29 +183,6 @@ const hasDiscount = computed(() => {
 	display: flex;
 	flex-direction: column;
 	transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-.price {
-	line-height: 1.5rem;
-	letter-spacing: 0.05em;
-	font-weight: 700;
-	text-align: center;
-}
-.old-price {
-	position: relative;
-	display: block;
-	margin-bottom: 0.125rem;
-	font-size: 0.875rem;
-	line-height: 100%;
-	color: #838d97;
-	&::before {
-		content: '';
-		background: #fff;
-		height: max(0.125rem, 2px);
-		position: absolute;
-		left: -0.1875rem;
-		right: -0.1875rem;
-		top: calc(50% - max(0.125rem, 2px) / 2);
-	}
 }
 .current-price {
 	&._discount {

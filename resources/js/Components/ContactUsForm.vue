@@ -70,6 +70,8 @@ const onSubmit = () => {
 .submit {
 	padding: 0.75rem 2.75rem;
 	font-weight: 700;
+	margin-left: auto;
+	margin-right: auto;
 }
 .policy-message {
 	color: rgba(183, 62, 56, 1);

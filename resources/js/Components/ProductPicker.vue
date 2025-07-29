@@ -11,7 +11,7 @@
 		</p>
 		<div class="ph-16 mb-16" v-if="+product.stock">
 			<div
-				class="f- justify-between align-center price-quantity pv-12 pl-16 pr-40"
+				class="f- justify-between align-center price-quantity pv-12 pl-16"
 			>
 				<ProductSpecialStatusBar
 					v-if="product.price_label"
@@ -29,41 +29,31 @@
 								setProductQuantity(product, newQuantity)
 						"
 					/>
-					<p class="price">
-						<span class="old-price" v-if="hasDiscount">
-							{{ product.old_price }}
-							<span class="price__currency">
-								{{ __('uah') }}
-							</span>
-						</span>
-						<span
-							class="current-price"
-							:class="{ _discount: hasDiscount }"
-						>
-							{{ product.price }}
-							<span class="price__currency">
-								{{ __('uah') }}
-							</span>
-						</span>
-					</p>
-					<div class="fw-800 text-right lh-100">
-						<p class="fs-semi-large">
-							{{ productInCart.price * productInCart.quantity }}
-						</p>
-						<p class="fs-semi-small color-secondary"></p>
-					</div>
 				</template>
 				<template v-else>
 					<BaseQuantityField :max="999" :min="1" v-model="quantity" />
-					<div class="fw-800 text-right lh-100">
-						<p class="fs-semi-large">
-							{{ quantity * props.product.price }}
-						</p>
-						<p class="fs-semi-small color-secondary">
-							{{ __('uah') }}
-						</p>
-					</div>
 				</template>
+				<p class="price">
+					<span class="old-price price__item" v-if="hasDiscount">
+						<span class="price__value">
+							{{ product.old_price }}
+						</span>
+						<span class="price__currency">
+							{{ __('uah') }}
+						</span>
+					</span>
+					<span
+						class="current-price price__item"
+						:class="{ _discount: hasDiscount }"
+					>
+						<span class="price__value">
+							{{ product.price }}
+						</span>
+						<span class="price__currency">
+							{{ __('uah') }}
+						</span>
+					</span>
+				</p>
 			</div>
 		</div>
 		<div class="ph-40 pb-24" v-if="+product.stock">
@@ -158,14 +148,24 @@ const hasDiscount = computed(() => {
 
 .price {
 	display: flex;
+
 	gap: 1.5rem;
+	margin-left: auto;
 	&__currency {
 		font-family: 'Mulish';
 		font-weight: 800;
 		font-size: 0.875rem;
-		line-height: 124%;
+		line-height: 100%;
 		opacity: 0.4;
-		margin-top: 0.125rem;
+		margin-top: -0.125rem;
+	}
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: end;
+	}
+	&__value {
+		position: relative;
 	}
 }
 .old-price {
@@ -175,6 +175,8 @@ const hasDiscount = computed(() => {
 	line-height: 100%;
 	text-align: center;
 	color: #838d97;
+}
+.old-price__value {
 	&::before {
 		content: '';
 		position: absolute;
@@ -192,7 +194,6 @@ const hasDiscount = computed(() => {
 	color: #fff;
 
 	&._discount {
-		text-decoration: line-through;
 		font-weight: 800;
 		color: #f24942;
 	}
