@@ -77,6 +77,8 @@ class ProductService
             'sku',
             'name',
             'price',
+            'old_price',
+            'price_label',
             'stock',
             'sorting_index',
             'description'
