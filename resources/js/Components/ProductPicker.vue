@@ -186,7 +186,7 @@ const hasDiscount = computed(() => {
 		right: -0.125rem;
 		top: calc(50% - 0.0625rem);
 		transform: rotate(-10deg);
-		background: #fff;
+		background: currentColor;
 	}
 }
 .current-price {
