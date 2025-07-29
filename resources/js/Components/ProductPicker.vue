@@ -14,7 +14,7 @@
 				class="f- justify-between align-center price-quantity pv-12 pl-16"
 			>
 				<ProductSpecialStatusBar
-					v-if="product.price_label"
+					v-if="_t(product.price_label)"
 					class="price-quantity__special-status-bar"
 				>
 					{{ _t(product.price_label) }}

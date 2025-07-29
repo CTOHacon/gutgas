@@ -8,7 +8,10 @@
 			type
 		]"
 	>
-		<ProductSpecialStatusBar v-if="product.price_label" class="price-label">
+		<ProductSpecialStatusBar
+			v-if="_t(product.price_label)"
+			class="price-label"
+		>
 			{{ _t(product.price_label) }}
 		</ProductSpecialStatusBar>
 		<Link
