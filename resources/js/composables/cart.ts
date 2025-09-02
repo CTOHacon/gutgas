@@ -101,6 +101,7 @@ export default function useCart() {
 		resetCart,
 		findInCart,
 		isCartModalOpened,
+		toggleCartModal,
 		isInCart
 	};
 }

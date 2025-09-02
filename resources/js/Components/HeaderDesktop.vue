@@ -29,7 +29,11 @@
 			</div>
 		</div>
 		<Transition name="fade">
-			<div class="cart-popup-background" v-if="isCartModalOpened"></div>
+			<div
+				class="cart-popup-background"
+				v-if="isCartModalOpened"
+				@click="toggleCartModal"
+			></div>
 		</Transition>
 	</header>
 </template>
@@ -58,7 +62,7 @@ onMounted(() => {
 });
 
 const { headerElementRef } = useHeaderElement();
-const { isCartModalOpened } = useCart();
+const { isCartModalOpened, toggleCartModal } = useCart();
 </script>
 
 <style scoped lang="scss">
