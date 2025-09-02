@@ -17,7 +17,7 @@
 						:is-active="isCartModalOpened"
 						@click="isCartModalOpened = !isCartModalOpened"
 					/>
-					<Transition name="fade">
+					<Transition name="cart-popup">
 						<CartPopup
 							class="cart-popup"
 							v-if="isCartModalOpened"
@@ -123,27 +123,15 @@ const { isCartModalOpened, toggleCartModal } = useCart();
 .language-switch {
 	color: #bdbdbd;
 }
+// Popup positioning
 .cart-popup {
 	position: absolute;
 	top: calc(100% + 1.5rem);
 	right: 0;
-	width: max-content;
 	width: 488px;
-	&.fade-enter-active,
-	&.fade-leave-active {
-		transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-	}
-	&.fade-enter-from,
-	&.fade-leave-to {
-		opacity: 0;
-		transform: translateY(-1rem);
-	}
-	&.fade-enter-to,
-	&.fade-leave-from {
-		opacity: 1;
-		transform: translateY(0);
-	}
 }
+
+// Background overlay positioning
 .cart-popup-background {
 	position: absolute;
 	left: 0;
@@ -153,18 +141,36 @@ const { isCartModalOpened, toggleCartModal } = useCart();
 	height: calc(100vh - 100%);
 	z-index: -1;
 	background: rgba($color: #000000, $alpha: 0.5);
-	transition: opacity 0.3s ease-in;
-	&.fade-enter-active,
-	&.fade-leave-active {
-		transition: opacity 0.3s ease-in-out;
-	}
-	&.fade-enter-from,
-	&.fade-leave-to {
-		opacity: 0;
-	}
-	&.fade-enter-to,
-	&.fade-leave-from {
-		opacity: 1;
-	}
+}
+
+/* Vue 3 transition classes (scoped) */
+/* Cart popup (opacity + slide) */
+.cart-popup-enter-active,
+.cart-popup-leave-active {
+	transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.cart-popup-enter-from,
+.cart-popup-leave-to {
+	opacity: 0;
+	transform: translateY(-1rem);
+}
+.cart-popup-enter-to,
+.cart-popup-leave-from {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Fading background */
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.3s ease-in-out;
+}
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+	opacity: 1;
 }
 </style>
