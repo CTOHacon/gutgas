@@ -39,16 +39,101 @@ class MediaFileController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'file' => ['required', 'file'],
+        // Authorization
+        $this->authorize('create', MediaFile::class);
+
+        // Validation (add svg)
+        $validated = $request->validate([
+            'file' => [
+            'required',
+            'file',
+            'max:5120', // 5 MB
+            'mimes:jpg,jpeg,png,gif,webp,pdf,svg',
+            'mimetypes:image/jpeg,image/png,image/gif,image/webp,application/pdf,image/svg+xml,text/plain,text/xml,application/xml',
+            ],
         ]);
 
-        $mediaFile = MediaFilesService::store($request->file('file'));
+        $uploadedFile = $validated['file'];
+
+        // Real mime (note svg can be reported as text/plain or image/svg+xml)
+        $realMime = $uploadedFile->getMimeType();
+        $allowedMimes = [
+            'image/jpeg','image/png','image/gif','image/webp',
+            'application/pdf','image/svg+xml','text/plain','text/xml','application/xml'
+        ];
+        if (! in_array($realMime, $allowedMimes)) {
+            return response()->json(['message' => 'Invalid file type'], 422);
+        }
+
+        // Sanitize original filename
+        $baseName = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeBase = preg_replace('/[^a-z0-9\-]+/i', '-', mb_strtolower($baseName));
+        $safeBase = trim(preg_replace('/-+/', '-', $safeBase), '-');
+        $extension = strtolower($uploadedFile->getClientOriginalExtension());
+        $safeName = ($safeBase ?: 'file') . '.' . $extension;
+
+        // SVG specific sanitization
+        if ($extension === 'svg') {
+            try {
+            $svgContent = file_get_contents($uploadedFile->getPathname());
+
+            // Basic quick rejects
+            if (stripos($svgContent, '<script') !== false ||
+                preg_match('/on\w+=/i', $svgContent) ||
+                preg_match('/javascript:/i', $svgContent) ||
+                preg_match('/data:[^;]+;base64/i', $svgContent)
+            ) {
+                // Optional: attempt cleanup instead of reject
+            }
+
+            // If library enshrined/svg-sanitizer is available, use it
+            if (class_exists(\Enshrined\SvgSanitizer\Sanitizer::class)) {
+                $sanitizer = new \Enshrined\SvgSanitizer\Sanitizer();
+                $dirty = $svgContent;
+                $clean = $sanitizer->sanitize($dirty);
+                if (! $clean) {
+                return response()->json(['message' => 'Invalid SVG'], 422);
+                }
+                $svgContent = $clean;
+            } else {
+                // Minimal manual stripping: remove scripts / event handlers / foreignObject
+                $svgContent = preg_replace('/<script.*?>.*?<\/script>/is', '', $svgContent);
+                $svgContent = preg_replace('/on\w+="[^"]*"/i', '', $svgContent);
+                $svgContent = preg_replace('/on\w+=\'[^\']*\'/i', '', $svgContent);
+                $svgContent = preg_replace('/<foreignObject.*?>.*?<\/foreignObject>/is', '', $svgContent);
+            }
+
+            // Ensure only one <svg ...> root
+            if (substr_count(str_ireplace('</svg', '</svg', $svgContent), '<svg') !== 1) {
+                return response()->json(['message' => 'Malformed SVG'], 422);
+            }
+
+            // Write sanitized content to a temp file and replace UploadedFile
+            $tmpPath = tempnam(sys_get_temp_dir(), 'svg');
+            file_put_contents($tmpPath, $svgContent);
+            $uploadedFile = new \Illuminate\Http\UploadedFile(
+                $tmpPath,
+                $safeName,
+                'image/svg+xml',
+                null,
+                true // mark as test (skip isValid() upload checks)
+            );
+            } catch (\Throwable $e) {
+            \Log::warning('SVG sanitization failed: ' . $e->getMessage());
+            return response()->json(['message' => 'SVG processing failed'], 422);
+            }
+        }
 
         try {
-            return response()->json($mediaFile, 201);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
+            $mediaFile = MediaFilesService::store($uploadedFile, $safeName);
+
+            return response()->json([
+            'message' => 'Uploaded successfully',
+            'data' => $mediaFile,
+            ], 201);
+        } catch (\Throwable $e) {
+            \Log::error('Media upload failure: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            return response()->json(['message' => 'Upload failed'], 500);
         }
     }
 
