@@ -86,5 +86,6 @@ class Kernel extends HttpKernel
         'urlLocaleHandler' => UrlLocaleHandler::class,
         'sessionLocaleHandler' => SessionLocaleHandler::class,
         'shareSeoEntityBreadcrumbs' => ShareSeoEntityBreadcrumbs::class,
+    'absoluteSession' => \App\Http\Middleware\AbsoluteSessionTimeout::class,
     ];
 }

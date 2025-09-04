@@ -33,6 +33,10 @@ return [
 
     'lifetime' => env('SESSION_LIFETIME', 120),
 
+    // Absolute maximum session lifetime in minutes (regardless of activity). Default 1440 (1 day).
+    // Configure via SESSION_ABSOLUTE_LIFETIME in env if needed.
+    'absolute_lifetime' => env('SESSION_ABSOLUTE_LIFETIME', 60 * 24),
+
     'expire_on_close' => false,
 
     /*
