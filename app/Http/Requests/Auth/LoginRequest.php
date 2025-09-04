@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -43,6 +44,13 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
         $identifier = $this->input('identifier');
         $password = $this->input('password');
+        Log::channel('auth')->info('Auth attempt started', [
+            'identifier' => $identifier,
+            'ip' => $this->ip(),
+            'remember' => $this->boolean('remember'),
+            'throttle_key' => $this->throttleKey(),
+            'attempts' => RateLimiter::attempts($this->throttleKey()),
+        ]);
         if (
             !Auth::attempt([
                 'email' => $identifier,
@@ -56,6 +64,12 @@ class LoginRequest extends FormRequest
         ) {
             // Record a failed attempt with a 10 minute decay (600 seconds)
             RateLimiter::hit($this->throttleKey(), 600);
+            Log::channel('auth')->warning('Auth attempt failed', [
+                'identifier' => $identifier,
+                'ip' => $this->ip(),
+                'attempts_after_hit' => RateLimiter::attempts($this->throttleKey()),
+                'max_attempts' => 3,
+            ]);
 
             throw ValidationException::withMessages([
                 'identifier' => trans('auth.failed')
@@ -63,6 +77,10 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+        Log::channel('auth')->info('Auth attempt successful', [
+            'identifier' => $identifier,
+            'ip' => $this->ip(),
+        ]);
     }
 
     /**
@@ -80,6 +98,13 @@ class LoginRequest extends FormRequest
         event(new Lockout($this));
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
+        Log::channel('auth')->notice('Auth lockout triggered', [
+            'throttle_key' => $this->throttleKey(),
+            'identifier' => $this->input('identifier'),
+            'ip' => $this->ip(),
+            'retry_after_seconds' => $seconds,
+            'max_attempts' => 3,
+        ]);
 
         throw ValidationException::withMessages([
             'identifier' => trans('auth.throttle', [

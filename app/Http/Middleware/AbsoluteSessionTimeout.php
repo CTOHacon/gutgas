@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Enforces an absolute session lifetime regardless of user activity.
@@ -23,9 +24,20 @@ class AbsoluteSessionTimeout
 
             if (!$startedAt) {
                 $request->session()->put('absolute_started_at', now()->timestamp);
+                Log::channel('auth')->info('Absolute session timer initialized', [
+                    'user_id' => Auth::id(),
+                    'ip' => $request->ip(),
+                    'max_minutes' => $maxMinutes,
+                ]);
             } else {
                 $ageMinutes = (now()->timestamp - (int) $startedAt) / 60;
                 if ($ageMinutes >= $maxMinutes) {
+                    Log::channel('auth')->info('Absolute session timeout reached', [
+                        'user_id' => Auth::id(),
+                        'ip' => $request->ip(),
+                        'age_minutes' => $ageMinutes,
+                        'max_minutes' => $maxMinutes,
+                    ]);
                     Auth::logout();
                     $request->session()->invalidate();
                     $request->session()->regenerateToken();
