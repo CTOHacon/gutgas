@@ -29,9 +29,11 @@ class MediaFilesService
         return $filename . '.' . $extension;
     }
 
-    static function store(\Illuminate\Http\UploadedFile $file)
+    static function store(\Illuminate\Http\UploadedFile $file, ?string $forceName = null)
     {
-        $fileBaseName = self::getUniqFileName($file->getClientOriginalName());
+        // Use the server-sanitized name when provided; never trust the raw
+        // client filename for the stored file (the extension is security-critical).
+        $fileBaseName = self::getUniqFileName($forceName ?: $file->getClientOriginalName());
         $fileName = pathinfo($fileBaseName, PATHINFO_FILENAME);
         $extension = pathinfo($fileBaseName, PATHINFO_EXTENSION);
         $path = $file->storeAs('public/media', $fileBaseName);

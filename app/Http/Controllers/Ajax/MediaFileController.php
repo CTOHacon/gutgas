@@ -42,94 +42,95 @@ class MediaFileController extends Controller
         // Authorization
         $this->authorize('create', MediaFile::class);
 
-        // Validation (add svg)
-        $validated = $request->validate([
-            'file' => [
-            'required',
-            'file',
-            'max:5120', // 5 MB
-            'mimes:jpg,jpeg,png,gif,webp,pdf,svg',
-            'mimetypes:image/jpeg,image/png,image/gif,image/webp,application/pdf,image/svg+xml,text/plain,text/xml,application/xml',
-            ],
+        // Only presence/size is validated here. The real type gate is below:
+        // the SAVED extension is derived SOLELY from the server-detected MIME
+        // type, never from the client-supplied filename. This is what prevents
+        // uploading executable PHP (incl. GIF/image polyglots named *.php).
+        $request->validate([
+            'file' => ['required', 'file', 'max:5120'], // 5 MB
         ]);
 
-        $uploadedFile = $validated['file'];
+        $uploadedFile = $request->file('file');
+        $realMime     = $uploadedFile->getMimeType();                          // sniffed from content (finfo)
+        $clientExt    = strtolower($uploadedFile->getClientOriginalExtension());
 
-        // Real mime (note svg can be reported as text/plain or image/svg+xml)
-        $realMime = $uploadedFile->getMimeType();
-        $allowedMimes = [
-            'image/jpeg','image/png','image/gif','image/webp',
-            'application/pdf','image/svg+xml','text/plain','text/xml','application/xml'
+        // Canonical, server-trusted MIME -> extension map. SVG is handled
+        // separately because finfo reports it inconsistently (xml/plain/svg).
+        $mimeToExt = [
+            'image/jpeg'      => 'jpg',
+            'image/png'       => 'png',
+            'image/gif'       => 'gif',
+            'image/webp'      => 'webp',
+            'application/pdf' => 'pdf',
         ];
-        if (! in_array($realMime, $allowedMimes)) {
-            return response()->json(['message' => 'Invalid file type'], 422);
-        }
 
-        // Sanitize original filename
+        // Sanitized base name: no path, no special chars, no extension.
         $baseName = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-        $safeBase = preg_replace('/[^a-z0-9\-]+/i', '-', mb_strtolower($baseName));
-        $safeBase = trim(preg_replace('/-+/', '-', $safeBase), '-');
-        $extension = strtolower($uploadedFile->getClientOriginalExtension());
-        $safeName = ($safeBase ?: 'file') . '.' . $extension;
+        $safeBase = trim(preg_replace('/-+/', '-', preg_replace('/[^a-z0-9\-]+/i', '-', mb_strtolower($baseName))), '-');
+        $safeBase = $safeBase !== '' ? $safeBase : 'file';
 
-        // SVG specific sanitization
-        if ($extension === 'svg') {
+        // --- SVG branch: only when the client claims .svg AND content is a real SVG ---
+        if ($clientExt === 'svg') {
             try {
-            $svgContent = file_get_contents($uploadedFile->getPathname());
-
-            // Basic quick rejects
-            if (stripos($svgContent, '<script') !== false ||
-                preg_match('/on\w+=/i', $svgContent) ||
-                preg_match('/javascript:/i', $svgContent) ||
-                preg_match('/data:[^;]+;base64/i', $svgContent)
-            ) {
-                // Optional: attempt cleanup instead of reject
-            }
-
-            // If library enshrined/svg-sanitizer is available, use it
-            if (class_exists(\Enshrined\SvgSanitizer\Sanitizer::class)) {
-                $sanitizer = new \Enshrined\SvgSanitizer\Sanitizer();
-                $dirty = $svgContent;
-                $clean = $sanitizer->sanitize($dirty);
-                if (! $clean) {
-                return response()->json(['message' => 'Invalid SVG'], 422);
+                $svgContent = file_get_contents($uploadedFile->getPathname());
+                if ($svgContent === false || stripos($svgContent, '<svg') === false) {
+                    return response()->json(['message' => 'Invalid SVG'], 422);
                 }
-                $svgContent = $clean;
-            } else {
-                // Minimal manual stripping: remove scripts / event handlers / foreignObject
-                $svgContent = preg_replace('/<script.*?>.*?<\/script>/is', '', $svgContent);
-                $svgContent = preg_replace('/on\w+="[^"]*"/i', '', $svgContent);
-                $svgContent = preg_replace('/on\w+=\'[^\']*\'/i', '', $svgContent);
-                $svgContent = preg_replace('/<foreignObject.*?>.*?<\/foreignObject>/is', '', $svgContent);
-            }
 
-            // Ensure only one <svg ...> root
-            if (substr_count(str_ireplace('</svg', '</svg', $svgContent), '<svg') !== 1) {
-                return response()->json(['message' => 'Malformed SVG'], 422);
-            }
+                if (class_exists(\Enshrined\SvgSanitizer\Sanitizer::class)) {
+                    $clean = (new \Enshrined\SvgSanitizer\Sanitizer())->sanitize($svgContent);
+                    if (! $clean) {
+                        return response()->json(['message' => 'Invalid SVG'], 422);
+                    }
+                    $svgContent = $clean;
+                } else {
+                    // Fallback manual stripping of active content
+                    $svgContent = preg_replace('/<script.*?>.*?<\/script>/is', '', $svgContent);
+                    $svgContent = preg_replace('/\son\w+\s*=\s*"[^"]*"/i', '', $svgContent);
+                    $svgContent = preg_replace("/\son\w+\s*=\s*'[^']*'/i", '', $svgContent);
+                    $svgContent = preg_replace('/<foreignObject.*?>.*?<\/foreignObject>/is', '', $svgContent);
+                    $svgContent = preg_replace('/(?:javascript|data)\s*:/i', '', $svgContent);
+                }
 
-            // Write sanitized content to a temp file and replace UploadedFile
-            $tmpPath = tempnam(sys_get_temp_dir(), 'svg');
-            file_put_contents($tmpPath, $svgContent);
-            $uploadedFile = new \Illuminate\Http\UploadedFile(
-                $tmpPath,
-                $safeName,
-                'image/svg+xml',
-                null,
-                true // mark as test (skip isValid() upload checks)
-            );
+                // Ensure exactly one <svg> root
+                if (substr_count(strtolower($svgContent), '<svg') !== 1) {
+                    return response()->json(['message' => 'Malformed SVG'], 422);
+                }
+
+                $safeName = $safeBase . '.svg';
+                $tmpPath  = tempnam(sys_get_temp_dir(), 'svg');
+                file_put_contents($tmpPath, $svgContent);
+                $uploadedFile = new \Illuminate\Http\UploadedFile(
+                    $tmpPath, $safeName, 'image/svg+xml', null, true // test mode: skip isValid()
+                );
             } catch (\Throwable $e) {
-            \Log::warning('SVG sanitization failed: ' . $e->getMessage());
-            return response()->json(['message' => 'SVG processing failed'], 422);
+                \Log::warning('SVG sanitization failed: ' . $e->getMessage());
+                return response()->json(['message' => 'SVG processing failed'], 422);
             }
+
+            return $this->persistMediaFile($uploadedFile, $safeName);
         }
 
+        // --- Raster / PDF branch: extension comes ONLY from the detected MIME ---
+        if (! isset($mimeToExt[$realMime])) {
+            return response()->json(['message' => 'Invalid or unsupported file type'], 422);
+        }
+        $safeName = $safeBase . '.' . $mimeToExt[$realMime];
+
+        return $this->persistMediaFile($uploadedFile, $safeName);
+    }
+
+    /**
+     * Persist an already-validated, safely-named upload.
+     */
+    private function persistMediaFile(\Illuminate\Http\UploadedFile $file, string $safeName)
+    {
         try {
-            $mediaFile = MediaFilesService::store($uploadedFile, $safeName);
+            $mediaFile = MediaFilesService::store($file, $safeName);
 
             return response()->json([
-            'message' => 'Uploaded successfully',
-            'data' => $mediaFile,
+                'message' => 'Uploaded successfully',
+                'data' => $mediaFile,
             ], 201);
         } catch (\Throwable $e) {
             \Log::error('Media upload failure: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
