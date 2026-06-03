@@ -77,7 +77,7 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/auth.log'),
             'level' => env('LOG_LEVEL', 'info'),
-            'days' => 30,
+            'days' => 180, // keep auth/login history ~6 months
             'replace_placeholders' => true,
         ],
 

@@ -67,6 +67,7 @@ class LoginRequest extends FormRequest
             Log::channel('auth')->warning('Auth attempt failed', [
                 'identifier' => $identifier,
                 'ip' => $this->ip(),
+                'user_agent' => $this->userAgent(),
                 'attempts_after_hit' => RateLimiter::attempts($this->throttleKey()),
                 'max_attempts' => 3,
             ]);
@@ -77,9 +78,14 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+        $user = Auth::user();
         Log::channel('auth')->info('Auth attempt successful', [
             'identifier' => $identifier,
+            'user_id' => $user?->id,
+            'email' => $user?->email,
+            'roles' => ($user && method_exists($user, 'getRoleNames')) ? $user->getRoleNames()->implode(',') : null,
             'ip' => $this->ip(),
+            'user_agent' => $this->userAgent(),
         ]);
     }
 
