@@ -69,5 +69,10 @@ jobs:
             docker compose -f docker-compose.prod.yaml pull
             docker compose -f docker-compose.prod.yaml up -d --no-build
             docker compose -f docker-compose.prod.yaml exec -T app php artisan migrate --force
+            # Regenerate the sitemap each deploy: it is written to the image's public/
+            # (not a volume), so it is lost on container recreate. Crawls the live site,
+            # so give SSR a moment to come up. Non-fatal — must not fail the deploy.
+            sleep 8
+            docker compose -f docker-compose.prod.yaml exec -T app php artisan sitemap:generate || true
             docker logout ghcr.io
             docker image prune -f
