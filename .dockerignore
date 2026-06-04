@@ -1,0 +1,30 @@
+# VCS / local
+.git
+.gitignore
+.DS_Store
+Icon?
+
+# Dependencies (installed inside the image)
+/vendor
+/node_modules
+
+# Secrets / local env (provided at runtime via compose)
+/.env
+/.env.*
+
+# Build artifacts (regenerated in the assets stage)
+/public/build
+/public/hot
+/bootstrap/ssr
+
+# Runtime/user data (comes from volume / restore, keeps image small + malware-free)
+/storage/app/public/media
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/public/storage
+
+# Tests / CI / docs
+/tests
+/.github

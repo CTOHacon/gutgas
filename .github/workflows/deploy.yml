@@ -1,0 +1,73 @@
+name: Build & Deploy (gutgas)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-gutgas
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compute image tag
+        run: echo "TAG=${GITHUB_SHA::12}" >> "$GITHUB_ENV"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & push gutgas
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/ctohacon/gutgas:${{ env.TAG }}
+            ghcr.io/ctohacon/gutgas:latest
+          cache-from: type=gha,scope=gutgas
+          cache-to: type=gha,mode=max,scope=gutgas
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: Deploy over SSH (rootless docker)
+        uses: appleboy/ssh-action@v1
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GHCR_USER: ${{ github.actor }}
+          GIT_SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          envs: GHCR_TOKEN,GHCR_USER,GIT_SHA
+          script: |
+            set -e
+            export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
+            export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+            cd ~/gutgas
+            TAG="$(echo "$GIT_SHA" | cut -c1-12)"
+            sed -i "s/^TAG=.*/TAG=${TAG}/" .env
+            echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin
+            docker compose -f docker-compose.prod.yaml pull
+            docker compose -f docker-compose.prod.yaml up -d --no-build
+            docker compose -f docker-compose.prod.yaml exec -T app php artisan migrate --force
+            docker logout ghcr.io
+            docker image prune -f

@@ -1,0 +1,79 @@
+services:
+  # MySQL 8.4 (self-contained, option B)
+  db:
+    image: mysql:8.4
+    container_name: gutgas_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - gutgas_network
+
+  # Laravel app (php-fpm + nginx + Inertia SSR via supervisor)
+  app:
+    image: ${REGISTRY:-ghcr.io/ctohacon}/gutgas:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gutgas_app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_NAME: ${APP_NAME:-Gutgas}
+      APP_ENV: production
+      APP_KEY: ${APP_KEY}
+      APP_DEBUG: "false"
+      APP_URL: ${APP_URL}
+      APP_LOCALE: ${APP_LOCALE:-uk}
+      APP_FALLBACK_LOCALE: ${APP_FALLBACK_LOCALE:-uk}
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      # Match original gutgas runtime (file-based session/cache; no queue worker)
+      SESSION_DRIVER: file
+      SESSION_LIFETIME: ${SESSION_LIFETIME:-120}
+      SESSION_SECURE_COOKIE: "true"
+      CACHE_STORE: file
+      QUEUE_CONNECTION: sync
+      # Logs to stderr -> `docker logs`
+      LOG_CHANNEL: stderr
+      # Inertia SSR runs inside the container on 127.0.0.1:13714
+      MAIL_MAILER: ${MAIL_MAILER:-smtp}
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT:-587}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      MAIL_ENCRYPTION: ${MAIL_ENCRYPTION:-tls}
+      MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS}
+      MAIL_FROM_NAME: ${APP_NAME:-Gutgas}
+    volumes:
+      # Persistent uploads (survive image updates); masks image's storage/app
+      - app_storage:/var/www/html/storage/app
+    # Loopback-only: CloudPanel reverse-proxies gutgas.eu -> this port
+    ports:
+      - "127.0.0.1:${APP_PORT:-8091}:8080"
+    networks:
+      - gutgas_network
+
+volumes:
+  mysql_data:
+  app_storage:
+
+networks:
+  gutgas_network:
+    driver: bridge
