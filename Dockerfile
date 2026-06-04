@@ -1,6 +1,15 @@
 # syntax=docker/dockerfile:1
 
 # =============================================================================
+# Stage 0 — composer vendor (PHP deps; also provides Ziggy's Vue plugin to the
+# asset build, since that file ships inside the tightenco/ziggy composer package)
+# =============================================================================
+FROM composer:latest AS vendor
+WORKDIR /app
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --ignore-platform-reqs
+
+# =============================================================================
 # Stage 1 — build frontend assets (client bundle + Inertia SSR bundle)
 # =============================================================================
 FROM node:20-alpine AS assets
@@ -8,6 +17,10 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
+# app.ts / ssr.ts import ZiggyVue from vendor/tightenco/ziggy/dist/vue.m, which
+# lives in the composer package (absent from the CI checkout). Bring it in so
+# vite can resolve the import.
+COPY --from=vendor /app/vendor/tightenco/ziggy ./vendor/tightenco/ziggy
 # Skip vue-tsc here so type warnings never block a deploy; build client + SSR bundles
 RUN npx vite build && npx vite build --ssr
 
@@ -35,9 +48,9 @@ COPY docker/php.ini /usr/local/etc/php/conf.d/custom.ini
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 COPY docker/supervisor/supervisord.conf /etc/supervisord.conf
 
-# Install PHP deps first (layer cache), then copy code, then optimize autoloader
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+# Reuse vendor from the composer stage, copy code, then optimize the autoloader
+# (/vendor is .dockerignore'd, so `COPY . .` will not clobber the copied vendor)
+COPY --from=vendor /app/vendor ./vendor
 COPY . .
 RUN composer dump-autoload --optimize --no-scripts
 
