@@ -1,66 +1,118 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Gutgas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+E-commerce storefront and admin panel for [gutgas.eu](https://gutgas.eu) — a Laravel 10 + Inertia.js + Vue 3 (TypeScript) application with server-side rendering, SEO-driven routing, a custom admin CMS, and a containerized production deploy.
 
-## About Laravel
+## Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+| Layer | Technology |
+| --- | --- |
+| Backend | Laravel 10, PHP 8.1+ (PHP 8.3 in production) |
+| Frontend | Vue 3 + TypeScript, Inertia.js, Vite 4 |
+| SSR | Inertia SSR (`@vue/server-renderer`), runs on `127.0.0.1:13714` |
+| Styling | Tailwind CSS 3, Bootstrap 5, SCSS |
+| Database | MySQL 8 |
+| Sessions / cache / queue | File-based (no queue worker; `QUEUE_CONNECTION=sync`) |
+| Container | Multi-stage Docker — php-fpm + nginx + Inertia SSR via supervisor |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Notable packages
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **spatie/laravel-permission** — role/permission gating on admin routes
+- **spatie/laravel-translatable** — multilingual model fields
+- **spatie/laravel-sluggable**, **spatie/laravel-sitemap** — slugs and sitemap generation
+- **staudenmeir/laravel-adjacency-list** — nested category trees
+- **diglactic/laravel-breadcrumbs** — breadcrumb trails
+- **intervention/image** — media processing / scaled images
+- **tightenco/ziggy** — Laravel routes in JS
+- **zoha/laravel-meta** — entity metadata
 
-## Learning Laravel
+## Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Storefront** — product catalog, product pages, product groups, contact pages, checkout, and thank-you flow.
+- **SEO-driven routing** — a catch-all `SeoEndpoint` resolves arbitrary URLs to `SeoEntity` records (categories, products, pages), with pagination support and locale-prefixed URLs.
+- **Multilingual** — locales `en`, `ru`, `ua` (production default `uk`); URL- and session-based locale handling middleware.
+- **Admin CMS** — `/admin` panel (permission-gated) for products, categories, attributes & attribute groups, product filters, product pages, SEO entities, media library, users, and global settings.
+- **Order notifications** — new orders and contact/call-back requests are pushed via **Telegram** and **email** (see `OrderController` / `MailController`).
+- **Security** — absolute session timeout middleware ([app/Http/Middleware/AbsoluteSessionTimeout.php](app/Http/Middleware/AbsoluteSessionTimeout.php)), login throttling, authentication audit logging to a dedicated `auth` log channel, MIME-verified media uploads with SVG sanitization.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Project layout
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+app/
+  Http/Controllers/        # storefront controllers (Checkout, Order, Mail, SeoEndpoint, ...)
+  Http/Controllers/Admin/  # admin CMS controllers
+  Http/Middleware/         # locale, SEO redirect, absolute session timeout, ...
+  Models/                  # Product, Category, Attribute, Order, Page, MediaFile, SeoEntity, ...
+resources/js/
+  Pages/                   # Inertia page components (storefront + Admin/ + Auth/)
+  Components/ AdminComponents/ Layouts/ composables/ modules/ api/
+routes/
+  web.php admin.php auth.php ajax.php api.php breadcrumbs.php
+docker/                    # nginx.conf, php.ini, supervisor, entrypoint.sh
+lang/                      # en, ru, ua translations
+```
 
-## Laravel Sponsors
+## Local development
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Requires PHP 8.1+, Composer, Node 20+, and a MySQL database.
 
-### Premium Partners
+```bash
+composer install
+npm install
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+cp .env.example .env
+php artisan key:generate
+# set DB_* in .env, then:
+php artisan migrate
 
-## Contributing
+# two terminals:
+npm run dev          # Vite dev server (HMR)
+php artisan serve    # http://127.0.0.1:8000
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Build for production assets
 
-## Code of Conduct
+```bash
+npm run build        # vue-tsc + vite build + vite build --ssr
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+This type-checks (`vue-tsc`), builds the client bundle to `public/build`, and builds the SSR bundle to `bootstrap/ssr`.
 
-## Security Vulnerabilities
+## Production deployment
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Deployment is automated via GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)):
+
+1. **Build** — on push to `main`, a multi-stage Docker image is built and pushed to `ghcr.io/ctohacon/gutgas` (tagged with the commit SHA and `latest`).
+2. **Deploy** — over SSH to the production host (rootless Docker): pull the new image, `docker compose up -d`, run `php artisan migrate --force`, then regenerate the sitemap (`php artisan sitemap:generate`).
+
+The app is served behind a CloudPanel reverse proxy at `gutgas.eu`, mapping loopback `127.0.0.1:8091 → 8080` in the container.
+
+### Running the prod stack manually
+
+```bash
+cp .env.production.example .env   # fill in APP_KEY, DB_*, MAIL_*, TELEGRAM_*
+docker compose -f docker-compose.prod.yaml run --rm app php artisan key:generate --show
+docker compose -f docker-compose.prod.yaml up -d
+```
+
+The container runs php-fpm, nginx, and the Inertia SSR process under supervisor. Uploads persist in the `app_storage` volume (`storage/app`); MySQL data in `mysql_data`.
+
+### Required production env
+
+See [.env.production.example](.env.production.example). Key variables beyond the Laravel defaults:
+
+- `REGISTRY`, `TAG`, `APP_PORT` — image source and host port
+- `APP_LOCALE` / `APP_FALLBACK_LOCALE` — default `uk`
+- `DB_*` — MySQL container credentials
+- `MAIL_*` — SMTP for order/contact mail
+- `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` — order/contact Telegram notifications
+- `ADMIN_EMAIL` — recipient for admin notifications
+
+## Testing
+
+```bash
+php artisan test       # or: ./vendor/bin/phpunit
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proprietary — © Gutgas. Built on the [Laravel framework](https://laravel.com) (MIT).

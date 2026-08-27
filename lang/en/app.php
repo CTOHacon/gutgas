@@ -86,6 +86,7 @@ return [
 
     'shipping' => 'Shipping',
     'free' => 'Free',
+    'shippingByCarrierRates' => 'At carrier rates',
 
     'contactInfo' => 'Contact info',
     'askAQuestion' => 'Ask a question',

@@ -86,6 +86,7 @@ return [
 
     'shipping' => 'Доставка',
     'free' => 'Бесплатно',
+    'shippingByCarrierRates' => 'По тарифам перевозчика',
 
     'contactInfo' => 'Контактная информация',
     'askAQuestion' => 'Задать вопрос',

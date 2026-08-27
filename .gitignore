@@ -23,3 +23,5 @@ yarn-error.log
 /.vscode
 /log
 package-lock.json
+# Local SSH keys for server access (never commit)
+/.ssh/

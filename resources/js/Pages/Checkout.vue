@@ -121,7 +121,7 @@
 								{{ __('shipping') }}
 							</p>
 							<strong class="g-col-3 color-secondary text-right">
-								{{ __('free') }}
+								{{ __('shippingByCarrierRates') }}
 							</strong>
 						</div>
 						<BaseButton
