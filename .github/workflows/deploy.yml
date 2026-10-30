@@ -74,5 +74,9 @@ jobs:
             # so give SSR a moment to come up. Non-fatal — must not fail the deploy.
             sleep 8
             docker compose -f docker-compose.prod.yaml exec -T app php artisan sitemap:generate || true
+            # The artisan calls above run as root and can leave root-owned cache/log
+            # files behind (e.g. permission cache), which php-fpm (www-data) then can't
+            # write — breaking throttled routes. Hand them back to www-data.
+            docker compose -f docker-compose.prod.yaml exec -T -u root app chown -R www-data:www-data storage/framework storage/logs bootstrap/cache
             docker logout ghcr.io
             docker image prune -f
