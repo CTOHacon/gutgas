@@ -180,6 +180,19 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'client_name' => 'ім\'я',
+        'client_surname' => 'прізвище',
+        'client_phone' => 'телефон',
+        'client_email' => 'email',
+        'client_message' => 'коментар',
+        'shipping_city' => 'місто',
+        'shipping_city_ref' => 'місто',
+        'shipping_warehouse' => 'відділення',
+        'shipping_warehouse_ref' => 'відділення',
+        'shipping_address' => 'адреса',
+        'shipping_message' => 'спосіб доставки',
+        'cart_content' => 'кошик',
+    ],
 
 ];

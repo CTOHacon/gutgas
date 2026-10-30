@@ -19,42 +19,26 @@
 								:placeholder="__('formName')"
 								class="mb-12"
 								v-model="checkoutData.client_name"
-								:error-message="
-									!checkoutData.client_name
-										? checkoutData.errors.client_name
-										: undefined
-								"
+								:error-message="checkoutData.errors.client_name"
 							/>
 							<BaseFormInput
 								:placeholder="__('formSurname')"
 								class="mb-12"
 								v-model="checkoutData.client_surname"
-								:error-message="
-									!checkoutData.client_surname
-										? checkoutData.errors.client_surname
-										: undefined
-								"
+								:error-message="checkoutData.errors.client_surname"
 							/>
 							<BaseFormInput
 								:placeholder="__('formPhone')"
 								class="mb-12"
 								:model-value="checkoutData.client_phone"
 								@update:model-value="onPhoneInput"
-								:error-message="
-									!checkoutData.client_phone
-										? checkoutData.errors.client_phone
-										: undefined
-								"
+								:error-message="checkoutData.errors.client_phone"
 								type="tel"
 							/>
 							<BaseFormInput
 								:placeholder="__('formEmail')"
 								v-model="checkoutData.client_email"
-								:error-message="
-									!emailRegexp.test(checkoutData.client_email)
-										? checkoutData.errors.client_email
-										: undefined
-								"
+								:error-message="checkoutData.errors.client_email"
 								type="mail"
 							/>
 						</div>
@@ -63,6 +47,7 @@
 								:placeholder="__('formMessage')"
 								class="mb-8"
 								v-model="checkoutData.client_message"
+								:error-message="checkoutData.errors.client_message"
 							/>
 						</div>
 					</div>
@@ -126,10 +111,8 @@
 								"
 								:is-valid="!!checkoutData.shipping_city_ref"
 								:error-message="
-									!checkoutData.shipping_city_ref
-										? checkoutData.errors.shipping_city ||
-										  checkoutData.errors.shipping_city_ref
-										: undefined
+									checkoutData.errors.shipping_city ||
+									checkoutData.errors.shipping_city_ref
 								"
 								@update:model-value="onCityInput"
 								@select="onCitySelect"
@@ -154,11 +137,8 @@
 								:disabled="!checkoutData.shipping_city_ref"
 								:is-valid="!!checkoutData.shipping_warehouse_ref"
 								:error-message="
-									!checkoutData.shipping_warehouse_ref
-										? checkoutData.errors.shipping_warehouse ||
-										  checkoutData.errors
-												.shipping_warehouse_ref
-										: undefined
+									checkoutData.errors.shipping_warehouse ||
+									checkoutData.errors.shipping_warehouse_ref
 								"
 								@update:model-value="onWarehouseInput"
 								@focus="loadWarehouses"
@@ -169,11 +149,7 @@
 							<BaseFormInput
 								:placeholder="__('shippingAddress')"
 								v-model="checkoutData.shipping_address"
-								:error-message="
-									!checkoutData.shipping_address
-										? checkoutData.errors.shipping_address
-										: undefined
-								"
+								:error-message="checkoutData.errors.shipping_address"
 							/>
 						</div>
 					</div>
@@ -182,11 +158,7 @@
 						:placeholder="__('shippingExample')"
 						class="mb-8"
 						v-model="checkoutData.shipping_message"
-						:error-message="
-							!checkoutData.shipping_message
-								? checkoutData.errors.shipping_message
-								: undefined
-						"
+						:error-message="checkoutData.errors.shipping_message"
 					/>
 				</div>
 				<div class="g-col-4 g-tablet-col-12">
@@ -213,15 +185,13 @@
 								{{ __('shippingByCarrierRates') }}
 							</strong>
 						</div>
-						<p
-							class="color-danger mb-12"
-							v-if="checkoutData.errors.cart_content"
-						>
-							{{ checkoutData.errors.cart_content }}
-						</p>
-						<p class="color-danger mb-12" v-if="pageExpiredError">
-							{{ pageExpiredError }}
-						</p>
+						<!-- Every server error, so a rejected order is never silent
+						     (cart items, expired page, fields hidden by the method) -->
+						<ul class="color-danger mb-12" v-if="errorMessages.length">
+							<li v-for="message in errorMessages" :key="message">
+								{{ message }}
+							</li>
+						</ul>
 						<BaseButton
 							type="submit"
 							:variation="'default'"
@@ -307,11 +277,24 @@ watch(cartProducts, () => {
 	checkoutData.cart_content = toOrderItems();
 });
 
-// Set by the exception handler on 419 (stale CSRF token / lost session)
-const pageExpiredError = computed(
-	() =>
-		(checkoutData.errors as Record<string, string | undefined>)
-			.page_expired
+// Includes keys outside the form type: page_expired (419 handler) and
+// cart_content.N.* from the validator
+const errorMessages = computed(() => [
+	...new Set(
+		Object.values(
+			checkoutData.errors as Record<string, string | undefined>
+		).filter((message): message is string => !!message)
+	)
+]);
+
+// A field's server error goes away as soon as the customer edits it
+watch(
+	() => checkoutData.data(),
+	(current, previous) => {
+		(Object.keys(current) as (keyof TOrderForm)[])
+			.filter(key => current[key] !== previous[key])
+			.forEach(key => checkoutData.clearErrors(key));
+	}
 );
 
 const isNovaPoshta = computed(() => checkoutData.shipping_method !== 'other');
@@ -479,8 +462,6 @@ const submitCheckout = () => {
 		}
 	});
 };
-
-const emailRegexp = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 
 onMounted(async () => {
 	const responce = await geRequiredProducts(cartProducts.value);

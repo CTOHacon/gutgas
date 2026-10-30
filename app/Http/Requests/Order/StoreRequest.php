@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Order;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class StoreRequest extends FormRequest
 {
@@ -51,6 +53,19 @@ class StoreRequest extends FormRequest
     }
 
     /**
+     * Log which fields failed (names only, no customer data) so rejected
+     * checkouts can be diagnosed from `docker compose logs app`.
+     */
+    protected function failedValidation(Validator $validator): void
+    {
+        Log::info('Order rejected by validation', [
+            'fields' => array_keys($validator->errors()->messages()),
+        ]);
+
+        parent::failedValidation($validator);
+    }
+
+    /**
      * Ukrainian phone: 0XXXXXXXXX or 380XXXXXXXXX in any formatting
      * (the checkout mask is "+38 (###) ###-##-##").
      */
@@ -60,7 +75,7 @@ class StoreRequest extends FormRequest
             $digits = preg_replace('/\D/', '', (string) $value);
 
             if (!preg_match('/^(38)?0\d{9}$/', $digits)) {
-                $fail(__('validation.phone', ['attribute' => $attribute]));
+                $fail(__('validation.phone'));
             }
         };
     }

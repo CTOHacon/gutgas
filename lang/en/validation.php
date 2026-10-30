@@ -183,6 +183,19 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'client_name' => 'first name',
+        'client_surname' => 'last name',
+        'client_phone' => 'phone',
+        'client_email' => 'email',
+        'client_message' => 'comment',
+        'shipping_city' => 'city',
+        'shipping_city_ref' => 'city',
+        'shipping_warehouse' => 'branch',
+        'shipping_warehouse_ref' => 'branch',
+        'shipping_address' => 'address',
+        'shipping_message' => 'delivery method',
+        'cart_content' => 'cart',
+    ],
 
 ];

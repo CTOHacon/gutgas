@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
@@ -149,6 +150,20 @@ class CompleteOrderFlowTest extends TestCase
             ->assertSessionHasErrors('client_email');
         $this->post('/order/store', $this->payload(['client_surname' => '']))
             ->assertSessionHasErrors('client_surname');
+    }
+
+    public function test_full_length_phone_without_leading_zero_is_rejected_and_logged(): void
+    {
+        // The checkout mask accepts "+38 (123) ...": complete-looking but not a UA number
+        Log::spy();
+
+        $this->post('/order/store', $this->payload(['client_phone' => '+38 (123) 123-12-31']))
+            ->assertSessionHasErrors(['client_phone' => __('validation.phone', ['attribute' => 'телефон'], 'ua')]);
+
+        $this->assertDatabaseCount('orders', 0);
+        Log::shouldHaveReceived('info')
+            ->with('Order rejected by validation', ['fields' => ['client_phone']])
+            ->once();
     }
 
     public function test_np_department_requires_city_and_warehouse(): void
