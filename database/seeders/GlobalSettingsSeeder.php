@@ -43,7 +43,7 @@ class GlobalSettingsSeeder extends Seeder
             ],
             [
                 'title' => 'Реєстрація продукту',
-                'url' => '/ua/product-registration',
+                'url' => '/ua/registration',
             ],
         ]));
 
@@ -66,7 +66,7 @@ class GlobalSettingsSeeder extends Seeder
             ],
             [
                 'title' => 'Product registration',
-                'url' => '/product-registration',
+                'url' => '/registration',
             ],
         ]));
 

@@ -39,7 +39,7 @@ Route::prefix('api/nova-poshta')->middleware('throttle:60,1')->as('novaPoshta.')
 });
 
 // Product registration (warranty)
-Route::post('/product-registration', [ProductRegistrationController::class, 'store'])
+Route::post('/registration', [ProductRegistrationController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('productRegistration.store');
 
@@ -50,7 +50,7 @@ Route::prefix('{locale?}')->middleware([
 ])->group(function () {
     Route::get('/checkout', CheckoutController::class)->name('checkout');
 
-    Route::get('/product-registration', [ProductRegistrationController::class, 'create'])->name('productRegistration');
+    Route::get('/registration', [ProductRegistrationController::class, 'create'])->name('productRegistration');
 
     Route::get('/thank-you', function () {
         return Inertia::render('ThankYou')->with('thankYouTranslations', trans('thank-you'));

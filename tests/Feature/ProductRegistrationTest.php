@@ -135,7 +135,7 @@ class ProductRegistrationTest extends TestCase
 
     public function test_public_page_is_available(): void
     {
-        $this->withoutVite()->get("/ua/product-registration")->assertOk();
+        $this->withoutVite()->get("/ua/registration")->assertOk();
     }
 
     public function test_menu_migration_adds_link_once(): void
@@ -149,6 +149,21 @@ class ProductRegistrationTest extends TestCase
         $items = json_decode(GlobalSettings::get('headerMenu_ua'), true);
         $this->assertCount(2, $items);
         $this->assertSame('/ua/product-registration', $items[1]['url']);
+    }
+
+    public function test_menu_url_migration_switches_to_registration(): void
+    {
+        GlobalSettings::set('headerMenu_ua', [
+            ['title' => 'Головна', 'url' => '/'],
+            ['title' => 'Реєстрація продукту', 'url' => '/ua/product-registration'],
+        ]);
+
+        $migration = require database_path('migrations/2026_10_30_120000_rename_product_registration_menu_url.php');
+        $migration->up();
+
+        $items = json_decode(GlobalSettings::get('headerMenu_ua'), true);
+        $this->assertSame('/', $items[0]['url']);
+        $this->assertSame('/ua/registration', $items[1]['url']);
     }
 
     public function test_admin_list_requires_authentication(): void

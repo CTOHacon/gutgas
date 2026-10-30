@@ -30,9 +30,9 @@
 				</div>
 			</div>
 
-			<div v-else class="g-layout layout">
+			<div v-else class="layout">
 				<form
-					class="g-col-7 g-tablet-col-12 registration-form"
+					class="registration-form"
 					@submit.prevent="onSubmit"
 				>
 					<fieldset class="group">
@@ -158,7 +158,7 @@
 					</div>
 				</form>
 
-				<aside class="g-col-5 g-tablet-col-12 aside">
+				<aside class="aside">
 					<div class="aside__card">
 						<img
 							src="@/assets/home-about-balon-1.png"
@@ -246,8 +246,17 @@ const onSubmit = () => {
 }
 
 .layout {
-	align-items: start;
+	// Own grid instead of global g-col-* utilities: purgecss strips unused
+	// utilities after the asset hash is computed, so a newly used g-col-* class
+	// can be missing from long-cached CSS (same file name, old content).
+	display: grid;
+	grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+	column-gap: 2.5rem;
 	row-gap: 3rem;
+	align-items: start;
+	@media (max-width: $tablet-width) {
+		grid-template-columns: minmax(0, 1fr);
+	}
 }
 
 .group {
