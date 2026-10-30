@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Middleware\VerifyCsrfToken;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -226,5 +227,23 @@ class CompleteOrderFlowTest extends TestCase
         }
 
         $this->assertSame(429, end($responses));
+    }
+
+    public function test_expired_csrf_token_returns_an_error_instead_of_a_silent_redirect(): void
+    {
+        // CSRF checks are skipped in unit tests by default; force them on
+        $this->app->bind(VerifyCsrfToken::class, fn ($app) => new class($app, $app['encrypter']) extends VerifyCsrfToken {
+            protected function runningUnitTests()
+            {
+                return false;
+            }
+        });
+
+        $this->from('/ua/checkout')
+            ->post('/order/store', $this->payload())
+            ->assertRedirect('/ua/checkout')
+            ->assertSessionHasErrors('page_expired');
+
+        $this->assertDatabaseCount('orders', 0);
     }
 }

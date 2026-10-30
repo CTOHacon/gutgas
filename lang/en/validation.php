@@ -153,6 +153,7 @@ return [
 
     'phone' => 'The :attribute must be a valid Ukrainian phone number.',
     'cartProductUnavailable' => 'One of the products in the cart is not available for ordering.',
+    'pageExpired' => 'The page has expired. Please check your details and submit again.',
 
     /*
     |--------------------------------------------------------------------------

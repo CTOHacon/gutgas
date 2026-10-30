@@ -58,9 +58,12 @@ RUN composer dump-autoload --optimize --no-scripts
 COPY --from=assets /app/public/build ./public/build
 COPY --from=assets /app/bootstrap/ssr ./bootstrap/ssr
 
+# nginx workers run as www-data; Alpine ships /var/lib/nginx as nginx:nginx 0700,
+# so large responses that spill to fastcgi temp files got truncated
 RUN chown -R www-data:www-data storage bootstrap/cache \
  && chmod -R 775 storage bootstrap/cache \
- && mkdir -p /run/nginx
+ && mkdir -p /run/nginx \
+ && chown -R www-data:www-data /var/lib/nginx
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

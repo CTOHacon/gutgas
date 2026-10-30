@@ -38,8 +38,10 @@ class Handler extends ExceptionHandler
                 ->toResponse($request)
                 ->setStatusCode($response->status());
         } elseif ($response->status() === 419) {
-            return back()->with([
-                'message' => 'The page expired, please try again.',
+            // An error bag (not a flash message) so Inertia calls onError:
+            // forms keep their data instead of treating the redirect as success
+            return back()->withErrors([
+                'page_expired' => __('validation.pageExpired'),
             ]);
         }
 

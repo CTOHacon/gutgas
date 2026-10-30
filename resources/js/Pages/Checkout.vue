@@ -219,6 +219,9 @@
 						>
 							{{ checkoutData.errors.cart_content }}
 						</p>
+						<p class="color-danger mb-12" v-if="pageExpiredError">
+							{{ pageExpiredError }}
+						</p>
 						<BaseButton
 							type="submit"
 							:variation="'default'"
@@ -303,6 +306,13 @@ const checkoutData = useForm<TOrderForm>({
 watch(cartProducts, () => {
 	checkoutData.cart_content = toOrderItems();
 });
+
+// Set by the exception handler on 419 (stale CSRF token / lost session)
+const pageExpiredError = computed(
+	() =>
+		(checkoutData.errors as Record<string, string | undefined>)
+			.page_expired
+);
 
 const isNovaPoshta = computed(() => checkoutData.shipping_method !== 'other');
 const hasWarehouse = computed(

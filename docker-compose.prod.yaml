@@ -72,6 +72,9 @@ services:
     volumes:
       # Persistent uploads (survive image updates); masks image's storage/app
       - app_storage:/var/www/html/storage/app
+      # Sessions survive deploys; otherwise every restart logs everyone out and
+      # open checkout pages fail with 419 on submit
+      - app_sessions:/var/www/html/storage/framework/sessions
     # Loopback-only: CloudPanel reverse-proxies gutgas.eu -> this port
     ports:
       - "127.0.0.1:${APP_PORT:-8091}:8080"
@@ -81,6 +84,7 @@ services:
 volumes:
   mysql_data:
   app_storage:
+  app_sessions:
 
 networks:
   gutgas_network:
