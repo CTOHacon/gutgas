@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'title' => 'Product registration',
+    'intro' => 'Registering your product is required to ensure the manufacturer\'s warranty. The information you provide will help us serve you more efficiently if you need assistance.',
+    'label_first_name' => 'First name',
+    'label_last_name' => 'Last name',
+    'label_phone' => 'Phone',
+    'label_email' => 'E-mail',
+    'label_city' => 'City',
+    'label_address' => 'Address (street, house)',
+    'label_model' => 'Model number',
+    'label_serial_number' => 'Grill serial number',
+    'label_purchase_date' => 'Purchase date',
+    'label_price' => 'Grill price, UAH',
+    'label_purchase_place' => 'Place of purchase',
+    'place_hint' => 'Store, city',
+    'where' => 'Where to find the model number?',
+    'where_text' => 'The model number and the serial number are printed on the same label. On gas grills it is usually found under the lid, on the back of the cart or on the inside of the cabinet door.',
+    'serial_hint' => 'The serial number is on the same label as the model number',
+    'consent' => 'I agree to receive news and offers from GUTGAS',
+    'submit' => 'Register product',
+    'required' => '* — required fields',
+    'success_title' => 'Thank you! Your product has been registered',
+    'success_text' => 'We have saved your details. If you need any help, feel free to contact us.',
+    'another' => 'Register another product',
+    'home' => 'Back to home',
+];

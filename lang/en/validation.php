@@ -151,6 +151,9 @@ return [
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
 
+    'phone' => 'The :attribute must be a valid Ukrainian phone number.',
+    'cartProductUnavailable' => 'One of the products in the cart is not available for ordering.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

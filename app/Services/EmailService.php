@@ -18,13 +18,21 @@ class EmailService implements EmailServiceInterface
     public function sendOrderConfirmation(Order $order): bool
     {
         try {
-            $emailData = $this->prepareOrderConfirmationData($order);
+            // Render the customer email in the language the order was placed in
+            $previousLocale = app()->getLocale();
+            app()->setLocale($order->locale ?: $previousLocale);
 
-            Mail::send('emails.orderReceipt', $emailData, function ($message) use ($order) {
-                $message->from(config('mail.from.address'), config('mail.from.name'));
-                $message->to($order->client_email, $order->client_name);
-                $message->subject(__('emails.orderConfirmationSubject', ['order_id' => $order->id]));
-            });
+            try {
+                $emailData = $this->prepareOrderConfirmationData($order);
+
+                Mail::send('emails.orderReceipt', $emailData, function ($message) use ($order) {
+                    $message->from(config('mail.from.address'), config('mail.from.name'));
+                    $message->to($order->client_email, trim($order->client_name . ' ' . $order->client_surname));
+                    $message->subject(__('emails.orderConfirmationSubject', ['order_id' => $order->id]));
+                });
+            } finally {
+                app()->setLocale($previousLocale);
+            }
 
             return true;
         } catch (\Exception $e) {
@@ -78,11 +86,14 @@ class EmailService implements EmailServiceInterface
             'order'            => $order,
             'order_id'         => $order->id,
             'client_name'      => $order->client_name,
+            'client_surname'   => $order->client_surname,
             'client_email'     => $order->client_email,
             'client_phone'     => $order->client_phone,
             'client_message'   => $order->client_message,
             'cart_content'     => $order->cart_content,
             'shipping_message' => $order->shipping_message,
+            'shipping_method'  => $order->shipping_method,
+            'shipping_lines'   => $order->shippingLines($order->locale ?: 'ua'),
             'total_price'      => $totalPrice,
             'order_date'       => $order->created_at->format('d/m/Y H:i'),
             'currency'         => '₴'
@@ -100,11 +111,14 @@ class EmailService implements EmailServiceInterface
         return [
             'order_id'         => $order->id,
             'client_name'      => $order->client_name,
+            'client_surname'   => $order->client_surname,
             'client_email'     => $order->client_email,
             'client_phone'     => $order->client_phone,
             'client_message'   => $order->client_message,
             'cart_content'     => $order->cart_content,
             'shipping_message' => $order->shipping_message,
+            'shipping_method'  => $order->shipping_method,
+            'shipping_lines'   => $order->shippingLines(),
         ];
     }
 
@@ -116,11 +130,7 @@ class EmailService implements EmailServiceInterface
      */
     private function calculateOrderTotal(Order $order): float
     {
-        $total = 0;
-        foreach ($order->cart_content as $product) {
-            $total += $product['price'] * $product['quantity'];
-        }
-        return $total;
+        return $order->total();
     }
 
 }

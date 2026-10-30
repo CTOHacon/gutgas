@@ -24,8 +24,6 @@ class EmailServiceTest extends TestCase
     /** @test */
     public function it_can_send_order_confirmation_email()
     {
-        Mail::fake();
-
         $order = Order::factory()->create([
             'client_name'  => 'John Doe',
             'client_email' => 'john@example.com',
@@ -47,14 +45,13 @@ class EmailServiceTest extends TestCase
         $result = $this->emailService->sendOrderConfirmation($order);
 
         $this->assertTrue($result);
-        Mail::assertSent(\Illuminate\Mail\Mailable::class);
+        // MAIL_MAILER=array keeps sent messages in memory (Mail::fake ignores view-based sends)
+        $this->assertCount(1, Mail::mailer('array')->getSymfonyTransport()->messages());
     }
 
     /** @test */
     public function it_can_send_order_notification_email()
     {
-        Mail::fake();
-
         $order = Order::factory()->create([
             'client_name'  => 'John Doe',
             'client_email' => 'john@example.com',
@@ -76,7 +73,8 @@ class EmailServiceTest extends TestCase
         $result = $this->emailService->sendOrderNotification($order);
 
         $this->assertTrue($result);
-        Mail::assertSent(\Illuminate\Mail\Mailable::class);
+        // MAIL_MAILER=array keeps sent messages in memory (Mail::fake ignores view-based sends)
+        $this->assertCount(1, Mail::mailer('array')->getSymfonyTransport()->messages());
     }
 
 }

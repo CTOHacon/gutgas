@@ -36,6 +36,14 @@ export default function useAdminSidebarNavigation() {
 			permited: hasPermissions('admin.order.index'),
 			active: checkIsActive(route('admin.order.index'))
 		},
+		// Product registrations
+		{
+			title: 'Реєстрації продуктів',
+			icon: 'bi-shield-check',
+			link: route('admin.productRegistration.index'),
+			permited: hasPermissions('admin.productRegistration.index'),
+			active: checkIsActive(route('admin.productRegistration.index'))
+		},
 		{
 			title: 'Галерея',
 			icon: 'bi-image',

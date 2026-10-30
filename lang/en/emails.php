@@ -22,4 +22,11 @@ return [
     'contactMessage'           => 'We will contact you as soon as possible to confirm your order and arrange delivery.',
     'companyName'              => 'Gutgas',
     'companyContact'           => 'Email: info@gutgas.eu | Phone: 0 (800) 35-35-05',
+    'shippingMethod'           => 'Delivery method',
+    'shippingMethods'          => [
+        'np_department'     => 'Nova Poshta branch',
+        'np_postal_machine' => 'Nova Poshta parcel locker',
+        'np_courier'        => 'Nova Poshta courier',
+    ],
+    'customerSurname'          => 'Surname',
 ];

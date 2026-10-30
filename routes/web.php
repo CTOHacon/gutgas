@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\NovaPoshtaController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductRegistrationController;
 use App\Http\Controllers\SeoEndpoint;
 use App\Http\Controllers\StaticHtmlController;
 use Illuminate\Support\Facades\Route;
@@ -24,10 +26,22 @@ require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';
 require __DIR__ . '/ajax.php';
 
-Route::post('/mail/consultation', [MailController::class, 'consultationMail'])->name('consultationMail');
-Route::post('/mail/requestCall', [MailController::class, 'requestCallMail'])->name('requestCallMail');
+Route::post('/mail/consultation', [MailController::class, 'consultationMail'])->middleware('throttle:5,1')->name('consultationMail');
+Route::post('/mail/requestCall', [MailController::class, 'requestCallMail'])->middleware('throttle:5,1')->name('requestCallMail');
 
-Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+Route::post('/order/store', [OrderController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('order.store');
+
+Route::prefix('api/nova-poshta')->middleware('throttle:60,1')->as('novaPoshta.')->group(function () {
+    Route::get('/settlements', [NovaPoshtaController::class, 'settlements'])->name('settlements');
+    Route::get('/warehouses', [NovaPoshtaController::class, 'warehouses'])->name('warehouses');
+});
+
+// Product registration (warranty)
+Route::post('/product-registration', [ProductRegistrationController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('productRegistration.store');
 
 Route::prefix('{locale?}')->middleware([
     'seoRedirect',
@@ -35,6 +49,8 @@ Route::prefix('{locale?}')->middleware([
     'shareSeoEntityBreadcrumbs',
 ])->group(function () {
     Route::get('/checkout', CheckoutController::class)->name('checkout');
+
+    Route::get('/product-registration', [ProductRegistrationController::class, 'create'])->name('productRegistration');
 
     Route::get('/thank-you', function () {
         return Inertia::render('ThankYou')->with('thankYouTranslations', trans('thank-you'));

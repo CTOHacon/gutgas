@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductFilterController;
 use App\Http\Controllers\Admin\ProductFilterValueController;
 use App\Http\Controllers\Admin\ProductPageController;
+use App\Http\Controllers\Admin\ProductRegistrationController;
 use App\Http\Controllers\Admin\SeoEntityController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\OrderController;
@@ -243,6 +244,20 @@ Route::group([
 
                     Route::get('{order}', 'edit')->name('edit')->middleware('permission:admin.order.manage');
                     Route::put('{order}', 'update')->name('update')->middleware('permission:admin.order.manage');
+                    Route::post('{order}/crm', 'pushToCrm')->name('crm')->middleware('permission:admin.order.manage');
+                }
+            );
+
+        // Product registrations
+        Route::controller(ProductRegistrationController::class)->prefix('productRegistration')->as('productRegistration.')
+            ->group(
+                function () {
+                    Route::get('', 'index')->name('index')->middleware('permission:admin.productRegistration.index');
+                    Route::get('/search/{search}', 'index')->name('search')->middleware('permission:admin.productRegistration.index');
+
+                    Route::delete('/delete/{productRegistration}', 'destroy')->name('destroy')->middleware('permission:admin.productRegistration.manage');
+
+                    Route::get('{productRegistration}', 'show')->name('show')->middleware('permission:admin.productRegistration.index');
                 }
             );
     });

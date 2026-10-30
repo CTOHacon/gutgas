@@ -2,23 +2,38 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use App\Models\Order;
 use App\Services\EmailService;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
+use Tests\TestCase;
 
 class AdminEmailConfigTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_uses_admin_email_environment_variable()
-    {
-        Mail::fake();
+    private const DEFAULT_ADMIN_EMAIL = 'sale@gutgas.eu';
 
-        // Create a test order
-        $order = Order::factory()->create([
+    /**
+     * Recipient addresses of every message captured by the in-memory "array" mailer.
+     *
+     * @return string[]
+     */
+    private function sentRecipients(): array
+    {
+        $recipients = [];
+        foreach (Mail::mailer('array')->getSymfonyTransport()->messages() as $message) {
+            foreach ($message->getEnvelope()->getRecipients() as $address) {
+                $recipients[] = $address->getAddress();
+            }
+        }
+
+        return $recipients;
+    }
+
+    private function makeOrder(): Order
+    {
+        return Order::factory()->create([
             'client_name'  => 'Test Customer',
             'client_email' => 'customer@example.com',
             'client_phone' => '+38 (123) 456-78-90',
@@ -26,83 +41,54 @@ class AdminEmailConfigTest extends TestCase
                 [
                     'id'       => 1,
                     'name'     => ['ua' => 'Test Product'],
+                    'sku'      => 'TEST-001',
                     'price'    => 100,
-                    'quantity' => 1
-                ]
-            ]
+                    'quantity' => 1,
+                ],
+            ],
         ]);
+    }
 
-        // Test with default environment value
-        $emailService = new EmailService();
-        $result       = $emailService->sendOrderNotification($order);
+    /** @test */
+    public function it_uses_admin_email_environment_variable()
+    {
+        putenv('ADMIN_EMAIL=configured-admin@example.com');
+        $_ENV['ADMIN_EMAIL']    = 'configured-admin@example.com';
+        $_SERVER['ADMIN_EMAIL'] = 'configured-admin@example.com';
+
+        $result = (new EmailService())->sendOrderNotification($this->makeOrder());
 
         $this->assertTrue($result);
-
-        // Verify that email was sent to the admin email from environment
-        Mail::assertSent(\Illuminate\Mail\Mailable::class, function ($mail) {
-            $adminEmail = env('ADMIN_EMAIL', 'sale@gutgas.eu');
-            return $mail->hasTo($adminEmail);
-        });
+        $this->assertSame(['configured-admin@example.com'], $this->sentRecipients());
     }
 
     /** @test */
     public function it_falls_back_to_default_when_admin_email_not_set()
     {
-        Mail::fake();
+        putenv('ADMIN_EMAIL');
+        unset($_ENV['ADMIN_EMAIL'], $_SERVER['ADMIN_EMAIL']);
 
-        // Temporarily clear the ADMIN_EMAIL env var
-        $originalValue = $_ENV['ADMIN_EMAIL'] ?? null;
-        unset($_ENV['ADMIN_EMAIL']);
-
-        $order = Order::factory()->create([
-            'client_name'  => 'Test Customer',
-            'client_email' => 'customer@example.com',
-            'cart_content' => [
-                [
-                    'id'       => 1,
-                    'name'     => ['ua' => 'Test Product'],
-                    'price'    => 100,
-                    'quantity' => 1
-                ]
-            ]
-        ]);
-
-        $emailService = new EmailService();
-        $result       = $emailService->sendOrderNotification($order);
+        $result = (new EmailService())->sendOrderNotification($this->makeOrder());
 
         $this->assertTrue($result);
-
-        // Should fall back to default
-        Mail::assertSent(\Illuminate\Mail\Mailable::class, function ($mail) {
-            return $mail->hasTo('sale@gutgas.eu');
-        });
-
-        // Restore original value
-        if ($originalValue !== null) {
-            $_ENV['ADMIN_EMAIL'] = $originalValue;
-        }
+        $this->assertSame([self::DEFAULT_ADMIN_EMAIL], $this->sentRecipients());
     }
 
     /** @test */
     public function mail_controller_uses_admin_email_variable()
     {
-        Mail::fake();
+        putenv('ADMIN_EMAIL=configured-admin@example.com');
+        $_ENV['ADMIN_EMAIL']    = 'configured-admin@example.com';
+        $_SERVER['ADMIN_EMAIL'] = 'configured-admin@example.com';
 
-        // Test consultation email
-        $response = $this->post('/consultation', [
+        $response = $this->post('/mail/consultation', [
             'name'     => 'John Doe',
             'phone'    => '+38 (067) 123-45-67',
             'email'    => 'john@example.com',
-            'question' => 'Test question'
+            'question' => 'Test question',
         ]);
 
-        $response->assertStatus(302); // Redirect to thank you page
-
-        // Verify email was sent to admin
-        Mail::assertSent(\Illuminate\Mail\Mailable::class, function ($mail) {
-            $adminEmail = env('ADMIN_EMAIL', 'sale@gutgas.eu');
-            return $mail->hasTo($adminEmail);
-        });
+        $response->assertRedirect();
+        $this->assertSame(['configured-admin@example.com'], $this->sentRecipients());
     }
-
 }

@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\TelegramNotifier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
+    public function __construct(private TelegramNotifier $telegram)
+    {
+    }
+
     public function consultationMail(Request $request)
     {
         $data = request()->validate([
@@ -27,25 +32,16 @@ class MailController extends Controller
             throw $e;
         }
 
-        $messageText = "**✅ Запит на консультацію**\n\n";
-        if (isset($data['name']))
-            $messageText .= "👤 " . $data['name'] . "\n";
-        if (isset($data['phone']))
-            $messageText .= "📞 " . $data['phone'] . "\n";
-        if (isset($data['email']))
-            $messageText .= "📧 " . $data['email'] . "\n\n";
-        $messageText .= "———————————————\n\n";
-        if (isset($data['question']))
-            $messageText .= "📝 " . $data['question'] . "\n\n";
-        $messageText .= "\n\n`" . date('d/m/Y') . "    " . date('H:i') . "`";
-
-        $data = [
-            'chat_id'    => env('TELEGRAM_CHAT_ID'),
-            'text'       => $messageText,
-            'parse_mode' => 'Markdown'
-        ];
-        $url  = "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage?" . http_build_query($data);
-        file_get_contents($url);
+        $this->telegram->send(TelegramNotifier::format('✅ Запит на консультацію', [
+            [
+                '👤 Імʼя'    => $data['name'] ?? null,
+                '📞 Телефон' => $data['phone'] ?? null,
+                '📧 Email'   => $data['email'] ?? null,
+            ],
+            [
+                '📝 Питання' => $data['question'] ?? null,
+            ],
+        ]));
 
         return redirect()->route('thankYou');
     }
@@ -62,18 +58,11 @@ class MailController extends Controller
             $message->subject('Заявка на дзвінок');
         });
 
-        $messageText = "**✅ Запит на консультацію**\n\n";
-        $messageText .= "📞 " . $data['phone'] . "\n\n";
-        $messageText .= "———————————————\n\n";
-        $messageText .= "\n\n`" . date('d/m/Y') . "    " . date('H:i') . "`";
-
-        $data = [
-            'chat_id'    => env('TELEGRAM_CHAT_ID'),
-            'text'       => $messageText,
-            'parse_mode' => 'Markdown'
-        ];
-        $url  = "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage?" . http_build_query($data);
-        file_get_contents($url);
+        $this->telegram->send(TelegramNotifier::format('✅ Запит на дзвінок', [
+            [
+                '📞 Телефон' => $data['phone'],
+            ],
+        ]));
 
         return redirect()->route('thankYou');
     }

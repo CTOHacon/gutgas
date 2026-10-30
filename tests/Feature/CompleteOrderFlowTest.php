@@ -2,174 +2,229 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Tests\TestCase;
 
 class CompleteOrderFlowTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    private const CITY_REF = '8d5a980d-391c-11dd-90d9-001a92567626';
+
+    protected function setUp(): void
     {
         parent::setUp();
 
-        // Mock HTTP requests to prevent actual API calls during testing
+        // No real Telegram / Nova Poshta calls
         Http::fake();
-        Mail::fake();
     }
 
-    /** @test */
-    public function complete_order_creation_flow_works_with_email_receipt()
+    private function product(int $price = 1500, ?string $sku = null): Product
     {
-        // Arrange - Simulate form data that would come from frontend
-        $orderData = [
-            'client_name'      => 'Іван Петренко',
+        return Product::factory()->create(['price' => $price, 'sku' => $sku ?? uniqid('GAS-')]);
+    }
+
+    private function payload(array $overrides = []): array
+    {
+        return array_merge([
+            'client_name'      => 'Іван',
+            'client_surname'   => 'Петренко',
             'client_phone'     => '+38 (067) 123-45-67',
             'client_email'     => 'ivan.petrenko@example.com',
             'client_message'   => 'Будь ласка, доставте після 18:00',
-            'cart_content'     => [
-                [
-                    'id'       => 1,
-                    'name'     => [
-                        'ua' => 'Газовий котел Premium',
-                        'en' => 'Premium Gas Boiler',
-                        'ru' => 'Газовый котел Премиум'
-                    ],
-                    'sku'      => 'GAS-001',
-                    'price'    => 15000,
-                    'quantity' => 1
-                ],
-                [
-                    'id'       => 2,
-                    'name'     => [
-                        'ua' => 'Газова труба DN25',
-                        'en' => 'Gas Pipe DN25',
-                        'ru' => 'Газовая труба DN25'
-                    ],
-                    'sku'      => 'PIPE-025',
-                    'price'    => 150,
-                    'quantity' => 5
-                ]
+            'cart_content'     => [['id' => $this->product()->id, 'quantity' => 2]],
+            'shipping_method'  => 'other',
+            'shipping_message' => 'Київ, самовивіз',
+        ], $overrides);
+    }
+
+    public function test_order_is_created_and_emails_are_sent(): void
+    {
+        $this->post('/order/store', $this->payload())->assertRedirect(route('thankYou'));
+
+        $this->assertDatabaseHas('orders', [
+            'client_name'      => 'Іван',
+            'client_surname'   => 'Петренко',
+            'client_email'     => 'ivan.petrenko@example.com',
+            'shipping_method'  => 'other',
+            'shipping_message' => 'Київ, самовивіз',
+            'locale'           => 'ua',
+            'status_name'      => Order::DEFAULT_STATUS_NAME,
+            'status_color'     => Order::DEFAULT_STATUS_COLOR,
+            'compleated'       => 0,
+        ]);
+
+        // MAIL_MAILER=array keeps sent messages in memory
+        $messages = Mail::mailer('array')->getSymfonyTransport()->messages();
+        $this->assertCount(2, $messages);
+
+        $recipients = $messages->map(fn($m) => $m->getOriginalMessage()->getTo()[0]->getAddress())->all();
+        $this->assertContains('ivan.petrenko@example.com', $recipients);
+    }
+
+    public function test_client_supplied_price_and_name_are_ignored(): void
+    {
+        $product = $this->product(1500, 'REAL-SKU');
+
+        $this->post('/order/store', $this->payload([
+            'cart_content' => [[
+                'id'       => $product->id,
+                'quantity' => 3,
+                'price'    => 1,
+                'sku'      => 'FAKE',
+                'name'     => ['ua' => 'Підробка'],
+            ]],
+        ]))->assertRedirect(route('thankYou'));
+
+        $order = Order::firstOrFail();
+        $item  = $order->cart_content[0];
+
+        $this->assertSame(1500, $item['price']);
+        $this->assertSame('REAL-SKU', $item['sku']);
+        $this->assertSame($product->getTranslations('name'), $item['name']);
+        $this->assertSame(3, $item['quantity']);
+        $this->assertEquals(4500, $order->total());
+    }
+
+    public function test_duplicate_products_are_merged(): void
+    {
+        $product = $this->product();
+
+        $this->post('/order/store', $this->payload([
+            'cart_content' => [
+                ['id' => $product->id, 'quantity' => 1],
+                ['id' => $product->id, 'quantity' => 2],
             ],
-            'shipping_message' => 'Доставка на другий поверх, ліфт є',
-            'status_name'      => 'pending',
-            'status_color'     => 'primary',
-            'compleated'       => false
-        ];
+        ]))->assertRedirect(route('thankYou'));
 
-        // Act - Submit order through the API
-        $response = $this->postJson('/order/store', $orderData);
+        $cart = Order::firstOrFail()->cart_content;
+        $this->assertCount(1, $cart);
+        $this->assertSame(3, $cart[0]['quantity']);
+    }
 
-        // Assert - Order creation succeeded
-        $response->assertStatus(302); // Redirect to thank you page
+    public function test_unknown_product_is_rejected(): void
+    {
+        $this->post('/order/store', $this->payload([
+            'cart_content' => [['id' => 99999, 'quantity' => 1]],
+        ]))->assertSessionHasErrors('cart_content.0.id');
 
-        // Verify order was saved in database with correct data
+        $this->assertDatabaseCount('orders', 0);
+    }
+
+    public function test_empty_cart_and_bad_quantity_are_rejected(): void
+    {
+        $product = $this->product();
+
+        $this->post('/order/store', $this->payload(['cart_content' => []]))
+            ->assertSessionHasErrors('cart_content');
+        $this->post('/order/store', $this->payload([
+            'cart_content' => [['id' => $product->id, 'quantity' => 0]],
+        ]))->assertSessionHasErrors('cart_content.0.quantity');
+    }
+
+    public function test_status_fields_from_client_are_ignored(): void
+    {
+        $this->post('/order/store', $this->payload([
+            'status_name'  => 'Отримано',
+            'status_color' => 'success',
+            'compleated'   => true,
+        ]))->assertRedirect(route('thankYou'));
+
+        $order = Order::firstOrFail();
+        $this->assertSame(Order::DEFAULT_STATUS_NAME, $order->status_name);
+        $this->assertSame(Order::DEFAULT_STATUS_COLOR, $order->status_color);
+        $this->assertEquals(0, $order->compleated);
+    }
+
+    public function test_phone_and_email_are_validated(): void
+    {
+        $this->post('/order/store', $this->payload(['client_phone' => '12345']))
+            ->assertSessionHasErrors('client_phone');
+        $this->post('/order/store', $this->payload(['client_email' => 'not-an-email']))
+            ->assertSessionHasErrors('client_email');
+        $this->post('/order/store', $this->payload(['client_surname' => '']))
+            ->assertSessionHasErrors('client_surname');
+    }
+
+    public function test_np_department_requires_city_and_warehouse(): void
+    {
+        $this->post('/order/store', $this->payload([
+            'shipping_method'  => 'np_department',
+            'shipping_message' => null,
+        ]))->assertSessionHasErrors([
+            'shipping_city', 'shipping_city_ref', 'shipping_warehouse', 'shipping_warehouse_ref',
+        ])->assertSessionDoesntHaveErrors('shipping_message');
+    }
+
+    public function test_np_postal_machine_is_stored_with_warehouse(): void
+    {
+        $this->post('/order/store', $this->payload([
+            'shipping_method'        => 'np_postal_machine',
+            'shipping_city'          => 'Київ',
+            'shipping_city_ref'      => self::CITY_REF,
+            'shipping_area'          => 'Київська область',
+            'shipping_warehouse'     => 'Поштомат №1',
+            'shipping_warehouse_ref' => 'wh-ref',
+            'shipping_message'       => 'ignored',
+        ]))->assertRedirect(route('thankYou'));
+
         $this->assertDatabaseHas('orders', [
-            'client_name'      => 'Іван Петренко',
-            'client_email'     => 'ivan.petrenko@example.com',
-            'client_phone'     => '+38 (067) 123-45-67',
-            'client_message'   => 'Будь ласка, доставте після 18:00',
-            'shipping_message' => 'Доставка на другий поверх, ліфт є',
-            'status_name'      => 'pending'
+            'shipping_method'        => 'np_postal_machine',
+            'shipping_city'          => 'Київ',
+            'shipping_city_ref'      => self::CITY_REF,
+            'shipping_warehouse'     => 'Поштомат №1',
+            'shipping_warehouse_ref' => 'wh-ref',
+            'shipping_address'       => null,
+            'shipping_message'       => null,
+        ]);
+    }
+
+    public function test_np_courier_requires_address_but_not_warehouse(): void
+    {
+        $base = $this->payload([
+            'shipping_method'   => 'np_courier',
+            'shipping_city'     => 'Львів',
+            'shipping_city_ref' => self::CITY_REF,
+            'shipping_message'  => null,
         ]);
 
-        // Verify that emails were sent
-        Mail::assertSent(\Illuminate\Mail\Mailable::class, 2); // One to customer, one to admin
+        $this->post('/order/store', $base)
+            ->assertSessionHasErrors('shipping_address')
+            ->assertSessionDoesntHaveErrors(['shipping_warehouse', 'shipping_warehouse_ref']);
 
-        // Verify customer email was sent to correct address
-        Mail::assertSent(\Illuminate\Mail\Mailable::class, function ($mail) {
-            return $mail->hasTo('ivan.petrenko@example.com');
-        });
-
-        // Verify admin notification email was sent
-        Mail::assertSent(\Illuminate\Mail\Mailable::class, function ($mail) {
-            return $mail->hasTo(env('ADMIN_EMAIL', 'sale@gutgas.eu'));
-        });
-    }
-
-    /** @test */
-    public function order_creation_handles_missing_optional_fields()
-    {
-        // Arrange - Order with only required fields
-        $orderData = [
-            'client_name'  => 'Анна Коваленко',
-            'client_phone' => '+38 (050) 987-65-43',
-            'client_email' => 'anna@example.com',
-            'cart_content' => [
-                [
-                    'id'       => 1,
-                    'name'     => [
-                        'ua' => 'Базовий комплект',
-                        'en' => 'Basic Kit'
-                    ],
-                    'sku'      => 'KIT-001',
-                    'price'    => 5000,
-                    'quantity' => 1
-                ]
-            ]
-        ];
-
-        // Act
-        $response = $this->postJson('/order/store', $orderData);
-
-        // Assert
-        $response->assertStatus(302);
+        $this->post('/order/store', $base + ['shipping_address' => 'вул. Шевченка 1, кв. 2'])
+            ->assertRedirect(route('thankYou'));
 
         $this->assertDatabaseHas('orders', [
-            'client_name'      => 'Анна Коваленко',
-            'client_email'     => 'anna@example.com',
-            'client_phone'     => '+38 (050) 987-65-43',
-            'client_message'   => null,
-            'shipping_message' => null
+            'shipping_method'  => 'np_courier',
+            'shipping_address' => 'вул. Шевченка 1, кв. 2',
+            'shipping_warehouse' => null,
         ]);
-
-        // Emails should still be sent
-        Mail::assertSent(\Illuminate\Mail\Mailable::class, 2);
     }
 
-    /** @test */
-    public function order_creation_calculates_totals_correctly()
+    public function test_other_method_requires_shipping_message(): void
     {
-        // Arrange
-        $orderData = [
-            'client_name'  => 'Тест Користувач',
-            'client_phone' => '+38 (123) 456-78-90',
-            'client_email' => 'test@example.com',
-            'cart_content' => [
-                [
-                    'id'       => 1,
-                    'name'     => ['ua' => 'Продукт 1'],
-                    'price'    => 100,
-                    'quantity' => 3 // 300
-                ],
-                [
-                    'id'       => 2,
-                    'name'     => ['ua' => 'Продукт 2'],
-                    'price'    => 250,
-                    'quantity' => 2 // 500
-                ]
-                // Total should be 800
-            ]
-        ];
-
-        // Act
-        $response = $this->postJson('/order/store', $orderData);
-
-        // Assert
-        $response->assertStatus(302);
-
-        // Check that order was created
-        $order = \App\Models\Order::where('client_email', 'test@example.com')->first();
-        $this->assertNotNull($order);
-
-        // Verify the cart content was saved correctly
-        $this->assertCount(2, $order->cart_content);
-
-        // Calculate total manually to verify
-        $expectedTotal = (100 * 3) + (250 * 2);
-        $this->assertEquals(800, $expectedTotal);
+        $this->post('/order/store', $this->payload(['shipping_message' => '']))
+            ->assertSessionHasErrors('shipping_message');
     }
 
+    public function test_unknown_shipping_method_is_rejected(): void
+    {
+        $this->post('/order/store', $this->payload(['shipping_method' => 'teleport']))
+            ->assertSessionHasErrors('shipping_method');
+    }
+
+    public function test_order_store_is_rate_limited(): void
+    {
+        $responses = [];
+        for ($i = 0; $i < 11; $i++) {
+            $responses[] = $this->post('/order/store', ['client_name' => ''])->status();
+        }
+
+        $this->assertSame(429, end($responses));
+    }
 }

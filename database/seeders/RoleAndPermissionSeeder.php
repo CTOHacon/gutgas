@@ -16,10 +16,10 @@ class RoleAndPermissionSeeder extends Seeder
     public function run()
     {
         foreach (PermissionsServiceProvider::ROLES as $role) {
-            Role::create(['name' => $role]);
+            Role::findOrCreate($role);
         }
         foreach (PermissionsServiceProvider::PERMISSIONS as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::findOrCreate($permission);
         }
         foreach (PermissionsServiceProvider::ROLE_PERMISSIONS as $role => $permissions) {
             $role = Role::findByName($role);

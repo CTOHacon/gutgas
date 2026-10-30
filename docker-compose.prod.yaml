@@ -64,6 +64,11 @@ services:
       # Order/contact notifications (read via env() in OrderController/MailController)
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
       TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+      # Nova Poshta checkout autocomplete (server-side only, read via config/services.php)
+      NOVA_POSHTA_API_KEY: ${NOVA_POSHTA_API_KEY:-}
+      SALESDRIVE_URL: ${SALESDRIVE_URL:-}
+      SALESDRIVE_API_KEY: ${SALESDRIVE_API_KEY:-}
+      SALESDRIVE_SITE_OPTION: ${SALESDRIVE_SITE_OPTION:-id_45}
     volumes:
       # Persistent uploads (survive image updates); masks image's storage/app
       - app_storage:/var/www/html/storage/app

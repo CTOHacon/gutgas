@@ -66,6 +66,9 @@ class PermissionsServiceProvider extends ServiceProvider
         'admin.order.index',
         'admin.order.manage',
 
+        'admin.productRegistration.index',
+        'admin.productRegistration.manage',
+
         'ajax.*',
 
         'ajax.mediaFile.index',

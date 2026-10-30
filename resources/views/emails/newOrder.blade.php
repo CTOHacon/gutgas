@@ -14,7 +14,7 @@
     border-collapse: collapse;">
         <tr>
             <td style="border: 1px solid black;padding: 10px;">Імʼя</td>
-            <td style="border: 1px solid black;padding: 10px;">{{ $client_name }}</td>
+            <td style="border: 1px solid black;padding: 10px;">{{ $client_name }} {{ $client_surname }}</td>
         </tr>
 
         <tr>
@@ -26,6 +26,24 @@
             <td style="border: 1px solid black;padding: 10px;">Телефон</td>
             <td style="border: 1px solid black;padding: 10px;">{{ $client_phone }}</td>
         </tr>
+
+        @if(!empty($shipping_lines))
+            <tr>
+                <td style="border: 1px solid black;padding: 10px;">Доставка</td>
+                <td style="border: 1px solid black;padding: 10px;">
+                    @foreach ($shipping_lines as $line)
+                        {{ $line }}<br>
+                    @endforeach
+                </td>
+            </tr>
+        @endif
+
+        @if(!empty($shipping_message))
+            <tr>
+                <td style="border: 1px solid black;padding: 10px;">Доставка (коментар)</td>
+                <td style="border: 1px solid black;padding: 10px;">{{ $shipping_message }}</td>
+            </tr>
+        @endif
 
         @isset($client_message)
             <tr>

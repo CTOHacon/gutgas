@@ -41,6 +41,10 @@ class GlobalSettingsSeeder extends Seeder
                 'title' => 'Інструкції',
                 'url' => '/instructions',
             ],
+            [
+                'title' => 'Реєстрація продукту',
+                'url' => '/ua/product-registration',
+            ],
         ]));
 
         GlobalSettings::set('headerMenu_en', json_encode([
@@ -59,6 +63,10 @@ class GlobalSettingsSeeder extends Seeder
             [
                 'title' => 'Instructions',
                 'url' => '/instructions',
+            ],
+            [
+                'title' => 'Product registration',
+                'url' => '/product-registration',
             ],
         ]));
 

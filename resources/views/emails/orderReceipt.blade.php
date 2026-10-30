@@ -125,7 +125,7 @@
                 </div>
                 <div class="info-row">
                     <span class="info-label">{{ __('emails.customerName') }}:</span>
-                    <span class="info-value">{{ $client_name }}</span>
+                    <span class="info-value">{{ trim($client_name . ' ' . $client_surname) }}</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">{{ __('emails.customerEmail') }}:</span>
@@ -143,6 +143,15 @@
                     <span class="info-label">{{ __('emails.customerMessage') }}:</span>
                     <span class="info-value">{{ $client_message }}</span>
                 </div>
+            </div>
+            @endif
+
+            @if(!empty($shipping_lines))
+            <div class="shipping-info">
+                <h3>{{ __('emails.shippingMethod') }}</h3>
+                @foreach ($shipping_lines as $line)
+                    <p style="margin: 0 0 4px 0;">{{ $line }}</p>
+                @endforeach
             </div>
             @endif
 

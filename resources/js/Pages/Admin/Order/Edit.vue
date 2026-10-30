@@ -72,13 +72,22 @@
 			<div class="row g-1">
 				<div class="col-6">
 					<div class="mb-3">
-						<label class="form-label">Назва</label>
+						<label class="form-label">Імʼя</label>
 						<input
 							class="form-control"
 							v-model="form.client_name"
-							placeholder="Назва"
+							placeholder="Імʼя"
 						/>
 						<FormError :error="form.errors.client_name" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Прізвище</label>
+						<input
+							class="form-control"
+							v-model="form.client_surname"
+							placeholder="Прізвище"
+						/>
+						<FormError :error="form.errors.client_surname" />
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Телефон</label>
@@ -122,7 +131,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="item in form.cart_content" :key="item.id">
+					<tr v-for="item in order.cart_content" :key="item.id">
 						<td>{{ item.id }}</td>
 						<td>
 							<img
@@ -146,7 +155,7 @@
 						<td>
 							<strong>
 								{{
-									form.cart_content.reduce(
+									order.cart_content.reduce(
 										(acc, item) =>
 											acc + item.price * item.quantity,
 										0
@@ -162,6 +171,41 @@
 		<FormFieldWrapper
 			label="Shipping"
 			class="mb-3"
+			v-if="order.shipping_method && order.shipping_method !== 'other'"
+		>
+			<table class="table table-bordered mb-0">
+				<tbody>
+					<tr>
+						<th>Спосіб</th>
+						<td>{{ shippingMethodLabels[order.shipping_method] }}</td>
+					</tr>
+					<tr v-if="order.shipping_city">
+						<th>Місто</th>
+						<td>
+							{{ order.shipping_city }}
+							<span v-if="order.shipping_area">
+								({{ order.shipping_area }})
+							</span>
+						</td>
+					</tr>
+					<tr v-if="order.shipping_warehouse">
+						<th>Відділення / Поштомат</th>
+						<td>{{ order.shipping_warehouse }}</td>
+					</tr>
+					<tr v-if="order.shipping_address">
+						<th>Адреса</th>
+						<td>{{ order.shipping_address }}</td>
+					</tr>
+					<tr v-if="order.locale">
+						<th>Мова замовлення</th>
+						<td>{{ order.locale }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</FormFieldWrapper>
+		<FormFieldWrapper
+			label="Shipping"
+			class="mb-3"
 			v-if="form.shipping_message"
 		>
 			<div class="mb-0">
@@ -172,6 +216,32 @@
 				></textarea>
 			</div>
 		</FormFieldWrapper>
+		<FormFieldWrapper label="CRM" class="mb-3">
+			<table class="table table-bordered mb-3">
+				<tbody>
+					<tr>
+						<th>ID в CRM</th>
+						<td>{{ order.crm_order_id ?? '—' }}</td>
+					</tr>
+					<tr>
+						<th>Відправлено</th>
+						<td>{{ order.crm_sent_at ?? '—' }}</td>
+					</tr>
+					<tr v-if="order.crm_error">
+						<th>Помилка</th>
+						<td class="text-danger">{{ order.crm_error }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<button
+				v-if="!order.crm_order_id"
+				type="button"
+				class="btn btn-outline-primary"
+				@click="onPushToCrm"
+			>
+				Відправити в CRM
+			</button>
+		</FormFieldWrapper>
 		<button class="btn btn-primary" @click="onSubmitForm">
 			Зберегти Зміни
 		</button>
@@ -180,8 +250,8 @@
 
 <script setup lang="ts">
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { TOrder, TOrderForm } from '@/types/TOreder';
-import { useForm } from '@inertiajs/vue3';
+import { TOrder, TOrderAdminForm } from '@/types/TOreder';
+import { router, useForm } from '@inertiajs/vue3';
 import FormFieldWrapper from '@/AdminComponents/FormFieldWrapper.vue';
 import FormError from '@/AdminComponents/FormError.vue';
 import useMessages from '@/modules/useMessages';
@@ -191,12 +261,18 @@ const { addMessage } = useMessages();
 const props = defineProps<{ order: TOrder }>();
 const { _t } = useTranslations();
 
-const form = useForm<TOrderForm>({
-	cart_content: props.order.cart_content,
+const shippingMethodLabels: Record<string, string> = {
+	np_department: 'Відділення Нової Пошти',
+	np_postal_machine: 'Поштомат Нової Пошти',
+	np_courier: 'Кур\'єр Нової Пошти'
+};
+
+const form = useForm<TOrderAdminForm>({
 	client_email: props.order.client_email,
 	client_phone: props.order.client_phone,
 	client_message: props.order.client_message,
 	client_name: props.order.client_name,
+	client_surname: props.order.client_surname,
 	shipping_message: props.order.shipping_message,
 	status_color: props.order.status_color,
 	status_name: props.order.status_name,
@@ -217,6 +293,10 @@ const onSubmitForm = () => {
 			});
 		}
 	});
+};
+
+const onPushToCrm = () => {
+	router.post(route('admin.order.crm', props.order.id), {}, { preserveScroll: true });
 };
 
 const onStatusSelectInput = (event: Event) => {

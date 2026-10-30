@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Order\StoreRequest;
+use App\Http\Requests\Order\UpdateRequest;
 use App\Interfaces\EmailServiceInterface;
+use App\Jobs\PushOrderToCrm;
 use App\Models\Order;
+use App\Models\Product;
+use App\Services\SalesDrive;
+use App\Services\TelegramNotifier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Mail;
 
@@ -14,7 +20,7 @@ class OrderController extends Controller
 {
     protected EmailServiceInterface $emailService;
 
-    public function __construct(EmailServiceInterface $emailService)
+    public function __construct(EmailServiceInterface $emailService, private TelegramNotifier $telegram)
     {
         $this->emailService = $emailService;
     }
@@ -56,9 +62,22 @@ class OrderController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
+
         DB::beginTransaction();
         try {
-            $order = Order::create($data);
+            $order = Order::create([
+                'client_name'      => $data['client_name'],
+                'client_surname'   => $data['client_surname'],
+                'client_phone'     => $data['client_phone'],
+                'client_email'     => $data['client_email'],
+                'client_message'   => $data['client_message'] ?? null,
+                // Prices/names come from the DB, never from the browser
+                'cart_content'     => $this->buildCartSnapshot($data['cart_content']),
+                'status_name'      => Order::DEFAULT_STATUS_NAME,
+                'status_color'     => Order::DEFAULT_STATUS_COLOR,
+                'compleated'       => false,
+                'locale'           => $data['locale'] ?? app()->getLocale(),
+            ] + $this->shippingAttributes($data));
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
@@ -72,8 +91,83 @@ class OrderController extends Controller
         // Send Telegram notification
         $this->sendTelegramNotification($order);
 
+        // CRM push runs after the response is sent; failures never reach the customer
+        PushOrderToCrm::dispatch($order)->afterResponse();
+
         return redirect()->route('thankYou')
             ->with('order', $order)->with('thankYouTranslations', trans('thank-you'));
+    }
+
+    /**
+     * Shipping columns for the chosen method; fields that do not belong to
+     * the method are dropped.
+     *
+     * @param array<string, mixed> $data validated request data
+     * @return array<string, string|null>
+     */
+    private function shippingAttributes(array $data): array
+    {
+        $method = $data['shipping_method'];
+        $isNp   = $method !== Order::SHIPPING_METHOD_OTHER;
+        $hasWarehouse = in_array($method, [
+            Order::SHIPPING_METHOD_DEPARTMENT,
+            Order::SHIPPING_METHOD_POSTAL_MACHINE,
+        ], true);
+
+        return [
+            'shipping_method'        => $method,
+            'shipping_city'          => $isNp ? $data['shipping_city'] : null,
+            'shipping_city_ref'      => $isNp ? $data['shipping_city_ref'] : null,
+            'shipping_area'          => $isNp ? ($data['shipping_area'] ?? null) : null,
+            'shipping_warehouse'     => $hasWarehouse ? $data['shipping_warehouse'] : null,
+            'shipping_warehouse_ref' => $hasWarehouse ? $data['shipping_warehouse_ref'] : null,
+            'shipping_address'       => $method === Order::SHIPPING_METHOD_COURIER ? $data['shipping_address'] : null,
+            'shipping_message'       => $method === Order::SHIPPING_METHOD_OTHER ? $data['shipping_message'] : null,
+        ];
+    }
+
+    /**
+     * Rebuild the cart from Product records. Only id and quantity are read
+     * from the client; duplicate ids are merged.
+     *
+     * @param array<int, array{id: int|string, quantity: int|string}> $items
+     * @return array<int, array<string, mixed>>
+     * @throws ValidationException
+     */
+    private function buildCartSnapshot(array $items): array
+    {
+        $quantities = [];
+        foreach ($items as $item) {
+            $id = (int) $item['id'];
+            $quantities[$id] = min(999, ($quantities[$id] ?? 0) + (int) $item['quantity']);
+        }
+
+        $products = Product::whereIn('id', array_keys($quantities))->get()->keyBy('id');
+
+        $snapshot = [];
+        foreach ($quantities as $id => $quantity) {
+            $product = $products->get($id);
+
+            if (!$product || $product->price === null) {
+                throw ValidationException::withMessages([
+                    'cart_content' => __('validation.cartProductUnavailable'),
+                ]);
+            }
+
+            $snapshot[] = [
+                'id'          => $product->id,
+                'name'        => $product->getTranslations('name'),
+                'sku'         => $product->sku,
+                'price'       => $product->price,
+                'old_price'   => $product->old_price,
+                'quantity'    => $quantity,
+                'media_file'  => $product->mediaFile?->thumbnail
+                    ? ['thumbnail' => ['url' => $product->mediaFile->thumbnail->url]]
+                    : null,
+            ];
+        }
+
+        return $snapshot;
     }
 
     /**
@@ -97,7 +191,7 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreRequest $request, Order $order)
+    public function update(UpdateRequest $request, Order $order)
     {
         DB::beginTransaction();
         try {
@@ -112,6 +206,22 @@ class OrderController extends Controller
             DB::rollBack();
             throw $e;
         }
+    }
+
+    /**
+     * Manually (re)send the order to the CRM.
+     */
+    public function pushToCrm(Order $order, SalesDrive $salesDrive)
+    {
+        if (!$salesDrive->isConfigured()) {
+            $message = ['type' => 'error', 'text' => 'CRM не налаштовано'];
+        } elseif ($salesDrive->push($order)) {
+            $message = ['type' => 'success', 'text' => 'Замовлення відправлено в CRM'];
+        } else {
+            $message = ['type' => 'error', 'text' => 'Не вдалося відправити в CRM: ' . $order->fresh()->crm_error];
+        }
+
+        return redirect()->route('admin.order.edit', $order->id)->with('message', $message);
     }
 
     /**
@@ -142,39 +252,40 @@ class OrderController extends Controller
      */
     private function sendTelegramNotification(Order $order): void
     {
-        try {
-            $totalPrice = 0;
-            foreach ($order->cart_content as $product) {
-                $totalPrice += $product['price'] * $product['quantity'];
-            }
-
-            $messageText = "**✅ Нове замовлення №{$order->id}**\n\n";
-            $messageText .= "👤 {$order->client_name}\n";
-            $messageText .= "💰 {$totalPrice}\n\n";
-            $messageText .= "📞 {$order->client_phone}\n";
-            $messageText .= "📩 [{$order->client_email}](mailto:{$order->client_email})\n\n";
-            $messageText .= "———————————————\n\n";
-            $messageText .= "__💬: {$order->client_message}__\n";
-            $messageText .= "__🚚: {$order->shipping_message}__\n\n";
-            $messageText .= "🛒\n";
-            $counter     = 1;
-            foreach ($order->cart_content as $product) {
-                $counter++;
-                $messageText .= "{$counter}. {$product['name'][app()->getLocale()]} - {$product['quantity']} шт. - {$product['price']}грн/шт.\n";
-            }
-            $messageText .= "\n\n`" . date('d/m/Y') . "    " . date('H:i') . "`";
-
-            $data = [
-                'chat_id'    => env('TELEGRAM_CHAT_ID'),
-                'text'       => $messageText,
-                'parse_mode' => 'Markdown'
-            ];
-            $url  = "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage?" . http_build_query($data);
-
-            file_get_contents($url);
-        } catch (\Exception $e) {
-            // Log error but don't fail the order creation
+        $products = [];
+        foreach (array_values($order->cart_content) as $index => $product) {
+            $label = ($index + 1) . '. ' . Order::itemName($product, 'ua');
+            $products[$label] = "{$product['quantity']} шт. × " . number_format($product['price'], 0, '', ' ') . ' грн';
         }
+
+        $this->telegram->send(TelegramNotifier::format(
+            "🛒 Нове замовлення №{$order->id}",
+            [
+                '👤 Клієнт' => [
+                    "Ім'я"    => trim($order->client_name . ' ' . $order->client_surname),
+                    'Телефон' => $order->client_phone,
+                    'Email'   => $order->client_email,
+                    'Коментар' => $order->client_message,
+                ],
+                '🚚 Доставка' => [
+                    'Спосіб'    => $order->shipping_method === Order::SHIPPING_METHOD_OTHER
+                        ? 'Інше'
+                        : ($order->shipping_method ? __('emails.shippingMethods.' . $order->shipping_method, [], 'ua') : null),
+                    'Місто'     => $order->shipping_city
+                        ? trim($order->shipping_city . ($order->shipping_area ? " ({$order->shipping_area})" : ''))
+                        : null,
+                    'Відділення' => $order->shipping_warehouse,
+                    'Адреса'    => $order->shipping_address,
+                    'Деталі'    => $order->shipping_message,
+                ],
+                '📦 Товари' => $products,
+                '💰 Разом' => [
+                    'Сума' => number_format($order->total(), 0, '', ' ') . ' грн',
+                ],
+            ],
+            route('admin.order.edit', $order->id),
+            'Відкрити в адмінці'
+        ));
     }
 
 }

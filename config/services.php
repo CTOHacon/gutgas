@@ -25,10 +25,26 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
+    'telegram' => [
+        'bot_token' => env('TELEGRAM_BOT_TOKEN'),
+        'chat_id' => env('TELEGRAM_CHAT_ID'),
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    'novaposhta' => [
+        'key' => env('NOVA_POSHTA_API_KEY'),
+    ],
+
+    'salesdrive' => [
+        'url' => env('SALESDRIVE_URL'),
+        'key' => env('SALESDRIVE_API_KEY'),
+        // "Сайт" option id in the CRM that marks orders as coming from gutgas.eu
+        'site_option' => env('SALESDRIVE_SITE_OPTION', 'id_45'),
     ],
 
 ];

@@ -9,6 +9,7 @@
 			<button
 				v-for="tab in tabs"
 				:key="tab.name"
+				type="button"
 				class="control-button"
 				:class="{ active: activeTabName === tab.name }"
 				@click="activeTabName = tab.name"
@@ -25,12 +26,17 @@
 
 <script setup lang="ts">
 import getImageUrl from '@/utils/getImageUrl';
-import { provide, ref, useSlots } from 'vue';
+import { provide, ref, useSlots, watch } from 'vue';
 
 const slots = useSlots();
 const props = defineProps<{
 	controlsBordered?: boolean;
 	controlsBackground?: 'none' | '#141414' | string;
+	modelValue?: string;
+}>();
+
+const emit = defineEmits<{
+	(e: 'update:modelValue', value: string): void;
 }>();
 
 const tabs =
@@ -45,7 +51,8 @@ const tabs =
 			};
 		}) || [];
 
-const activeTabName = ref(tabs[0].name);
+const activeTabName = ref<string>(props.modelValue ?? tabs[0].name);
+watch(activeTabName, name => emit('update:modelValue', name));
 provide('activeTabName', activeTabName);
 </script>
 
