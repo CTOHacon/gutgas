@@ -25,7 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import getImageUrl from '@/utils/getImageUrl';
 import { provide, ref, useSlots, watch } from 'vue';
 
 const slots = useSlots();
@@ -47,7 +46,7 @@ const tabs =
 			return {
 				name: slot.props?.name,
 				label: slot.props?.label || index,
-				icon: slot.props?.icon ? getImageUrl(slot.props.icon) : null
+				icon: slot.props?.icon ?? null
 			};
 		}) || [];
 

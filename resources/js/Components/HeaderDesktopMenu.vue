@@ -37,15 +37,27 @@ onMounted(() => {
 @import '@/styles/variables.scss';
 .desktop-header-menu {
 	display: flex;
+	flex-wrap: nowrap;
 }
 .menu-item {
 	color: #bdbdbd;
+	white-space: nowrap;
 	position: relative;
 	padding-bottom: 8px;
 	transition: color 0.2s ease-in-out;
 	margin-right: 1.5rem;
-	@media (max-width: $small-desktop-width) {
+	// Five items must fit on one row next to the logo and the phone
+	@media (max-width: $large-desktop-width) {
+		font-size: 16px;
 		margin-right: 1rem;
+	}
+	@media (max-width: $small-desktop-width) {
+		font-size: 15px;
+		margin-right: 0.75rem;
+	}
+	@media (max-width: 1150px) {
+		font-size: 14px;
+		margin-right: 0.6rem;
 	}
 	&::before {
 		content: '';

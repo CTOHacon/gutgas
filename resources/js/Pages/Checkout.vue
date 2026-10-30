@@ -93,17 +93,17 @@
 						<BaseTab
 							:label="__('shippingNpDepartment')"
 							name="np_department"
-							icon="../assets/nova-poshta-tab-icon.svg"
+							:icon="novaPoshtaTabIcon"
 						/>
 						<BaseTab
 							:label="__('shippingNpPostalMachine')"
 							name="np_postal_machine"
-							icon="../assets/nova-poshta-tab-icon.svg"
+							:icon="novaPoshtaTabIcon"
 						/>
 						<BaseTab
 							:label="__('shippingNpCourier')"
 							name="np_courier"
-							icon="../assets/nova-poshta-tab-icon.svg"
+							:icon="novaPoshtaTabIcon"
 						/>
 						<BaseTab :label="__('shippingOther')" name="other" />
 					</BaseTabs>
@@ -249,6 +249,7 @@ import useCart from '@/composables/cart';
 import useHeaderElement from '@/composables/headerElement';
 import BaseButton from '@/Components/BaseButton.vue';
 import BaseTab from '@/Components/BaseTab.vue';
+import novaPoshtaTabIcon from '@/assets/nova-poshta-tab-icon.svg';
 import BaseTabs from '@/Components/BaseTabs.vue';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
 import debounce from 'lodash.debounce';

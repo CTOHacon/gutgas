@@ -18,6 +18,10 @@ const phone = getGlobalSetting('phone') ?? '';
 @import '@/styles/variables.scss';
 .desktop-header-phone {
 	text-align: right;
+	white-space: nowrap;
+	@media (max-width: $small-desktop-width) {
+		font-size: 16px;
+	}
 	@media (max-width: $tablet-width) {
 		text-align: left;
 	}
