@@ -1,0 +1,1168 @@
+{
+ "source": "ua",
+ "exported_at": "2026-11-02T14:25:51+02:00",
+ "entries": [
+  {
+   "kind": "model",
+   "model": "App\\Models\\Product",
+   "id": 15,
+   "field": "name",
+   "value": "Газовий балон Gutgas HeavyDuty HD-45.5",
+   "translation": "Gas cylinder Gutgas HeavyDuty HD-45.5"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\Page",
+   "id": 2,
+   "field": "content",
+   "value": "<h2 class=\"product_block_row_1\">Оплата товару</h2><p class=\"product_block_row_1\">Оплату обраного товару можна здійснити одним з двох способів:</p><ul><li class=\"product_block_row_1\">Одразу при оформленні замовлення платіжними картами Visa і MasterCard за допомогою сервісу <a href=\"https://www.liqpay.ua/\" rel=\"noopener noreferrer\" target=\"_blank\">LiqPay</a>;</li><li class=\"product_block_row_1\">При отриманні товару у нашого дилера або у відділенні Нової Пошти.</li></ul><h2 class=\"product_block_row_1\">Доставка товару</h2><p class=\"product_block_row_1\">Щоб отримати товар, Ви можете обрати:</p><ul><li class=\"product_block_row_1\">Доставку Новою Поштою (не забудьте вказати місто і номер відділення при оформленні замовлення);</li><li class=\"product_block_row_1\">Самовивіз або доставку кур'єром (з Вами обов'язково зв'яжеться наш менеджер).</li></ul>",
+   "translation": "<h2 class=\"product_block_row_1\">Payment</h2><p class=\"product_block_row_1\">You can pay for your order in one of the following ways:</p><ul><li class=\"product_block_row_1\">Online when placing the order, by bank card, using the payment methods available at checkout;</li><li class=\"product_block_row_1\">Another convenient method agreed with our manager when the order is confirmed.</li></ul><h2 class=\"product_block_row_1\">Delivery</h2><p class=\"product_block_row_1\">Gutgas is a Ukrainian brand with international delivery and warehouses across Europe. To receive your order, you can choose:</p><ul><li class=\"product_block_row_1\">Delivery from our warehouses across Europe: delivery terms and cost are confirmed by our manager after you place the order;</li><li class=\"product_block_row_1\">Self-pickup or courier delivery, where available for your location (our manager will contact you to arrange the details).</li></ul>"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\Page",
+   "id": 3,
+   "field": "content",
+   "value": "<p class=\"product_block_row_1\">Повернення товару згідно зі статтею 9 Закону \"Про захист прав споживача\" відбувається протягом 14 днів, не враховуючи дня покупки, якщо дотримані такі умови:</p><ul><li class=\"product_block_row_1\">товар не був у вжитку і не має слідів використання: подряпин, сколів, потертостей, слідів розкриття;</li><li class=\"product_block_row_1\">немає слідів попадання рідини у виріб або на упаковку, документацію;</li><li class=\"product_block_row_1\">товарний вигляд збережений - тобто залишилися всі ярлики, наліпки й інше приладдя товару в незмінному вигляді, товар повністю укомплектований і запакований, як під час першої покупки;</li><li class=\"product_block_row_1\">присутні всі документи на товар (інструкції, гарантійний талон, квитанція або товарний чек, що підтверджують покупку), збережені всі ярлики та заводське маркування.</li></ul><p class=\"product_block_row_1\">Якщо товар не працює, його обмін або повернення здійснюється тільки за наявності висновку сервісного центру виробника про те, що умови експлуатації не були порушені.</p><p class=\"product_block_row_1\">Прохання враховувати всі ці моменти під час створення запиту на повернення.</p><p class=\"product_block_row_1\">Якщо один з цих пунктів порушений, продавець залишає за собою право не прийняти товар.</p><p class=\"product_block_row_1\">Під час повернення замовлення/товару покупець оплачує всі транспортні витрати, пов'язані з поверненням замовлення/товару (крім гарантійних випадків). Якщо доставка товару не була оплачена покупцем, сума витрат на доставку буде вирахувана з суми повернення грошей.</p><h2 class=\"product_block_row_1\">Вищеописані умови не обмежують права, надані споживачам чинним законодавством нашої країни.</h2>",
+   "translation": "<p class=\"product_block_row_1\">Products can be returned within 14 days, not counting the day of purchase, if the following conditions are met:</p><ul><li class=\"product_block_row_1\">the product has not been used and shows no signs of use: scratches, chips, wear marks, signs of opening;</li><li class=\"product_block_row_1\">there are no traces of liquid on the product, its packaging or documentation;</li><li class=\"product_block_row_1\">the product's appearance is preserved, i.e. all labels, stickers and other accessories remain unchanged, and the product is fully equipped and packaged as it was at the first purchase;</li><li class=\"product_block_row_1\">all product documents are present (instructions, warranty card, receipt or sales slip confirming the purchase), and all labels and factory markings are preserved.</li></ul><p class=\"product_block_row_1\">If the product does not work, its exchange or return is possible only with a conclusion from the manufacturer's service center that the operating conditions were not violated.</p><p class=\"product_block_row_1\">Please take all these points into account when submitting a return request.</p><p class=\"product_block_row_1\">If any of these conditions is violated, the seller reserves the right not to accept the product.</p><p class=\"product_block_row_1\">When returning an order/product, the buyer pays all shipping costs related to the return of the order/product (except for warranty cases). If the delivery of the product was not paid by the buyer, the delivery cost will be deducted from the refund amount.</p><h2 class=\"product_block_row_1\">The conditions described above do not limit the rights granted to consumers by the applicable legislation of the buyer's country.</h2>"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\Page",
+   "id": 7,
+   "field": "content",
+   "value": "<p>Ласкаво просимо до нашої компанії, де ми пропонуємо широкий вибір газових балонів для різних потреб.  В нашому асортименті є композитні балони, ExtraLight балони та HeavyDuty балони, кожен з яких має свої особливості і переваги.</p><p>Композитні газові балони - це сучасне рішення, створене з використанням пластикових матеріалів. Однією з головних переваг таких балонів є їх технологічність та суперлегкість. Це дозволяє забезпечити зручність в транспортуванні та використанні. Композитні балони мають високу міцність і стійкість до зовнішніх впливів, що робить їх довговічними та надійними.</p><p>Балони ExtraLight дещо важчі за композитні, проте майже вдвічі легші за звичайні сталеві балони такого ж об'єму і при цьому не втрачають міцності та якості. Ці балони є економічним вибором, оскільки вони доступні за більш прийнятну ціну. Балони ExtraLight також відрізняються своєю високою міцністю, що робить їх ідеальними для різних застосувань.</p><p>HeavyDuty газові балони призначені для використання в промислових умовах. Ці балони виготовляються з металу, але додатково обробляються для захисту від корозії. Вони відрізняються своєю великою ємністю та стійкістю до важких умов. HeavyDuty балони дозволяють забезпечити довготривале зберігання та використання газу у важких промислових процесах.</p><p>Обираючи газовий балон, важливо враховувати конкретні потреби та вимоги вашого проекту чи діяльності. Наша компанія готова надати професійну консультацію та допомогу в підборі найбільш відповідних балонів для ваших потреб.</p><p>Ми гарантуємо високу якість наших продуктів, дотримання стандартів безпеки та надійність у використанні. Наші газові балони стануть незамінними помічниками у вашому процесі роботи, забезпечуючи потрібне джерело газу з мінімальними зусиллями.</p><p>Оберіть найкращий тип газових балонів для вашої потреби - композитні, ExtraLight або HeavyDuty, і насолоджуйтесь їх перевагами. Робіть крок до високоякісних і надійних газових балонів від нашої компанії.</p><p>Нехай ваші проекти розвиваються швидко та успішно з нашими газовими балонами високої якості. Звертайтеся до нас і отримуйте найкраще обладнання для вашої роботи.</p>",
+   "translation": "<p>Welcome to our company, where we offer a wide range of gas cylinders for various needs. Our product line includes composite cylinders, ExtraLight cylinders and HeavyDuty cylinders, each with its own features and advantages.</p><p>Composite gas cylinders are a modern solution made from plastic materials. One of the main advantages of these cylinders is their technological sophistication and super lightness. This makes them convenient to transport and use. Composite cylinders offer high strength and resistance to external influences, which makes them durable and reliable.</p><p>ExtraLight gas cylinders are slightly heavier than composite ones, yet nearly half the weight of conventional steel cylinders of the same volume, with no compromise on strength or quality. These cylinders are an economical choice, as they are available at a more affordable price. ExtraLight cylinders also stand out for their high strength, which makes them ideal for a variety of applications.</p><p>HeavyDuty gas cylinders are designed for use in industrial conditions. These cylinders are made of metal and additionally treated for corrosion protection. They stand out for their large capacity and resistance to harsh conditions. HeavyDuty cylinders allow long-term storage and use of gas in demanding industrial processes.</p><p>When choosing a gas cylinder, it is important to consider the specific needs and requirements of your project or activity. Our company is ready to provide professional consultation and help you select the most suitable cylinders for your needs.</p><p>We guarantee high product quality, compliance with safety standards and reliability in use. Our gas cylinders will become indispensable helpers in your work process, providing a reliable gas source with minimal effort.</p><p>Choose the best type of gas cylinder for your needs - composite, ExtraLight or HeavyDuty - and enjoy their advantages. Take a step toward high-quality, reliable gas cylinders from our company.</p><p>May your projects develop quickly and successfully with our high-quality gas cylinders. Contact us and get the best equipment for your work.</p>"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\ProductPage",
+   "id": 13,
+   "field": "description",
+   "value": "<h4>Замовляйте на сайті та отримуйте в магазинах партнерів або у відділеннях Нової Пошти!</h4><p>Спроектований спеціально для побутових газових приладів (плити, обігрівачі). При збільшеному до 24.5л об’ємі та висоті лише 571мм, він стане незамінним помічником усюди, де потрібне автономне газопостачання, а завдяки вазі лише 5.3кг є найлегшим на ринку.</p><p><strong style=\"color: rgb(255, 255, 255);\">Найтехнологічніші балони у світі.</strong></p><p>Усі етапи створення полімерно-композитних балонів для зрідженого газу Gutgas Composite від постачання сировини до пакування проводяться на єдиній у світі повністю автоматизованій виробничій лінії. У процесі виробництва кожен балон випробовується по 35 параметрам, в тому числі під високим тиском на міцність і жорсткість, щоб ви завжди були впевнені в абсолютній надійності нашого газового балона.</p><p>Безпека і довговічність — головні принципи створення серії газових балонів Gutgas Composite. Кожен 200-й виріб перевіряється на розрив під тиском 150Атм., а кожен 1000-й — проходить циклічні випробування на максимальну кількість заповнень, витримуючи понад 100 000 циклів за норми у 12 000! Тобто їх можна використовувати понад 100 років.</p><p>Сучасні композитні матеріали наділять газові балони Gutgas Composite унікальними властивостями, недосяжними для інших технологій:</p><ul><li><strong>неперевершена легкість</strong>&nbsp;— майже у 2,5 рази легше за звичайні металеві балони;</li><li><strong>прозорість</strong>&nbsp;— рівень газу легко контролювати завдяки прозорому корпусу;</li><li><strong>довговічність</strong>&nbsp;— завдяки відсутності металу, композитні газові балони не піддаються корозії (іржавінню), стійкі до механічного та хімічного впливу;</li><li><strong>безпека та вогнестійкість</strong>&nbsp;забезпечується клапаном надлишкового тиску, який дозовано випускає зайвий газ, виключають іскроутворення.</li></ul><p>Балони Gutgas Composite розроблені з увагою до кожної деталі, щоб перевершити очікування найвимогливіших споживачів. Виготовлені за унікальними технологіями на найсучаснішій 100% автоматизованій фабриці у Норвегії.</p><p>Сертифіковано: Директива ЄС 2010/35, π-маркування, стандарти EN14427 і EN12245.</p>",
+   "translation": "<h4>Order on the website — international delivery from our warehouses across Europe!</h4><p>Designed specifically for household gas appliances (stoves, heaters). With an increased volume of 24.5 L and a height of just 571 mm, it becomes an indispensable helper wherever independent gas supply is needed, and with a weight of only 5.3 kg it is the lightest on the market.</p><p><strong style=\"color: rgb(255, 255, 255);\">The most technologically advanced cylinders in the world.</strong></p><p>All stages of manufacturing polymer-composite cylinders for liquefied gas Gutgas Composite, from raw material supply to packaging, are carried out on a single, fully automated production line unique in the world. During production, each cylinder is tested against 35 parameters, including high-pressure tests for strength and rigidity, so you can always be confident in the absolute reliability of our gas cylinder.</p><p>Safety and durability are the core principles behind the Gutgas Composite gas cylinder series. Every 200th item is tested for burst strength at 150 atm., and every 1000th undergoes cyclic testing for the maximum number of refills, withstanding over 100,000 cycles against a standard of 12,000! This means they can be used for over 100 years.</p><p>Modern composite materials give Gutgas Composite gas cylinders unique properties unattainable with other technologies:</p><ul><li><strong>unmatched lightness</strong>&nbsp;— almost 2.5 times lighter than conventional metal cylinders;</li><li><strong>transparency</strong>&nbsp;— the gas level is easy to monitor thanks to the transparent body;</li><li><strong>durability</strong>&nbsp;— with no metal, composite gas cylinders are not subject to corrosion (rust) and are resistant to mechanical and chemical impact;</li><li><strong>safety and fire resistance</strong>&nbsp;is ensured by a pressure relief valve that releases excess gas in a controlled way, preventing sparks.</li></ul><p>Gutgas Composite cylinders are designed with attention to every detail, to exceed the expectations of the most demanding customers. Manufactured using unique technologies at a state-of-the-art 100% automated factory in Norway.</p><p>Certified: EU Directive 2010/35, π-marking, standards EN14427 and EN12245.</p>"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\ProductPage",
+   "id": 15,
+   "field": "description",
+   "value": "<p>Спроектований спеціально для професійного використання та для потужних побутових газових приладів (плити, обігрівачі). При об’ємі 45.5л та висоті лише 750мм, він стане у нагоді усюди, де потрібне тривале автономне газопостачання, а завдяки діаметру 320мм, працює з високою продуктивністю при низьких температурах (до -20°C)</p><p><strong style=\"color: rgb(255, 255, 255);\">Найміцніша серія наших балонів інтенсивного професійного використання.</strong></p><p>Серія балонів для зрідженого газу Gutgas HeavyDuty розроблена таким чином, щоб витримувати найсуворіші щоденні навантаження, будь то вилковий навантажувач, газове зварювання чи домашнє приготування їжі та опалення.</p><p>Балони Gutgas HeavyDuty створені на віки. Дивовижна довговічність забезпечується завдяки високоякісній холоднокатаній товстостінній сталі з особливою термічною обробкою. При вазі на 5-10% меншій, ніж у звичайного сталевого газового балона співмірного об’єму, газові балони HeavyDuty витримують тиск понад 120 Атм (майже у 5 разів перевершуючи стандартні 25Атм), надійно утримуючи газ всередині. У той же час, завдяки здатності до деформації, металевий корпус балона з легкістю гасить енергію ударів. Найвища якість гарантується суворим багаторівневим контролем на кожному етапі виробництва.</p><p>Безкомпромісна безпека та вогнестійкість газових балонів Gutgas HeavyDuty забезпечується клапаном надлишкового тиску, який дозовано випускає зайвий газ, не підтримуючи горіння навіть у відкритому полум’ї, а тришарове зносостійке та атмосферостійке захисне покриття (посилене оцинкування та двошарове лакофарбове покриття) забезпечує надзвичайну стійкість до корозії.</p><p>Балони Gutgas розроблені з увагою до кожної деталі, щоб перевершити очікування найвимогливіших споживачів. Вироблено в ЄС (Португалія) лідером галузі з 60-річною історією досліджень, інновацій і довгим списком патентів.</p><p>Сертифіковано: Директива ЄС 2010/35, π-маркування та стандарт EN 1442.</p>",
+   "translation": "<p>Designed specifically for professional use and for powerful household gas appliances (stoves, heaters). With a capacity of 45.5 L and a height of just 750 mm, it will come in handy wherever long-lasting autonomous gas supply is needed, and thanks to its 320 mm diameter, it performs with high efficiency at low temperatures (down to -20°C)</p><p><strong style=\"color: rgb(255, 255, 255);\">The strongest series of our cylinders, built for intensive professional use.</strong></p><p>The Gutgas HeavyDuty LPG cylinder series is designed to withstand the harshest daily loads, whether on a forklift, in gas welding, or for home cooking and heating.</p><p>Gutgas HeavyDuty cylinders are built to last. Outstanding durability is ensured by high-quality cold-rolled, thick-walled steel with special heat treatment. With a weight 5-10% lower than that of a standard steel gas cylinder of comparable volume, HeavyDuty gas cylinders withstand pressures above 120 Atm (almost 5 times the standard 25 Atm), reliably containing gas inside. At the same time, thanks to its deformability, the metal cylinder body easily absorbs impact energy. The highest quality is guaranteed by strict multi-level control at every stage of production.</p><p>Uncompromising safety and fire resistance of Gutgas HeavyDuty cylinders are ensured by an overpressure valve, which releases excess gas in controlled amounts and does not sustain combustion even in an open flame, while a three-layer wear-resistant and weather-resistant protective coating (reinforced galvanizing and a two-layer paint coating) provides exceptional resistance to corrosion.</p><p>Gutgas cylinders are designed with attention to every detail to exceed the expectations of the most demanding customers. Manufactured in the EU (Portugal) by an industry leader with 60 years of research and innovation and a long list of patents.</p><p>Certified: EU Directive 2010/35, π-marking and EN 1442 standard.</p>"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 17,
+   "field": "title",
+   "value": "Перехідник для заправки газового балона - Купити в Україні",
+   "translation": "Gas Cylinder Refill Adapter - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 17,
+   "field": "description",
+   "value": "Високоякісний перехідник для заправки газового балона  з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality refill adapter for gas cylinders, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 18,
+   "field": "title",
+   "value": "Редуктор для підключення газового балону Gutgas 37mbar - Купити в Україні",
+   "translation": "Gutgas 37mbar Regulator for Gas Cylinder Connection - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 18,
+   "field": "description",
+   "value": "Високоякісний редуктор низького тиску для пропан-бутану з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality low-pressure regulator for propane-butane, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 19,
+   "field": "title",
+   "value": "Редуктор зі шлангом та гайкою для підключення газових балонів - Купити в Україні",
+   "translation": "Regulator with Hose and Nut for Gas Cylinder Connection - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 19,
+   "field": "description",
+   "value": "Високоякісний редуктор зі шлангом та гайкою з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality regulator with hose and nut, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 20,
+   "field": "title",
+   "value": "Професійний  газовий  шланг для балонів - Купити в Україні",
+   "translation": "Professional Gas Hose for Cylinders - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 20,
+   "field": "description",
+   "value": "Високоякісний професійний  газовий  шланг з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality professional gas hose, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 21,
+   "field": "title",
+   "value": "Професійний газовий шланг 1м для підключення балонів - Купити в Україні",
+   "translation": "Professional 1m Gas Hose for Cylinder Connection - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 21,
+   "field": "description",
+   "value": "Високоякісний професійний газовий шланг 1м з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality professional 1m gas hose, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 22,
+   "field": "title",
+   "value": "Професійний  газовий  шланг 2м для підключення балонів - Купити в Україні",
+   "translation": "Professional 2m Gas Hose for Cylinder Connection - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 22,
+   "field": "description",
+   "value": "Високоякісний професійний  газовий  шланг 2м з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality professional 2m gas hose, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 23,
+   "field": "title",
+   "value": "Професійний газовий шланг 5м для підключення балонів - Купити в Україні",
+   "translation": "Professional 5m Gas Hose for Cylinder Connection - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 23,
+   "field": "description",
+   "value": "Високоякісний професійний газовий шланг 5м з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality professional 5m gas hose, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 24,
+   "field": "title",
+   "value": "Професійний газовий шланг 10м для підключення балонів - Купити в Україні",
+   "translation": "Professional 10m Gas Hose for Cylinder Connection - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 24,
+   "field": "description",
+   "value": "Високоякісний професійний газовий шланг 10м з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality professional 10m gas hose, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 25,
+   "field": "title",
+   "value": "Професійний газовий шланг 50м для підключення балонів - Купити в Україні",
+   "translation": "Professional 50m Gas Hose for Cylinder Connection - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 25,
+   "field": "description",
+   "value": "Високоякісний професійний газовий шланг 50м з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality professional 50m gas hose, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 26,
+   "field": "title",
+   "value": "Нержавіючий хомут для підключення газових балонів - Купити в Україні",
+   "translation": "Stainless Steel Clamp for Gas Cylinder Connection - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 26,
+   "field": "description",
+   "value": "Високоякісний нержавіючий хомут для газових балонів з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality stainless steel clamp for gas cylinders, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 27,
+   "field": "title",
+   "value": "Композитний газовий балон Gutgas KLF 12.5л  - Купити в Україні",
+   "translation": "Gutgas KLF 12.5L Composite Gas Cylinder - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 27,
+   "field": "description",
+   "value": "Високоякісний композитний газовий балон Gutgas CR-12.5 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality composite gas cylinder Gutgas CR-12.5, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 28,
+   "field": "title",
+   "value": "Композитний газовий балон Gutgas CR-18.2 - Купити в Україні",
+   "translation": "Gutgas CR-18.2 Composite Gas Cylinder - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 28,
+   "field": "description",
+   "value": "Високоякісний композитний газовий балон Gutgas CR-18.2 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality composite gas cylinder Gutgas CR-18.2, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 29,
+   "field": "title",
+   "value": "Композитний газовий балон Gutgas KLF 24.5л - Купити в Україні",
+   "translation": "Gutgas KLF 24.5L Composite Gas Cylinder - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 29,
+   "field": "description",
+   "value": "Високоякісний композитний газовий балон Gutgas CR-24.5 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality composite gas cylinder Gutgas CR-24.5, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 30,
+   "field": "title",
+   "value": "Композитний газовий балон Gutgas CR-33.5 - Купити в Україні",
+   "translation": "Gutgas CR-33.5 Composite Gas Cylinder - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 30,
+   "field": "description",
+   "value": "Високоякісний композитний газовий балон Gutgas CR-33.5 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality composite gas cylinder Gutgas CR-33.5, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 31,
+   "field": "title",
+   "value": "Газовий балон Gutgas HeavyDuty HD-45.5 - Купити в Україні",
+   "translation": "Gutgas HeavyDuty HD-45.5 Gas Cylinder - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 31,
+   "field": "description",
+   "value": "Високоякісний газовий балон Gutgas HeavyDuty HD-45.5 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality gas cylinder Gutgas HeavyDuty HD-45.5, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 32,
+   "field": "title",
+   "value": "Газовий балон Gutgas ExtraLight XLT-9.6 - Купити в Україні",
+   "translation": "Gutgas ExtraLight XLT-9.6 Gas Cylinder - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 32,
+   "field": "description",
+   "value": "Високоякісний газовий балон Gutgas ExtraLight XLT-9.6 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality gas cylinder Gutgas ExtraLight XLT-9.6, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 33,
+   "field": "title",
+   "value": "Газовий балон Gutgas ExtraLight XLT-19.9 - Купити в Україні",
+   "translation": "Gutgas ExtraLight XLT-19.9 Gas Cylinder - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 33,
+   "field": "description",
+   "value": "Високоякісний газовий балон Gutgas ExtraLight XLT-19.9 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality gas cylinder Gutgas ExtraLight XLT-19.9, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 34,
+   "field": "title",
+   "value": "Газовий балон Gutgas ExtraLight XLT-26.6 - Купити в Україні",
+   "translation": "Gutgas ExtraLight XLT-26.6 Gas Cylinder - Buy Online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 34,
+   "field": "description",
+   "value": "Високоякісний газовий балон Gutgas ExtraLight XLT-26.6 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "High-quality gas cylinder Gutgas ExtraLight XLT-26.6, with international delivery from our warehouses across Europe, in the Gutgas.eu catalog. Order: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 1,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 2,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 3,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 4,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 5,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 6,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 7,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 8,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 9,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 10,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 11,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "page_meta",
+   "owner_type": "App\\Models\\Page",
+   "owner_id": 1,
+   "key": "advantagesItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "page_meta",
+   "owner_type": "App\\Models\\Page",
+   "owner_id": 1,
+   "key": "catalogPreviewItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Композитні газові балони",
+     "text": "<p><strong>Найтехнологічніші балони у світі.</strong> Усі етапи створення полімерно-композитних балонів для зрідженого газу Gutgas Composite від постачання сировини до пакування проводяться на єдиній у світі повністю автоматизованій виробничій лінії. </p>",
+     "image": "/storage/media/composite-gas-cylinders-banner.png",
+     "products": [
+      14,
+      13,
+      12
+     ],
+     "featuredProduct": null
+    },
+    {
+     "title": "Gutgas ExtraLight",
+     "text": "<p><strong>Газовий балон створений для використання будь-коли і будь-кому.</strong> Мінімальна висота та збільшений діаметр забезпечують легкість транспортування та максимальний об'єм газу, який може бути збережений. </p>",
+     "image": "/storage/media/gutgas-extra-light-cylinders-banner.png",
+     "products": [
+      18,
+      17,
+      16
+     ],
+     "featuredProduct": null
+    },
+    {
+     "title": "Gutgas HeavyDuty",
+     "text": "<p><strong>Найміцніша серія балонів Gutgas для інтенсивного професійного використання.</strong> Товстостінна холоднокатана сталь витримує тиск понад 120 Атм, а посилене оцинкування та двошарове лакофарбове покриття надійно захищають від корозії. Об'єм 45.5л забезпечує тривале автономне газопостачання. </p>",
+     "image": "/storage/media/heavy-cylinders-banner.png",
+     "products": [
+      4,
+      3,
+      2
+     ],
+     "featuredProduct": "15"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Composite Gas Cylinders",
+     "text": "<p><strong>The most technologically advanced cylinders in the world.</strong> All stages of creating polymer-composite cylinders for liquefied gas Gutgas Composite, from raw material supply to packaging, are carried out on a unique, fully automated production line in the world. </p>",
+     "image": "/storage/media/composite-gas-cylinders-banner.png",
+     "products": [
+      14,
+      13,
+      12
+     ],
+     "featuredProduct": null
+    },
+    {
+     "title": "Gutgas ExtraLight",
+     "text": "<p><strong>A gas cylinder designed for use anytime, by anyone.</strong> Minimal height and increased diameter ensure ease of transport and maximum gas volume that can be stored. </p>",
+     "image": "/storage/media/gutgas-extra-light-cylinders-banner.png",
+     "products": [
+      18,
+      17,
+      16
+     ],
+     "featuredProduct": null
+    },
+    {
+     "title": "Gutgas HeavyDuty",
+     "text": "<p><strong>The toughest Gutgas series, built for intensive professional use.</strong> Thick-walled cold-rolled steel withstands pressures above 120 atm, while reinforced galvanizing and a two-layer paint coating provide reliable corrosion protection. A 45.5 L capacity ensures long-lasting autonomous gas supply. </p>",
+     "image": "/storage/media/heavy-cylinders-banner.png",
+     "products": [
+      4,
+      3,
+      2
+     ],
+     "featuredProduct": "15"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "page_meta",
+   "owner_type": "App\\Models\\Page",
+   "owner_id": 1,
+   "key": "compairItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Композитний балон",
+     "image": "/storage/media/composite-cylinder-example.png",
+     "recommended": false,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo-darken.svg",
+     "advantages": [
+      "Найнижча вага (24.5л - 5.3кг)",
+      "Не вибухає",
+      "Висока надійність",
+      "Не іржавіє, не боїться подряпин",
+      "Не потребує чищення,\nфарбування",
+      "Естетичний зовнішній вигляд"
+     ],
+     "disadvantages": [
+      "Найдорожчий варіант"
+     ]
+    },
+    {
+     "title": "Полегшений газовий балон",
+     "image": "/storage/media/extra-light-cylinder-example.png",
+     "recommended": false,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo-darken.svg",
+     "advantages": [
+      "Низька вага (26.6л - 6.8кг)",
+      "Не вибухає, не підтримує горіння",
+      "Висока надійність",
+      "Стійкий до корозії (оцинкований)",
+      "Найвища продуктивність (Ø306мм)",
+      "Стійкий до ударів",
+      "Естетичний зовнішній вигляд"
+     ],
+     "disadvantages": [
+      "Не видно рівень газу"
+     ]
+    },
+    {
+     "title": "Промисловий газовий балон",
+     "image": "/storage/media/heavy-duty-cylinder-example.png",
+     "recommended": true,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo.svg",
+     "advantages": [
+      "Найбільший об'єм (45.5л)",
+      "Не вибухає, не підтримує горіння",
+      "Висока надійність",
+      "Стійкий до корозії (посилене оцинкування)"
+     ],
+     "disadvantages": [
+      "Більша вага, ніж у композитного та полегшеного балонів"
+     ]
+    },
+    {
+     "title": "Звичайний сталевий Балон",
+     "image": "/storage/media/regular-cylinder-example.png",
+     "recommended": false,
+     "discouraged": true,
+     "logo": null,
+     "advantages": [
+      "Найдешевший варіант"
+     ],
+     "disadvantages": [
+      "Найвища вага (27л - 13кг)",
+      "Вибухає, втрачає герметичність",
+      "Високі витрати на утримання",
+      "Висока швидкість зносу через\nпошкодження фарби і корозію",
+      "Не естетичний на вигляд",
+      "Не видно рівень газу"
+     ]
+    }
+   ],
+   "translation": [
+    {
+     "title": "Composite cylinder",
+     "image": "/storage/media/composite-cylinder-example.png",
+     "recommended": false,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo-darken.svg",
+     "advantages": [
+      "Lowest weight (24.5 L - 5.3 kg)",
+      "Does not explode",
+      "High reliability",
+      "Does not rust, not afraid of scratches",
+      "No need for cleaning,\npainting",
+      "Attractive appearance"
+     ],
+     "disadvantages": [
+      "The most expensive option"
+     ]
+    },
+    {
+     "title": "Lightweight gas cylinder",
+     "image": "/storage/media/extra-light-cylinder-example.png",
+     "recommended": false,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo-darken.svg",
+     "advantages": [
+      "Low weight (26.6 L - 6.8 kg)",
+      "Does not explode, does not support combustion",
+      "High reliability",
+      "Corrosion resistant (galvanized)",
+      "Highest performance (Ø306 mm)",
+      "Shock resistant",
+      "Attractive appearance"
+     ],
+     "disadvantages": [
+      "Gas level not visible"
+     ]
+    },
+    {
+     "title": "Industrial gas cylinder",
+     "image": "/storage/media/heavy-duty-cylinder-example.png",
+     "recommended": true,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo.svg",
+     "advantages": [
+      "Largest capacity (45.5 L)",
+      "Does not explode, does not support combustion",
+      "High reliability",
+      "Corrosion resistant (reinforced galvanizing)"
+     ],
+     "disadvantages": [
+      "Heavier than composite and lightweight cylinders"
+     ]
+    },
+    {
+     "title": "Regular steel cylinder",
+     "image": "/storage/media/regular-cylinder-example.png",
+     "recommended": false,
+     "discouraged": true,
+     "logo": null,
+     "advantages": [
+      "Cheapest option"
+     ],
+     "disadvantages": [
+      "Highest weight (27 L - 13 kg)",
+      "Explodes, loses its seal",
+      "High maintenance costs",
+      "High wear rate due to\npaint damage and corrosion",
+      "Not aesthetically pleasing",
+      "Gas level not visible"
+     ]
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "page_meta",
+   "owner_type": "App\\Models\\Page",
+   "owner_id": 1,
+   "key": "heroSubTitle",
+   "type": "string",
+   "value": "<p><strong>Українські газові балони для всіх. </strong>Ми є надійним партнером для всіх, хто потребує якісні та безпечні газові балони в Україні.</p>",
+   "translation": "<p><strong>Ukrainian gas cylinders for everyone. </strong>A Ukrainian brand with international delivery and warehouses across Europe — a reliable partner for everyone who needs quality, safe gas cylinders.</p>"
+  },
+  {
+   "kind": "meta",
+   "table": "page_meta",
+   "owner_type": "App\\Models\\Page",
+   "owner_id": 5,
+   "key": "advantagesItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "setting",
+   "key": "ourAdvantages",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Convenient Payment",
+     "description": "Pay online or choose another convenient payment option — our manager will confirm the available methods for your order.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "International Delivery",
+     "description": "A Ukrainian brand with warehouses across Europe. Delivery terms and cost are confirmed by our manager after you place the order.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Quality Guarantee",
+     "description": "The quality of our cylinders and components ensures long and safe operation.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  }
+ ]
+}

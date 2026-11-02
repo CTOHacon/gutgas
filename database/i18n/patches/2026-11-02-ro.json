@@ -1,0 +1,1160 @@
+{
+ "source": "ua",
+ "exported_at": "2026-11-02T14:25:51+02:00",
+ "entries": [
+  {
+   "kind": "model",
+   "model": "App\\Models\\Page",
+   "id": 2,
+   "field": "content",
+   "value": "<h2 class=\"product_block_row_1\">Оплата товару</h2><p class=\"product_block_row_1\">Оплату обраного товару можна здійснити одним з двох способів:</p><ul><li class=\"product_block_row_1\">Одразу при оформленні замовлення платіжними картами Visa і MasterCard за допомогою сервісу <a href=\"https://www.liqpay.ua/\" rel=\"noopener noreferrer\" target=\"_blank\">LiqPay</a>;</li><li class=\"product_block_row_1\">При отриманні товару у нашого дилера або у відділенні Нової Пошти.</li></ul><h2 class=\"product_block_row_1\">Доставка товару</h2><p class=\"product_block_row_1\">Щоб отримати товар, Ви можете обрати:</p><ul><li class=\"product_block_row_1\">Доставку Новою Поштою (не забудьте вказати місто і номер відділення при оформленні замовлення);</li><li class=\"product_block_row_1\">Самовивіз або доставку кур'єром (з Вами обов'язково зв'яжеться наш менеджер).</li></ul>",
+   "translation": "<h2 class=\"product_block_row_1\">Plata</h2><p class=\"product_block_row_1\">Puteți achita comanda în unul dintre următoarele moduri:</p><ul><li class=\"product_block_row_1\">Online, la plasarea comenzii, cu cardul bancar, prin metodele de plată disponibile la finalizarea comenzii;</li><li class=\"product_block_row_1\">Printr-o altă modalitate convenabilă, stabilită cu managerul nostru la confirmarea comenzii.</li></ul><h2 class=\"product_block_row_1\">Livrarea</h2><p class=\"product_block_row_1\">Gutgas este un brand ucrainean cu livrare internațională și depozite în toată Europa. Pentru a primi comanda, puteți alege:</p><ul><li class=\"product_block_row_1\">Livrare din depozitele noastre din Europa: condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii;</li><li class=\"product_block_row_1\">Ridicare personală sau livrare prin curier, acolo unde sunt disponibile pentru localitatea dumneavoastră (managerul nostru vă va contacta pentru a stabili detaliile).</li></ul>"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\Page",
+   "id": 3,
+   "field": "content",
+   "value": "<p class=\"product_block_row_1\">Повернення товару згідно зі статтею 9 Закону \"Про захист прав споживача\" відбувається протягом 14 днів, не враховуючи дня покупки, якщо дотримані такі умови:</p><ul><li class=\"product_block_row_1\">товар не був у вжитку і не має слідів використання: подряпин, сколів, потертостей, слідів розкриття;</li><li class=\"product_block_row_1\">немає слідів попадання рідини у виріб або на упаковку, документацію;</li><li class=\"product_block_row_1\">товарний вигляд збережений - тобто залишилися всі ярлики, наліпки й інше приладдя товару в незмінному вигляді, товар повністю укомплектований і запакований, як під час першої покупки;</li><li class=\"product_block_row_1\">присутні всі документи на товар (інструкції, гарантійний талон, квитанція або товарний чек, що підтверджують покупку), збережені всі ярлики та заводське маркування.</li></ul><p class=\"product_block_row_1\">Якщо товар не працює, його обмін або повернення здійснюється тільки за наявності висновку сервісного центру виробника про те, що умови експлуатації не були порушені.</p><p class=\"product_block_row_1\">Прохання враховувати всі ці моменти під час створення запиту на повернення.</p><p class=\"product_block_row_1\">Якщо один з цих пунктів порушений, продавець залишає за собою право не прийняти товар.</p><p class=\"product_block_row_1\">Під час повернення замовлення/товару покупець оплачує всі транспортні витрати, пов'язані з поверненням замовлення/товару (крім гарантійних випадків). Якщо доставка товару не була оплачена покупцем, сума витрат на доставку буде вирахувана з суми повернення грошей.</p><h2 class=\"product_block_row_1\">Вищеописані умови не обмежують права, надані споживачам чинним законодавством нашої країни.</h2>",
+   "translation": "<p class=\"product_block_row_1\">Returnarea produsului este posibilă în termen de 14 zile, fără a include ziua cumpărării, dacă sunt respectate următoarele condiții:</p><ul><li class=\"product_block_row_1\">produsul nu a fost utilizat și nu are urme de utilizare: zgârieturi, ciobituri, uzură, urme de deschidere;</li><li class=\"product_block_row_1\">nu există urme de pătrundere a lichidului în produs sau pe ambalaj, documentație;</li><li class=\"product_block_row_1\">aspectul comercial este păstrat — adică au rămas toate etichetele, autocolantele și celelalte accesorii ale produsului în forma inițială, produsul este complet echipat și ambalat, ca la prima cumpărare;</li><li class=\"product_block_row_1\">sunt prezente toate documentele produsului (instrucțiunile, certificatul de garanție, chitanța sau bonul fiscal care confirmă cumpărarea), sunt păstrate toate etichetele și marcajele de fabrică.</li></ul><p class=\"product_block_row_1\">Dacă produsul nu funcționează, schimbul sau returnarea acestuia se efectuează doar în baza concluziei centrului de service al producătorului că condițiile de exploatare nu au fost încălcate.</p><p class=\"product_block_row_1\">Vă rugăm să țineți cont de toate aceste aspecte la depunerea cererii de returnare.</p><p class=\"product_block_row_1\">Dacă unul dintre aceste puncte este încălcat, vânzătorul își rezervă dreptul de a nu accepta produsul.</p><p class=\"product_block_row_1\">La returnarea comenzii/produsului, cumpărătorul suportă toate cheltuielile de transport legate de returnarea comenzii/produsului (cu excepția cazurilor de garanție). Dacă livrarea produsului nu a fost plătită de cumpărător, suma cheltuielilor de livrare va fi scăzută din suma returnată.</p><h2 class=\"product_block_row_1\">Condițiile de mai sus nu limitează drepturile acordate consumatorilor prin legislația în vigoare din țara cumpărătorului.</h2>"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\Page",
+   "id": 7,
+   "field": "content",
+   "value": "<p>Ласкаво просимо до нашої компанії, де ми пропонуємо широкий вибір газових балонів для різних потреб.  В нашому асортименті є композитні балони, ExtraLight балони та HeavyDuty балони, кожен з яких має свої особливості і переваги.</p><p>Композитні газові балони - це сучасне рішення, створене з використанням пластикових матеріалів. Однією з головних переваг таких балонів є їх технологічність та суперлегкість. Це дозволяє забезпечити зручність в транспортуванні та використанні. Композитні балони мають високу міцність і стійкість до зовнішніх впливів, що робить їх довговічними та надійними.</p><p>Балони ExtraLight дещо важчі за композитні, проте майже вдвічі легші за звичайні сталеві балони такого ж об'єму і при цьому не втрачають міцності та якості. Ці балони є економічним вибором, оскільки вони доступні за більш прийнятну ціну. Балони ExtraLight також відрізняються своєю високою міцністю, що робить їх ідеальними для різних застосувань.</p><p>HeavyDuty газові балони призначені для використання в промислових умовах. Ці балони виготовляються з металу, але додатково обробляються для захисту від корозії. Вони відрізняються своєю великою ємністю та стійкістю до важких умов. HeavyDuty балони дозволяють забезпечити довготривале зберігання та використання газу у важких промислових процесах.</p><p>Обираючи газовий балон, важливо враховувати конкретні потреби та вимоги вашого проекту чи діяльності. Наша компанія готова надати професійну консультацію та допомогу в підборі найбільш відповідних балонів для ваших потреб.</p><p>Ми гарантуємо високу якість наших продуктів, дотримання стандартів безпеки та надійність у використанні. Наші газові балони стануть незамінними помічниками у вашому процесі роботи, забезпечуючи потрібне джерело газу з мінімальними зусиллями.</p><p>Оберіть найкращий тип газових балонів для вашої потреби - композитні, ExtraLight або HeavyDuty, і насолоджуйтесь їх перевагами. Робіть крок до високоякісних і надійних газових балонів від нашої компанії.</p><p>Нехай ваші проекти розвиваються швидко та успішно з нашими газовими балонами високої якості. Звертайтеся до нас і отримуйте найкраще обладнання для вашої роботи.</p>",
+   "translation": "<p>Bine ați venit în compania noastră, unde oferim o gamă largă de butelii de gaz pentru diverse necesități. În asortimentul nostru există butelii compozite, butelii ExtraLight și butelii HeavyDuty, fiecare având propriile particularități și avantaje.</p><p>Buteliile de gaz compozite sunt o soluție modernă, realizată din materiale plastice. Unul dintre principalele avantaje ale acestor butelii este tehnologicitatea și ultra-ușurința lor. Acest lucru asigură comoditate la transport și utilizare. Buteliile compozite au rezistență ridicată și stabilitate la influențele externe, ceea ce le face durabile și fiabile.</p><p>Buteliile de gaz ExtraLight sunt puțin mai grele decât cele compozite, dar cântăresc aproape de două ori mai puțin decât buteliile obișnuite din oțel de același volum, fără a pierde din rezistență și calitate. Aceste butelii reprezintă o alegere economică, deoarece sunt disponibile la un preț mai accesibil. Buteliile ExtraLight se remarcă, de asemenea, prin rezistența lor ridicată, ceea ce le face ideale pentru diverse aplicații.</p><p>Buteliile de gaz HeavyDuty sunt destinate utilizării în condiții industriale. Aceste butelii sunt fabricate din metal, dar sunt suplimentar tratate pentru protecție împotriva coroziunii. Se remarcă prin capacitatea lor mare și rezistența la condiții dure. Buteliile HeavyDuty permit depozitarea și utilizarea pe termen lung a gazului în procesele industriale grele.</p><p>Alegând o butelie de gaz, este important să luați în considerare nevoile și cerințele concrete ale proiectului sau activității dumneavoastră. Compania noastră este pregătită să ofere consultanță profesională și asistență în alegerea buteliilor cele mai potrivite pentru nevoile dumneavoastră.</p><p>Garantăm o calitate înaltă a produselor noastre, respectarea standardelor de siguranță și fiabilitatea utilizării. Buteliile noastre de gaz vor deveni asistenți indispensabili în procesul dumneavoastră de lucru, asigurând sursa necesară de gaz cu eforturi minime.</p><p>Alegeți cel mai bun tip de butelii de gaz pentru nevoia dumneavoastră — compozite, ExtraLight sau HeavyDuty — și bucurați-vă de avantajele lor. Faceți un pas spre butelii de gaz de înaltă calitate și fiabile de la compania noastră.</p><p>Lăsați proiectele dumneavoastră să se dezvolte rapid și cu succes cu buteliile noastre de gaz de înaltă calitate. Contactați-ne și obțineți cel mai bun echipament pentru munca dumneavoastră.</p>"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\ProductPage",
+   "id": 13,
+   "field": "description",
+   "value": "<h4>Замовляйте на сайті та отримуйте в магазинах партнерів або у відділеннях Нової Пошти!</h4><p>Спроектований спеціально для побутових газових приладів (плити, обігрівачі). При збільшеному до 24.5л об’ємі та висоті лише 571мм, він стане незамінним помічником усюди, де потрібне автономне газопостачання, а завдяки вазі лише 5.3кг є найлегшим на ринку.</p><p><strong style=\"color: rgb(255, 255, 255);\">Найтехнологічніші балони у світі.</strong></p><p>Усі етапи створення полімерно-композитних балонів для зрідженого газу Gutgas Composite від постачання сировини до пакування проводяться на єдиній у світі повністю автоматизованій виробничій лінії. У процесі виробництва кожен балон випробовується по 35 параметрам, в тому числі під високим тиском на міцність і жорсткість, щоб ви завжди були впевнені в абсолютній надійності нашого газового балона.</p><p>Безпека і довговічність — головні принципи створення серії газових балонів Gutgas Composite. Кожен 200-й виріб перевіряється на розрив під тиском 150Атм., а кожен 1000-й — проходить циклічні випробування на максимальну кількість заповнень, витримуючи понад 100 000 циклів за норми у 12 000! Тобто їх можна використовувати понад 100 років.</p><p>Сучасні композитні матеріали наділять газові балони Gutgas Composite унікальними властивостями, недосяжними для інших технологій:</p><ul><li><strong>неперевершена легкість</strong>&nbsp;— майже у 2,5 рази легше за звичайні металеві балони;</li><li><strong>прозорість</strong>&nbsp;— рівень газу легко контролювати завдяки прозорому корпусу;</li><li><strong>довговічність</strong>&nbsp;— завдяки відсутності металу, композитні газові балони не піддаються корозії (іржавінню), стійкі до механічного та хімічного впливу;</li><li><strong>безпека та вогнестійкість</strong>&nbsp;забезпечується клапаном надлишкового тиску, який дозовано випускає зайвий газ, виключають іскроутворення.</li></ul><p>Балони Gutgas Composite розроблені з увагою до кожної деталі, щоб перевершити очікування найвимогливіших споживачів. Виготовлені за унікальними технологіями на найсучаснішій 100% автоматизованій фабриці у Норвегії.</p><p>Сертифіковано: Директива ЄС 2010/35, π-маркування, стандарти EN14427 і EN12245.</p>",
+   "translation": "<h4>Comandați pe site — livrare internațională din depozitele noastre din Europa!</h4><p>Proiectată special pentru aparatele de gaz casnice (aragazuri, încălzitoare). Cu un volum mărit de 24.5 l și o înălțime de doar 571 mm, va deveni un ajutor indispensabil oriunde este necesară alimentarea autonomă cu gaz, iar datorită greutății de doar 5.3 kg este cea mai ușoară de pe piață.</p><p><strong style=\"color: rgb(255, 255, 255);\">Cele mai tehnologice butelii din lume.</strong></p><p>Toate etapele creării buteliilor polimer-compozite pentru gaz lichefiat Gutgas Composite, de la furnizarea materiei prime până la ambalare, se desfășoară pe o linie de producție complet automatizată, unică în lume. În procesul de producție, fiecare butelie este testată după 35 de parametri, inclusiv sub presiune ridicată pentru rezistență și rigiditate, pentru ca dumneavoastră să fiți mereu siguri de fiabilitatea absolută a buteliei noastre de gaz.</p><p>Siguranța și durabilitatea sunt principiile de bază ale creării seriei de butelii de gaz Gutgas Composite. Fiecare al 200-lea produs este verificat la rupere sub presiune de 150 Atm., iar fiecare al 1000-lea trece prin teste ciclice la numărul maxim de umpleri, rezistând la peste 100 000 de cicluri, la norma de 12 000! Adică pot fi folosite peste 100 de ani.</p><p>Materialele compozite moderne înzestrează buteliile de gaz Gutgas Composite cu proprietăți unice, de neatins pentru alte tehnologii:</p><ul><li><strong>ușurință excepțională</strong>&nbsp;— aproape de 2,5 ori mai ușoare decât buteliile metalice obișnuite;</li><li><strong>transparență</strong>&nbsp;— nivelul gazului poate fi controlat cu ușurință datorită corpului transparent;</li><li><strong>durabilitate</strong>&nbsp;— datorită absenței metalului, buteliile de gaz compozite nu sunt supuse coroziunii (ruginii), sunt rezistente la acțiunea mecanică și chimică;</li><li><strong>siguranță și rezistență la foc</strong>&nbsp;sunt asigurate de supapa de suprapresiune, care eliberează dozat gazul în exces, excluzând formarea scânteilor.</li></ul><p>Buteliile Gutgas Composite sunt concepute cu atenție la fiecare detaliu, pentru a depăși așteptările celor mai exigenți consumatori. Sunt fabricate prin tehnologii unice, pe o fabrică modernă, 100% automatizată, din Norvegia.</p><p>Certificat: Directiva UE 2010/35, marcajul π, standardele EN14427 și EN12245.</p>"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\ProductPage",
+   "id": 15,
+   "field": "description",
+   "value": "<p>Спроектований спеціально для професійного використання та для потужних побутових газових приладів (плити, обігрівачі). При об’ємі 45.5л та висоті лише 750мм, він стане у нагоді усюди, де потрібне тривале автономне газопостачання, а завдяки діаметру 320мм, працює з високою продуктивністю при низьких температурах (до -20°C)</p><p><strong style=\"color: rgb(255, 255, 255);\">Найміцніша серія наших балонів інтенсивного професійного використання.</strong></p><p>Серія балонів для зрідженого газу Gutgas HeavyDuty розроблена таким чином, щоб витримувати найсуворіші щоденні навантаження, будь то вилковий навантажувач, газове зварювання чи домашнє приготування їжі та опалення.</p><p>Балони Gutgas HeavyDuty створені на віки. Дивовижна довговічність забезпечується завдяки високоякісній холоднокатаній товстостінній сталі з особливою термічною обробкою. При вазі на 5-10% меншій, ніж у звичайного сталевого газового балона співмірного об’єму, газові балони HeavyDuty витримують тиск понад 120 Атм (майже у 5 разів перевершуючи стандартні 25Атм), надійно утримуючи газ всередині. У той же час, завдяки здатності до деформації, металевий корпус балона з легкістю гасить енергію ударів. Найвища якість гарантується суворим багаторівневим контролем на кожному етапі виробництва.</p><p>Безкомпромісна безпека та вогнестійкість газових балонів Gutgas HeavyDuty забезпечується клапаном надлишкового тиску, який дозовано випускає зайвий газ, не підтримуючи горіння навіть у відкритому полум’ї, а тришарове зносостійке та атмосферостійке захисне покриття (посилене оцинкування та двошарове лакофарбове покриття) забезпечує надзвичайну стійкість до корозії.</p><p>Балони Gutgas розроблені з увагою до кожної деталі, щоб перевершити очікування найвимогливіших споживачів. Вироблено в ЄС (Португалія) лідером галузі з 60-річною історією досліджень, інновацій і довгим списком патентів.</p><p>Сертифіковано: Директива ЄС 2010/35, π-маркування та стандарт EN 1442.</p>",
+   "translation": "<p>Proiectată special pentru utilizare profesională și pentru aparate de gaz casnice puternice (aragaze, încălzitoare). Cu un volum de 45.5l și o înălțime de doar 750mm, va fi utilă oriunde este necesară alimentarea autonomă cu gaz pe termen lung, iar datorită diametrului de 320mm, funcționează cu productivitate ridicată la temperaturi scăzute (până la -20°C)</p><p><strong style=\"color: rgb(255, 255, 255);\">Cea mai rezistentă serie a buteliilor noastre pentru utilizare profesională intensivă.</strong></p><p>Seria de butelii pentru gaz lichefiat Gutgas HeavyDuty este dezvoltată astfel încât să reziste la cele mai severe sarcini zilnice, fie că este vorba de un motostivuitor, sudură cu gaz sau gătit și încălzire casnică.</p><p>Buteliile Gutgas HeavyDuty sunt create pentru ani. Durabilitatea remarcabilă este asigurată de oțel laminat la rece de înaltă calitate, cu pereți groși, supus unui tratament termic special. Cu o greutate cu 5-10% mai mică decât a unei butelii metalice obișnuite de volum comparabil, buteliile HeavyDuty rezistă la o presiune de peste 120 Atm (aproape de 5 ori mai mare decât cea standard de 25Atm), reținând sigur gazul în interior. În același timp, datorită capacității de deformare, corpul metalic al buteliei amortizează cu ușurință energia loviturilor. Calitatea superioară este garantată de un control riguros pe mai multe niveluri, la fiecare etapă a producției.</p><p>Siguranța fără compromis și rezistența la foc ale buteliilor de gaz Gutgas HeavyDuty sunt asigurate de supapa de suprapresiune, care eliberează dozat excesul de gaz, fără a susține arderea nici chiar în flacără deschisă, iar stratul de protecție triplu, rezistent la uzură și intemperii (zincare întărită și vopsire cu lac în două straturi) asigură o rezistență excepțională la coroziune.</p><p>Buteliile Gutgas sunt concepute cu atenție față de fiecare detaliu, pentru a depăși așteptările celor mai exigenți consumatori. Fabricate în UE (Portugalia) de un lider al industriei, cu o istorie de 60 de ani de cercetări, inovații și o listă lungă de brevete.</p><p>Certificat: Directiva UE 2010/35, marcajul π și standardul EN 1442.</p>"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 17,
+   "field": "title",
+   "value": "Перехідник для заправки газового балона - Купити в Україні",
+   "translation": "Adaptor pentru umplerea buteliei de gaz – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 17,
+   "field": "description",
+   "value": "Високоякісний перехідник для заправки газового балона  з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Adaptor de înaltă calitate pentru umplerea buteliei de gaz, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 18,
+   "field": "title",
+   "value": "Редуктор для підключення газового балону Gutgas 37mbar - Купити в Україні",
+   "translation": "Reductor pentru conectarea buteliei de gaz Gutgas 37mbar – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 18,
+   "field": "description",
+   "value": "Високоякісний редуктор низького тиску для пропан-бутану з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Reductor de joasă presiune de înaltă calitate pentru propan-butan, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 19,
+   "field": "title",
+   "value": "Редуктор зі шлангом та гайкою для підключення газових балонів - Купити в Україні",
+   "translation": "Reductor cu furtun și piuliță pentru conectarea buteliilor de gaz – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 19,
+   "field": "description",
+   "value": "Високоякісний редуктор зі шлангом та гайкою з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Reductor de înaltă calitate cu furtun și piuliță, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 20,
+   "field": "title",
+   "value": "Професійний  газовий  шланг для балонів - Купити в Україні",
+   "translation": "Furtun de gaz profesional pentru butelii – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 20,
+   "field": "description",
+   "value": "Високоякісний професійний  газовий  шланг з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Furtun de gaz profesional de înaltă calitate, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 21,
+   "field": "title",
+   "value": "Професійний газовий шланг 1м для підключення балонів - Купити в Україні",
+   "translation": "Furtun de gaz profesional 1m pentru conectarea buteliilor – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 21,
+   "field": "description",
+   "value": "Високоякісний професійний газовий шланг 1м з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Furtun de gaz profesional de 1m, de înaltă calitate, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 22,
+   "field": "title",
+   "value": "Професійний  газовий  шланг 2м для підключення балонів - Купити в Україні",
+   "translation": "Furtun de gaz profesional 2m pentru conectarea buteliilor – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 22,
+   "field": "description",
+   "value": "Високоякісний професійний  газовий  шланг 2м з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Furtun de gaz profesional de 2m, de înaltă calitate, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 23,
+   "field": "title",
+   "value": "Професійний газовий шланг 5м для підключення балонів - Купити в Україні",
+   "translation": "Furtun de gaz profesional 5m pentru conectarea buteliilor – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 23,
+   "field": "description",
+   "value": "Високоякісний професійний газовий шланг 5м з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Furtun de gaz profesional de 5m, de înaltă calitate, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 24,
+   "field": "title",
+   "value": "Професійний газовий шланг 10м для підключення балонів - Купити в Україні",
+   "translation": "Furtun de gaz profesional 10m pentru conectarea buteliilor – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 24,
+   "field": "description",
+   "value": "Високоякісний професійний газовий шланг 10м з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Furtun de gaz profesional de 10m, de înaltă calitate, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 25,
+   "field": "title",
+   "value": "Професійний газовий шланг 50м для підключення балонів - Купити в Україні",
+   "translation": "Furtun de gaz profesional 50m pentru conectarea buteliilor – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 25,
+   "field": "description",
+   "value": "Високоякісний професійний газовий шланг 50м з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Furtun de gaz profesional de 50m, de înaltă calitate, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 26,
+   "field": "title",
+   "value": "Нержавіючий хомут для підключення газових балонів - Купити в Україні",
+   "translation": "Colier din oțel inoxidabil pentru conectarea buteliilor de gaz – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 26,
+   "field": "description",
+   "value": "Високоякісний нержавіючий хомут для газових балонів з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Colier din oțel inoxidabil de înaltă calitate pentru butelii de gaz, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 27,
+   "field": "title",
+   "value": "Композитний газовий балон Gutgas KLF 12.5л  - Купити в Україні",
+   "translation": "Butelie de gaz compozită Gutgas KLF 12.5l – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 27,
+   "field": "description",
+   "value": "Високоякісний композитний газовий балон Gutgas CR-12.5 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Butelie de gaz compozită de înaltă calitate Gutgas CR-12.5, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 28,
+   "field": "title",
+   "value": "Композитний газовий балон Gutgas CR-18.2 - Купити в Україні",
+   "translation": "Butelie de gaz compozită Gutgas CR-18.2 – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 28,
+   "field": "description",
+   "value": "Високоякісний композитний газовий балон Gutgas CR-18.2 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Butelie de gaz compozită de înaltă calitate Gutgas CR-18.2, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 29,
+   "field": "title",
+   "value": "Композитний газовий балон Gutgas KLF 24.5л - Купити в Україні",
+   "translation": "Butelie de gaz compozită Gutgas KLF 24.5l – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 29,
+   "field": "description",
+   "value": "Високоякісний композитний газовий балон Gutgas CR-24.5 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Butelie de gaz compozită de înaltă calitate Gutgas CR-24.5, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 30,
+   "field": "title",
+   "value": "Композитний газовий балон Gutgas CR-33.5 - Купити в Україні",
+   "translation": "Butelie de gaz compozită Gutgas CR-33.5 – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 30,
+   "field": "description",
+   "value": "Високоякісний композитний газовий балон Gutgas CR-33.5 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Butelie de gaz compozită de înaltă calitate Gutgas CR-33.5, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 31,
+   "field": "title",
+   "value": "Газовий балон Gutgas HeavyDuty HD-45.5 - Купити в Україні",
+   "translation": "Butelie de gaz Gutgas HeavyDuty HD-45.5 – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 31,
+   "field": "description",
+   "value": "Високоякісний газовий балон Gutgas HeavyDuty HD-45.5 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Butelie de gaz de înaltă calitate Gutgas HeavyDuty HD-45.5, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 32,
+   "field": "title",
+   "value": "Газовий балон Gutgas ExtraLight XLT-9.6 - Купити в Україні",
+   "translation": "Butelie de gaz Gutgas ExtraLight XLT-9.6 – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 32,
+   "field": "description",
+   "value": "Високоякісний газовий балон Gutgas ExtraLight XLT-9.6 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Butelie de gaz de înaltă calitate Gutgas ExtraLight XLT-9.6, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 33,
+   "field": "title",
+   "value": "Газовий балон Gutgas ExtraLight XLT-19.9 - Купити в Україні",
+   "translation": "Butelie de gaz Gutgas ExtraLight XLT-19.9 – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 33,
+   "field": "description",
+   "value": "Високоякісний газовий балон Gutgas ExtraLight XLT-19.9 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Butelie de gaz de înaltă calitate Gutgas ExtraLight XLT-19.9, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 34,
+   "field": "title",
+   "value": "Газовий балон Gutgas ExtraLight XLT-26.6 - Купити в Україні",
+   "translation": "Butelie de gaz Gutgas ExtraLight XLT-26.6 – Cumpărați online"
+  },
+  {
+   "kind": "model",
+   "model": "App\\Models\\SeoEntity",
+   "id": 34,
+   "field": "description",
+   "value": "Високоякісний газовий балон Gutgas ExtraLight XLT-26.6 з доставкою по Україні в каталозі Gutgas.eu. Замовляйте: ☎ (0800) 35-35-05.",
+   "translation": "Butelie de gaz de înaltă calitate Gutgas ExtraLight XLT-26.6, cu livrare internațională din depozitele noastre din Europa, în catalogul Gutgas.eu. Comandați: ☎ (0800) 35-35-05."
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 1,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 2,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 3,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 4,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 5,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 6,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 7,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 8,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 9,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 10,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "productPages_meta",
+   "owner_type": "App\\Models\\ProductPage",
+   "owner_id": 11,
+   "key": "advantageItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "page_meta",
+   "owner_type": "App\\Models\\Page",
+   "owner_id": 1,
+   "key": "advantagesItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "page_meta",
+   "owner_type": "App\\Models\\Page",
+   "owner_id": 1,
+   "key": "catalogPreviewItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Композитні газові балони",
+     "text": "<p><strong>Найтехнологічніші балони у світі.</strong> Усі етапи створення полімерно-композитних балонів для зрідженого газу Gutgas Composite від постачання сировини до пакування проводяться на єдиній у світі повністю автоматизованій виробничій лінії. </p>",
+     "image": "/storage/media/composite-gas-cylinders-banner.png",
+     "products": [
+      14,
+      13,
+      12
+     ],
+     "featuredProduct": null
+    },
+    {
+     "title": "Gutgas ExtraLight",
+     "text": "<p><strong>Газовий балон створений для використання будь-коли і будь-кому.</strong> Мінімальна висота та збільшений діаметр забезпечують легкість транспортування та максимальний об'єм газу, який може бути збережений. </p>",
+     "image": "/storage/media/gutgas-extra-light-cylinders-banner.png",
+     "products": [
+      18,
+      17,
+      16
+     ],
+     "featuredProduct": null
+    },
+    {
+     "title": "Gutgas HeavyDuty",
+     "text": "<p><strong>Найміцніша серія балонів Gutgas для інтенсивного професійного використання.</strong> Товстостінна холоднокатана сталь витримує тиск понад 120 Атм, а посилене оцинкування та двошарове лакофарбове покриття надійно захищають від корозії. Об'єм 45.5л забезпечує тривале автономне газопостачання. </p>",
+     "image": "/storage/media/heavy-cylinders-banner.png",
+     "products": [
+      4,
+      3,
+      2
+     ],
+     "featuredProduct": "15"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Butelii de gaz compozite",
+     "text": "<p><strong>Cele mai tehnologice butelii din lume.</strong> Toate etapele creării buteliilor din polimer-compozit pentru gaz lichefiat Gutgas Composite, de la livrarea materiei prime până la ambalare, se desfășoară pe o linie de producție complet automatizată, unică în lume. </p>",
+     "image": "/storage/media/composite-gas-cylinders-banner.png",
+     "products": [
+      14,
+      13,
+      12
+     ],
+     "featuredProduct": null
+    },
+    {
+     "title": "Gutgas ExtraLight",
+     "text": "<p><strong>Butelie de gaz creată pentru utilizare oricând și de oricine.</strong> Înălțimea minimă și diametrul mărit asigură ușurința transportului și volumul maxim de gaz care poate fi stocat. </p>",
+     "image": "/storage/media/gutgas-extra-light-cylinders-banner.png",
+     "products": [
+      18,
+      17,
+      16
+     ],
+     "featuredProduct": null
+    },
+    {
+     "title": "Gutgas HeavyDuty",
+     "text": "<p><strong>Cea mai rezistentă serie de butelii Gutgas, pentru utilizare profesională intensivă.</strong> Oțelul laminat la rece, cu pereți groși, rezistă la o presiune de peste 120 atm, iar zincarea întărită și vopsirea în două straturi asigură o protecție fiabilă împotriva coroziunii. Volumul de 45.5 l asigură o alimentare autonomă cu gaz de lungă durată. </p>",
+     "image": "/storage/media/heavy-cylinders-banner.png",
+     "products": [
+      4,
+      3,
+      2
+     ],
+     "featuredProduct": "15"
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "page_meta",
+   "owner_type": "App\\Models\\Page",
+   "owner_id": 1,
+   "key": "compairItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Композитний балон",
+     "image": "/storage/media/composite-cylinder-example.png",
+     "recommended": false,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo-darken.svg",
+     "advantages": [
+      "Найнижча вага (24.5л - 5.3кг)",
+      "Не вибухає",
+      "Висока надійність",
+      "Не іржавіє, не боїться подряпин",
+      "Не потребує чищення,\nфарбування",
+      "Естетичний зовнішній вигляд"
+     ],
+     "disadvantages": [
+      "Найдорожчий варіант"
+     ]
+    },
+    {
+     "title": "Полегшений газовий балон",
+     "image": "/storage/media/extra-light-cylinder-example.png",
+     "recommended": false,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo-darken.svg",
+     "advantages": [
+      "Низька вага (26.6л - 6.8кг)",
+      "Не вибухає, не підтримує горіння",
+      "Висока надійність",
+      "Стійкий до корозії (оцинкований)",
+      "Найвища продуктивність (Ø306мм)",
+      "Стійкий до ударів",
+      "Естетичний зовнішній вигляд"
+     ],
+     "disadvantages": [
+      "Не видно рівень газу"
+     ]
+    },
+    {
+     "title": "Промисловий газовий балон",
+     "image": "/storage/media/heavy-duty-cylinder-example.png",
+     "recommended": true,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo.svg",
+     "advantages": [
+      "Найбільший об'єм (45.5л)",
+      "Не вибухає, не підтримує горіння",
+      "Висока надійність",
+      "Стійкий до корозії (посилене оцинкування)"
+     ],
+     "disadvantages": [
+      "Більша вага, ніж у композитного та полегшеного балонів"
+     ]
+    },
+    {
+     "title": "Звичайний сталевий Балон",
+     "image": "/storage/media/regular-cylinder-example.png",
+     "recommended": false,
+     "discouraged": true,
+     "logo": null,
+     "advantages": [
+      "Найдешевший варіант"
+     ],
+     "disadvantages": [
+      "Найвища вага (27л - 13кг)",
+      "Вибухає, втрачає герметичність",
+      "Високі витрати на утримання",
+      "Висока швидкість зносу через\nпошкодження фарби і корозію",
+      "Не естетичний на вигляд",
+      "Не видно рівень газу"
+     ]
+    }
+   ],
+   "translation": [
+    {
+     "title": "Butelie compozită",
+     "image": "/storage/media/composite-cylinder-example.png",
+     "recommended": false,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo-darken.svg",
+     "advantages": [
+      "Greutatea cea mai mică (24.5l - 5.3kg)",
+      "Nu explodează",
+      "Fiabilitate ridicată",
+      "Nu ruginește, nu se teme de zgârieturi",
+      "Nu necesită curățare,\nvopsire",
+      "Aspect estetic"
+     ],
+     "disadvantages": [
+      "Cea mai scumpă variantă"
+     ]
+    },
+    {
+     "title": "Butelie ușoară de gaz",
+     "image": "/storage/media/extra-light-cylinder-example.png",
+     "recommended": false,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo-darken.svg",
+     "advantages": [
+      "Greutate redusă (26.6l - 6.8kg)",
+      "Nu explodează, nu întreține arderea",
+      "Fiabilitate ridicată",
+      "Rezistentă la coroziune (galvanizată)",
+      "Cea mai mare productivitate (Ø306 mm)",
+      "Rezistentă la lovituri",
+      "Aspect estetic"
+     ],
+     "disadvantages": [
+      "Nivelul gazului nu este vizibil"
+     ]
+    },
+    {
+     "title": "Butelie industrială de gaz",
+     "image": "/storage/media/heavy-duty-cylinder-example.png",
+     "recommended": true,
+     "discouraged": false,
+     "logo": "/storage/media/tiny-logo.svg",
+     "advantages": [
+      "Cel mai mare volum (45.5l)",
+      "Nu explodează, nu întreține arderea",
+      "Fiabilitate ridicată",
+      "Rezistentă la coroziune (zincare întărită)"
+     ],
+     "disadvantages": [
+      "Mai grea decât buteliile compozite și cele ușoare"
+     ]
+    },
+    {
+     "title": "Butelie obișnuită din oțel",
+     "image": "/storage/media/regular-cylinder-example.png",
+     "recommended": false,
+     "discouraged": true,
+     "logo": null,
+     "advantages": [
+      "Cea mai ieftină variantă"
+     ],
+     "disadvantages": [
+      "Greutatea cea mai mare (27l - 13kg)",
+      "Explodează, pierde etanșeitatea",
+      "Costuri ridicate de întreținere",
+      "Uzură rapidă din cauza deteriorării vopselei\nși a coroziunii",
+      "Nu are aspect estetic",
+      "Nivelul gazului nu este vizibil"
+     ]
+    }
+   ]
+  },
+  {
+   "kind": "meta",
+   "table": "page_meta",
+   "owner_type": "App\\Models\\Page",
+   "owner_id": 1,
+   "key": "heroSubTitle",
+   "type": "string",
+   "value": "<p><strong>Українські газові балони для всіх. </strong>Ми є надійним партнером для всіх, хто потребує якісні та безпечні газові балони в Україні.</p>",
+   "translation": "<p><strong>Butelii de gaz ucrainene pentru toată lumea. </strong>Un brand ucrainean cu livrare internațională și depozite în toată Europa — un partener de încredere pentru toți cei care au nevoie de butelii de gaz de calitate și sigure.</p>"
+  },
+  {
+   "kind": "meta",
+   "table": "page_meta",
+   "owner_type": "App\\Models\\Page",
+   "owner_id": 5,
+   "key": "advantagesItems",
+   "type": "collection",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  },
+  {
+   "kind": "setting",
+   "key": "ourAdvantages",
+   "value": [
+    {
+     "title": "Зручна оплата",
+     "description": "Оплатити товар можна онлайн за допомогою сервісу LiqPay або при отриманні в пункті видачі.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Швидка доставка",
+     "description": "Доставка Новою поштою, кур'єром або самовивіз.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Гарантія якості",
+     "description": "Якість наших балонів і комплектуючих забезпечує довгу та безпечну експлуатацію.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ],
+   "translation": [
+    {
+     "title": "Plată comodă",
+     "description": "Achitați online sau alegeți o altă modalitate de plată convenabilă — managerul nostru vă va confirma metodele disponibile pentru comanda dumneavoastră.",
+     "image": "/storage/media/comfortable-payment-icon.svg"
+    },
+    {
+     "title": "Livrare internațională",
+     "description": "Brand ucrainean cu depozite în toată Europa. Condițiile și costul livrării sunt confirmate de managerul nostru după plasarea comenzii.",
+     "image": "/storage/media/fast-shipping-icon.svg"
+    },
+    {
+     "title": "Garanția calității",
+     "description": "Calitatea buteliilor și componentelor noastre asigură o exploatare îndelungată și sigură.",
+     "image": "/storage/media/guarantee-icon.svg"
+    }
+   ]
+  }
+ ]
+}
