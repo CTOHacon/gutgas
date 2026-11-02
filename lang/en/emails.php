@@ -19,7 +19,7 @@ return [
     'totalPrice'               => 'Total',
     'orderTotal'               => 'Order Total',
     'thankYouMessage'          => 'Thank you for your order!',
-    'contactMessage'           => 'We will contact you as soon as possible to confirm your order and arrange delivery.',
+    'contactMessage'           => 'We will contact you shortly to confirm your order and arrange delivery.',
     'companyName'              => 'Gutgas',
     'companyContact'           => 'Email: info@gutgas.eu | Phone: 0 (800) 35-35-05',
     'shippingMethod'           => 'Delivery method',
@@ -28,5 +28,5 @@ return [
         'np_postal_machine' => 'Nova Poshta parcel locker',
         'np_courier'        => 'Nova Poshta courier',
     ],
-    'customerSurname'          => 'Surname',
+    'customerSurname'          => 'Last name',
 ];

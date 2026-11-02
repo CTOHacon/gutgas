@@ -91,6 +91,9 @@ return [
         'ua' => 'uk-UA',
         'ru' => 'ru-UA',
         'ka' => 'ka-GE',
+        'en' => 'en-US',
+        'ro' => 'ro-MD',
+        'kk' => 'kk-KZ',
     ],
 
     /*

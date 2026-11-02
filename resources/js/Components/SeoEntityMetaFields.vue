@@ -52,7 +52,9 @@ const OG_LOCALES: Record<string, string> = {
 	ua: 'uk_UA',
 	ru: 'ru_RU',
 	ka: 'ka_GE',
-	en: 'en_US'
+	en: 'en_US',
+	ro: 'ro_MD',
+	kk: 'kk_KZ'
 };
 const locale = usePage().props.locale as string;
 const ogLocale = OG_LOCALES[locale] ?? locale;

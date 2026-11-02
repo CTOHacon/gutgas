@@ -2,7 +2,7 @@
 
 return [
     'title' => 'Product registration',
-    'intro' => 'Register your GUTGAS cylinder or accessory to activate the manufacturer\'s warranty. With these details we can help you faster if it ever needs service.',
+    'intro' => 'Register your GUTGAS cylinder or accessory to activate the manufacturer\'s warranty. These details help us assist you faster if service is ever needed.',
     'section_contact' => 'Your details',
     'section_product' => 'Product',
     'section_purchase' => 'Purchase',

@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'orderConfirmationSubject' => 'Тапсырысты растау №:order_id',
+    'orderReceiptTitle'        => 'Тапсырысты растау',
+    'orderReceiptSubtitle'     => 'Тапсырысыңыз үшін рахмет!',
+    'orderNumber'              => 'Тапсырыс нөмірі',
+    'orderDate'                => 'Тапсырыс күні',
+    'customerName'             => 'Клиенттің аты',
+    'customerEmail'            => 'Email',
+    'customerPhone'            => 'Телефон',
+    'customerMessage'          => 'Хабарлама',
+    'shippingInstructions'     => 'Жеткізу нұсқаулары',
+    'orderItems'               => 'Тапсырыстағы тауарлар',
+    'productName'              => 'Тауар',
+    'productSku'               => 'Артикул',
+    'quantity'                 => 'Саны',
+    'unitPrice'                => 'Бірлік бағасы',
+    'totalPrice'               => 'Барлығы',
+    'orderTotal'               => 'Тапсырыс сомасы',
+    'thankYouMessage'          => 'Тапсырысыңыз үшін рахмет!',
+    'contactMessage'           => 'Тапсырысты растау және жеткізуді ұйымдастыру үшін сізбен жақын арада байланысамыз.',
+    'companyName'              => 'Gutgas',
+    'companyContact'           => 'Email: info@gutgas.eu | Телефон: 0 (800) 35-35-05',
+    'shippingMethod'           => 'Жеткізу тәсілі',
+    'shippingMethods'          => [
+        'np_department'     => 'Нова Пошта бөлімшесі',
+        'np_postal_machine' => 'Нова Пошта поштоматы',
+        'np_courier'        => 'Нова Пошта курьері',
+    ],
+    'customerSurname'          => 'Тегі',
+];

@@ -29,22 +29,22 @@ return [
 
     'formName' => 'Name',
     'formEmail' => 'Email',
-    'formPhone' => 'Phone Number',
+    'formPhone' => 'Phone number',
     'formQuestion' => 'Question',
     'formMessage' => 'Message',
     'formSend' => 'Send',
 
-    'formAgree' => 'Pressing the button, you agree to the',
-    'formAgreeLink' => 'terms of use of the site',
+    'formAgree' => 'By clicking the button, you agree to the',
+    'formAgreeLink' => 'terms of use of the website',
 
-    'toTop' => 'To top',
+    'toTop' => 'Back to top',
 
     'inStock' => 'In stock',
-    'outOfStock' => 'Out Of stock',
+    'outOfStock' => 'Out of stock',
 
-    'buyInOneClick' => 'Buy in 1 click',
+    'buyInOneClick' => 'Buy in one click',
 
-    'balonInOneClick' => 'Balloon in 1 click',
+    'balonInOneClick' => 'Cylinder in one click',
 
     'sku' => 'SKU',
 
@@ -55,12 +55,12 @@ return [
     'documentation' => 'Documentation',
 
     'home' => 'Home',
-    'toHome' => 'To home',
+    'toHome' => 'Go to home page',
 
     'order' => 'Order',
-    'orderCall' => 'Order a call',
+    'orderCall' => 'Request a call',
 
-    'addToCart' => 'To cart',
+    'addToCart' => 'Add to cart',
     'removeFromCart' => 'Remove from cart',
     'inCart' => 'In cart',
     'yourCartIsEmpty' => 'Your cart is empty',
@@ -75,8 +75,8 @@ return [
 
     'questionsAndAnswers' => 'Questions and answers',
 
-    'adviseBalon?' => 'Advise a balloon?',
-    'fillFormAndWeWillHelpChouseBalon' => 'Fill out the form, <br>and we will help you choose a balloon.',
+    'adviseBalon?' => 'Help me choose a cylinder?',
+    'fillFormAndWeWillHelpChouseBalon' => 'Fill out the form, <br>and we will help you choose a cylinder.',
 
     'viewAllProducts' => 'View all products',
 
@@ -90,9 +90,9 @@ return [
 
     'shipping' => 'Shipping',
     'free' => 'Free',
-    'shippingByCarrierRates' => 'At carrier rates',
+    'shippingByCarrierRates' => 'Carrier rates',
 
-    'contactInfo' => 'Contact info',
+    'contactInfo' => 'Contact information',
     'askAQuestion' => 'Ask a question',
 
     'page' => 'Page',

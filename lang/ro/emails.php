@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'orderConfirmationSubject' => 'Confirmarea comenzii nr. :order_id',
+    'orderReceiptTitle'        => 'Confirmarea comenzii',
+    'orderReceiptSubtitle'     => 'Vă mulțumim pentru comandă!',
+    'orderNumber'              => 'Numărul comenzii',
+    'orderDate'                => 'Data comenzii',
+    'customerName'             => 'Numele clientului',
+    'customerEmail'            => 'Email',
+    'customerPhone'            => 'Telefon',
+    'customerMessage'          => 'Mesaj',
+    'shippingInstructions'     => 'Instrucțiuni de livrare',
+    'orderItems'               => 'Produsele din comandă',
+    'productName'              => 'Produs',
+    'productSku'               => 'Cod articol',
+    'quantity'                 => 'Cantitate',
+    'unitPrice'                => 'Preț unitar',
+    'totalPrice'               => 'Total',
+    'orderTotal'               => 'Suma comenzii',
+    'thankYouMessage'          => 'Vă mulțumim pentru comandă!',
+    'contactMessage'           => 'Vă vom contacta în curând pentru confirmarea comenzii și organizarea livrării.',
+    'companyName'              => 'Gutgas',
+    'companyContact'           => 'Email: info@gutgas.eu | Telefon: 0 (800) 35-35-05',
+    'shippingMethod'           => 'Modalitatea de livrare',
+    'shippingMethods'          => [
+        'np_department'     => 'Oficiul Nova Poshta',
+        'np_postal_machine' => 'Poștomatul Nova Poshta',
+        'np_courier'        => 'Curierul Nova Poshta',
+    ],
+    'customerSurname'          => 'Nume de familie',
+];

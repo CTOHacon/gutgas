@@ -38,20 +38,10 @@
 					class="option"
 				>
 					<a
-						:href="
-							currentUrl.replace(
-								usePage().props.locale,
-								locale[0]
-							)
-						"
+						:href="localeUrl(locale[0])"
 						class="option-link"
 						@click.prevent="
-							router.get(
-								currentUrl.replace(
-									usePage().props.locale,
-									locale[0]
-								)
-							);
+							router.get(localeUrl(locale[0]));
 							toggle();
 						"
 					>
@@ -88,10 +78,22 @@ const otherLocales = ref(
 );
 const isActive = ref(false);
 
-const currentUrl = ref('');
+const currentUrl = ref<string>(usePage().url);
 onMounted(() => {
 	currentUrl.value = window.location.href.replace(window.location.origin, '');
 });
+
+// Replace only the leading locale path segment, keeping query and hash intact.
+const localeUrl = (target: string): string => {
+	const url = new URL(currentUrl.value || '/', 'http://localhost');
+	const segments = url.pathname.split('/');
+	if (segments[1] === currentLocale) {
+		segments[1] = target;
+	} else {
+		segments.splice(1, 0, target);
+	}
+	return segments.join('/') + url.search + url.hash;
+};
 
 const toggle = () => {
 	isActive.value = !isActive.value;

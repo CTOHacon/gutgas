@@ -52,4 +52,13 @@ class LinkRewriterTest extends TestCase
             $this->rw([['title' => 'T', 'url' => '/ua/a', 'n' => 3, 'html' => '<a href="/ua/b">b</a>']])
         );
     }
+
+    public function test_other_target_locale(): void
+    {
+        $this->assertSame('/en/catalog', LinkRewriter::rewrite('/ua/catalog', 'ua', 'en'));
+        $this->assertSame(
+            '<a href="/ro/x">a</a> https://gutgas.eu/ro',
+            LinkRewriter::rewrite('<a href="/ua/x">a</a> https://gutgas.eu/ua', 'ua', 'ro')
+        );
+    }
 }
