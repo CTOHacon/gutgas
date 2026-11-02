@@ -35,8 +35,9 @@ class I18nImport extends Command
             $this->error('Invalid locale code.');
             return self::FAILURE;
         }
-        if ($source === $target) {
-            $this->error('Source and target locales are the same.');
+        // Same locale = patching the source text itself; only meaningful with --force.
+        if ($source === $target && !$this->option('force')) {
+            $this->error('Source and target locales are the same (use --force to patch the source locale).');
             return self::FAILURE;
         }
 
