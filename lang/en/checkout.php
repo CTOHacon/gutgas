@@ -5,7 +5,7 @@ return [
     'requiredComponents' => 'Required components',
     'shippingAndPayment' => 'Shipping & payment',
     'shippingDescription' => 'Describe the shipping method that works best for you.',
-    'shippingExample' => 'Kyiv, Nova Poshta branch 80...',
+    'shippingExample' => 'City, address or preferred delivery method...',
     'formSurname' => 'Last name',
     'shippingNpDepartment' => 'Nova Poshta branch',
     'shippingNpPostalMachine' => 'Nova Poshta parcel locker',
@@ -17,4 +17,5 @@ return [
     'shippingAddress' => 'Street, building, apartment',
     'shippingSearching' => 'Searching...',
     'shippingNothingFound' => 'Nothing found',
+    'phonePlaceholderIntl' => '+ country code and number',
 ];

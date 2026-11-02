@@ -17,7 +17,7 @@ return [
     'label_serial_number' => 'Serial number',
     'serial_hint' => 'Printed on the product marking',
     'label_purchase_date' => 'Purchase date',
-    'label_price' => 'Purchase price, UAH',
+    'label_price' => 'Purchase price',
     'label_purchase_place' => 'Where you bought it',
     'place_hint' => 'Store, city',
     'aside_title' => 'Where to find the model and serial number',
@@ -51,4 +51,5 @@ return [
     'confirm_success_text' => 'Your extended warranty is now active. Keep your receipt — you will need it for a warranty claim.',
     'confirm_error_title' => 'Invalid link',
     'confirm_error_text' => 'We could not confirm the registration: the link is broken or incomplete. Open it from the email again or call us: 0 (800) 35-35-05.',
+    'placeholder_phone_intl' => '+ country code and number',
 ];

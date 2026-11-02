@@ -54,6 +54,48 @@ class ProductRegistrationTest extends TestCase
         ], $overrides);
     }
 
+    public static function intlPhoneProvider(): array
+    {
+        return [
+            'georgia'    => ['+995 555 12 34 56', 'ka'],
+            'moldova'    => ['+373 (69) 123-456', 'ro'],
+            'kazakhstan' => ['+7 701 123-45-67', 'kk'],
+            'eu'         => ['+49 30 1234567', 'en'],
+        ];
+    }
+
+    /** @dataProvider intlPhoneProvider */
+    public function test_international_phone_is_accepted_on_international_locales(string $phone, string $locale): void
+    {
+        Http::fake(['api.telegram.org/*' => Http::response(['ok' => true])]);
+
+        $this->post(route('productRegistration.store'), $this->validData(['phone' => $phone, 'locale' => $locale]))
+            ->assertSessionDoesntHaveErrors('phone');
+        $this->assertDatabaseHas('product_registrations', ['phone' => $phone]);
+    }
+
+    /** @dataProvider intlPhoneProvider */
+    public function test_international_phone_is_rejected_on_ua_and_ru(string $phone): void
+    {
+        $this->withoutMiddleware(\Illuminate\Routing\Middleware\ThrottleRequests::class);
+        foreach (['ua', 'ru'] as $locale) {
+            $this->post(route('productRegistration.store'), $this->validData(['phone' => $phone, 'locale' => $locale]))
+                ->assertSessionHasErrors('phone');
+        }
+        $this->assertDatabaseCount('product_registrations', 0);
+    }
+
+    public function test_garbage_phone_is_rejected_on_every_locale(): void
+    {
+        $this->withoutMiddleware(\Illuminate\Routing\Middleware\ThrottleRequests::class);
+        foreach (array_keys(config('app.locales')) as $locale) {
+            foreach (['123', 'abc', '+0123456789012', '995555123456'] as $phone) {
+                $this->post(route('productRegistration.store'), $this->validData(['phone' => $phone, 'locale' => $locale]))
+                    ->assertSessionHasErrors('phone');
+            }
+        }
+    }
+
     public function test_valid_submission_is_stored_and_sent_to_telegram(): void
     {
         Http::fake(['api.telegram.org/*' => Http::response(['ok' => true])]);

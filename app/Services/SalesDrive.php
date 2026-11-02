@@ -162,11 +162,17 @@ class SalesDrive
     }
 
     /**
-     * Normalize to 380XXXXXXXXX; return the raw string when impossible.
+     * Normalize to 380XXXXXXXXX for Ukrainian numbers. A number written with
+     * a leading "+" and a foreign country code is passed as digits with the
+     * country code (e.g. 995555123456); the raw string is returned when impossible.
      */
     public static function normalizePhone(string $phone): string
     {
         $digits = preg_replace('/\D+/', '', $phone);
+
+        if (str_starts_with(trim($phone), '+') && !str_starts_with($digits, '380') && preg_match('/^[1-9]\d{7,14}$/', $digits)) {
+            return $digits;
+        }
 
         if (preg_match('/^380\d{9}$/', $digits)) {
             return $digits;

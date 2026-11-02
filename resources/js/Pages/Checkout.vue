@@ -28,7 +28,7 @@
 								:error-message="checkoutData.errors.client_surname"
 							/>
 							<BaseFormInput
-								:placeholder="__('formPhone')"
+								:placeholder="phonePlaceholder"
 								class="mb-12"
 								:model-value="checkoutData.client_phone"
 								@update:model-value="onPhoneInput"
@@ -233,7 +233,7 @@ import { TProduct } from '@/types/TProduct';
 import { watch } from 'vue';
 import ICartProduct from '@/types/ICartProduct';
 import { TOrderForm } from '@/types/TOreder';
-import { formatUaPhone } from '@/utils/formatUaPhone';
+import { formatPhone, usesUaPhoneMask } from '@/utils/formatPhone';
 import {
 	TNovaPoshtaSettlement,
 	TNovaPoshtaWarehouse
@@ -416,8 +416,12 @@ watch(
 	}
 );
 
+const phonePlaceholder = computed(() =>
+	usesUaPhoneMask(checkoutData.locale) ? __('formPhone') : __('phonePlaceholderIntl')
+);
+
 const onPhoneInput = (value?: string) => {
-	checkoutData.client_phone = formatUaPhone(value ?? '');
+	checkoutData.client_phone = formatPhone(value ?? '', checkoutData.locale);
 };
 
 const canSubmit = computed(() => {

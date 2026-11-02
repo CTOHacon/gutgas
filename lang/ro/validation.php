@@ -152,6 +152,7 @@ return [
     'uuid' => 'Câmpul :attribute trebuie să fie un UUID valid.',
 
     'phone' => 'Câmpul :attribute trebuie să fie un număr de telefon ucrainean valid.',
+    'phone_international' => 'Câmpul :attribute trebuie să conțină un număr de telefon în format internațional, de exemplu +37369123456.',
     'cartProductUnavailable' => 'Unul dintre produsele din coș nu este disponibil pentru comandă.',
     'pageExpired' => 'Pagina a expirat. Verificați datele și apăsați din nou „Trimiteți”.',
 

@@ -152,6 +152,61 @@ class CompleteOrderFlowTest extends TestCase
             ->assertSessionHasErrors('client_surname');
     }
 
+    public static function intlPhoneProvider(): array
+    {
+        return [
+            'georgia'    => ['+995 555 12 34 56', 'ka'],
+            'moldova'    => ['+373 (69) 123-456', 'ro'],
+            'kazakhstan' => ['+7 701 123-45-67', 'kk'],
+            'eu'         => ['+49 30 1234567', 'en'],
+        ];
+    }
+
+    /** @dataProvider intlPhoneProvider */
+    public function test_international_phone_is_accepted_on_international_locales(string $phone, string $locale): void
+    {
+        $this->post('/order/store', $this->payload(['client_phone' => $phone, 'locale' => $locale]))
+            ->assertSessionDoesntHaveErrors('client_phone');
+        $this->assertDatabaseHas('orders', ['client_phone' => $phone, 'locale' => $locale]);
+    }
+
+    /** @dataProvider intlPhoneProvider */
+    public function test_international_phone_is_rejected_on_ua_and_ru(string $phone): void
+    {
+        foreach (['ua', 'ru'] as $locale) {
+            $this->post('/order/store', $this->payload(['client_phone' => $phone, 'locale' => $locale]))
+                ->assertSessionHasErrors('client_phone');
+        }
+        $this->assertDatabaseCount('orders', 0);
+    }
+
+    public function test_ukrainian_phone_is_accepted_on_every_locale(): void
+    {
+        $this->withoutMiddleware(\Illuminate\Routing\Middleware\ThrottleRequests::class);
+        foreach (array_keys(config('app.locales')) as $locale) {
+            $this->post('/order/store', $this->payload(['locale' => $locale]))
+                ->assertSessionDoesntHaveErrors('client_phone');
+        }
+    }
+
+    public function test_garbage_phone_is_rejected_on_every_locale(): void
+    {
+        $this->withoutMiddleware(\Illuminate\Routing\Middleware\ThrottleRequests::class);
+        $base = $this->payload();
+        foreach (array_keys(config('app.locales')) as $locale) {
+            foreach (['12345', 'abc', '+0123456789012', '+99 5', '995555123456', '+995 555 12 34 56 78 90 12 34'] as $phone) {
+                $this->post('/order/store', array_merge($base, ['client_phone' => $phone, 'locale' => $locale]))
+                    ->assertSessionHasErrors('client_phone');
+            }
+        }
+    }
+
+    public function test_international_phone_error_uses_international_message(): void
+    {
+        $this->post('/order/store', $this->payload(['client_phone' => '12345', 'locale' => 'en']))
+            ->assertSessionHasErrors(['client_phone' => __('validation.phone_international', ['attribute' => 'phone'], 'en')]);
+    }
+
     public function test_full_length_phone_without_leading_zero_is_rejected_and_logged(): void
     {
         // The checkout mask accepts "+38 (123) ...": complete-looking but not a UA number

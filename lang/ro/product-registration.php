@@ -17,7 +17,7 @@ return [
     'label_serial_number' => 'Număr de serie',
     'serial_hint' => 'Indicat pe marcajul produsului',
     'label_purchase_date' => 'Data cumpărării',
-    'label_price' => 'Costul cumpărării, UAH',
+    'label_price' => 'Costul cumpărării',
     'label_purchase_place' => 'Unde ați cumpărat',
     'place_hint' => 'Magazin, localitate',
     'aside_title' => 'Unde găsiți modelul și numărul de serie',
@@ -51,4 +51,5 @@ return [
     'confirm_success_text' => 'Garanția extinsă a fost activată. Păstrați chitanța — va fi necesară pentru solicitarea de garanție.',
     'confirm_error_title' => 'Linkul nu este valid',
     'confirm_error_text' => 'Nu am putut confirma înregistrarea: linkul este deteriorat sau incomplet. Deschideți-l din e-mail încă o dată sau sunați-ne la: 0 (800) 35-35-05.',
+    'placeholder_phone_intl' => '+ prefix de țară și număr',
 ];

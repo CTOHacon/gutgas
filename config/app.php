@@ -96,6 +96,9 @@ return [
         'kk' => 'kk-KZ',
     ],
 
+    // Locales whose forms use the Ukrainian phone mask; all other locales accept international numbers.
+    'ua_phone_locales' => ['ua', 'ru'],
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\ProductRegistration;
 
+use App\Support\Phone;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -36,8 +37,8 @@ class StoreRequest extends FormRequest
         return [
             'first_name'           => 'required|string|max:255',
             'last_name'            => 'required|string|max:255',
-            // phone should be +38 (###) ###-##-## where # is a digit
-            'phone'                => ['required', 'regex:/^\+38 \(\d{3}\) \d{3}-\d{2}-\d{2}$/'],
+            // ua/ru: +38 (###) ###-##-##; other locales: international E.164
+            'phone'                => ['required', 'string', 'max:32', $this->phoneRule()],
             'email'                => 'required|email|max:255',
             'city'                 => 'required|string|max:255',
             'address'              => 'nullable|string|max:1000',
@@ -49,6 +50,24 @@ class StoreRequest extends FormRequest
             'subscription_consent' => 'nullable|boolean',
             'locale'               => 'nullable|string|max:8',
         ];
+    }
+
+    private function phoneRule(): callable
+    {
+        $locale = Phone::resolveLocale($this->input('locale'));
+        $uaMask = Phone::usesUaMask($locale);
+
+        return function (string $attribute, mixed $value, callable $fail) use ($locale, $uaMask) {
+            $value = (string) $value;
+            // Keep the strict mask on ua/ru, as before.
+            $ok = $uaMask
+                ? (bool) preg_match('/^\+38 \(\d{3}\) \d{3}-\d{2}-\d{2}$/', $value)
+                : Phone::validationError($value, $locale) === null;
+
+            if (!$ok) {
+                $fail(__($uaMask ? 'validation.phone' : 'validation.phone_international', ['attribute' => mb_strtolower(__('product-registration.label_phone'))], $locale));
+            }
+        };
     }
 
     /**

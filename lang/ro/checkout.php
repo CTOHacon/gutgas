@@ -4,7 +4,7 @@ return [
      'requiredComponents' => 'Componente obligatorii',
      'shippingAndPayment' => 'Livrare și plată',
      'shippingDescription' => 'Indicați modalitatea de livrare convenabilă pentru dvs.',
-     'shippingExample' => 'Kiev, Nova Poshta, oficiul 80...',
+     'shippingExample' => 'Localitatea, adresa sau metoda de livrare preferată...',
      'formSurname' => 'Nume de familie',
      'shippingNpDepartment' => 'Oficiul Nova Poshta',
      'shippingNpPostalMachine' => 'Poștomatul Nova Poshta',
@@ -16,4 +16,5 @@ return [
      'shippingAddress' => 'Strada, casa, apartamentul',
      'shippingSearching' => 'Se caută...',
      'shippingNothingFound' => 'Nu s-a găsit nimic',
+    'phonePlaceholderIntl' => '+ prefix de țară și număr',
 ];

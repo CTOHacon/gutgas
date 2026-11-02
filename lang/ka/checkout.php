@@ -4,7 +4,7 @@ return [
      'requiredComponents' => 'სავალდებულო ველები',
      'shippingAndPayment' => 'მიწოდება და გადახდა',
      'shippingDescription' => 'აირჩიეთ თქვენთვის მოსახერხებელი მიწოდების მეთოდი',
-     'shippingExample' => 'კიევი, ნოვა პოშტის განყოფილება 80...',
+     'shippingExample' => 'ქალაქი, მისამართი ან მიწოდების სასურველი გზა...',
      'formSurname' => 'გვარი',
      'shippingNpDepartment' => 'ნოვა პოშტის განყოფილება',
      'shippingNpPostalMachine' => 'ნოვა პოშტის ამანათების ტერმინალი',
@@ -16,4 +16,5 @@ return [
      'shippingAddress' => 'ქუჩა, სახლი, ბინა',
      'shippingSearching' => 'ძებნა...',
      'shippingNothingFound' => 'ვერაფერი მოიძებნა',
+    'phonePlaceholderIntl' => '+ ქვეყნის კოდი და ნომერი',
 ];

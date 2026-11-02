@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Order;
 
+use App\Support\Phone;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Log;
@@ -66,16 +67,18 @@ class StoreRequest extends FormRequest
     }
 
     /**
-     * Ukrainian phone: 0XXXXXXXXX or 380XXXXXXXXX in any formatting
-     * (the checkout mask is "+38 (###) ###-##-##").
+     * ua/ru: Ukrainian phone (mask "+38 (###) ###-##-##").
+     * Other locales: international E.164 (a Ukrainian number is still accepted).
      */
     private function phoneRule(): callable
     {
-        return function (string $attribute, mixed $value, callable $fail) {
-            $digits = preg_replace('/\D/', '', (string) $value);
+        $locale = Phone::resolveLocale($this->input('locale'));
 
-            if (!preg_match('/^(38)?0\d{9}$/', $digits)) {
-                $fail(__('validation.phone'));
+        return function (string $attribute, mixed $value, callable $fail) use ($locale) {
+            $error = Phone::validationError((string) $value, $locale);
+
+            if ($error !== null) {
+                $fail(__($error, ['attribute' => __('validation.attributes.client_phone', [], $locale)], $locale));
             }
         };
     }

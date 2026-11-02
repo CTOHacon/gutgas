@@ -55,10 +55,10 @@
 							/>
 							<BaseFormInput
 								:model-value="form.phone"
-								:placeholder="`${__('label_phone')} *`"
+								:placeholder="phonePlaceholder"
 								type="tel"
 								:error-message="form.errors.phone"
-								:is-valid="form.phone.length === 19"
+								:is-valid="isPhoneValid"
 								@update:model-value="onPhoneInput"
 							/>
 							<BaseFormInput
@@ -180,7 +180,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import WebsitePage from '@/Layouts/WebsitePage.vue';
 import PageHeadSpacer from '@/Components/PageHeadSpacer.vue';
@@ -190,7 +190,7 @@ import BaseFormTextarea from '@/Components/BaseFormTextarea.vue';
 import BaseCheckboxField from '@/Components/BaseCheckboxField.vue';
 import BaseButton from '@/Components/BaseButton.vue';
 import { isEmailValid } from '@/utils/IsEmailValid';
-import { formatUaPhone } from '@/utils/formatUaPhone';
+import { formatPhone, usesUaPhoneMask, isIntlPhoneValid } from '@/utils/formatPhone';
 import { TProductRegistrationForm } from '@/types/TProductRegistration';
 
 const props = defineProps<{
@@ -221,8 +221,15 @@ const form = useForm<TProductRegistrationForm>({
 	website: ''
 });
 
+const phonePlaceholder = computed(() =>
+	usesUaPhoneMask(locale) ? `${__('label_phone')} *` : `${__('placeholder_phone_intl')} *`
+);
+const isPhoneValid = computed(() =>
+	usesUaPhoneMask(locale) ? form.phone.length === 19 : isIntlPhoneValid(form.phone)
+);
+
 const onPhoneInput = (value?: string) => {
-	form.phone = formatUaPhone(value ?? '');
+	form.phone = formatPhone(value ?? '', locale);
 };
 
 const onSubmit = () => {

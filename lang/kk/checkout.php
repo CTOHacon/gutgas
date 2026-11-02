@@ -4,7 +4,7 @@ return [
      'requiredComponents' => 'Міндетті компоненттер',
      'shippingAndPayment' => 'Жеткізу және төлем',
      'shippingDescription' => 'Сізге ыңғайлы жеткізу тәсілін сипаттаңыз',
-     'shippingExample' => 'Киев, Нова Пошта бөлімшесі 80...',
+     'shippingExample' => 'Қала, мекенжай немесе қалаған жеткізу тәсілі...',
      'formSurname' => 'Тегі',
      'shippingNpDepartment' => 'Нова Пошта бөлімшесі',
      'shippingNpPostalMachine' => 'Нова Пошта поштоматы',
@@ -16,4 +16,5 @@ return [
      'shippingAddress' => 'Көше, үй, пәтер',
      'shippingSearching' => 'Іздеу...',
      'shippingNothingFound' => 'Ештеңе табылмады',
+    'phonePlaceholderIntl' => '+ ел коды және нөмір',
 ];

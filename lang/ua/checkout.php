@@ -16,4 +16,5 @@ return [
      'shippingAddress' => 'Вулиця, будинок, квартира',
      'shippingSearching' => 'Пошук...',
      'shippingNothingFound' => 'Нічого не знайдено',
+    'phonePlaceholderIntl' => '+ код країни та номер',
 ];

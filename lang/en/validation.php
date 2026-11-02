@@ -152,6 +152,7 @@ return [
     'uuid' => 'The :attribute field must be a valid UUID.',
 
     'phone' => 'The :attribute must be a valid Ukrainian phone number.',
+    'phone_international' => 'The :attribute must be a phone number in international format, e.g. +995555123456.',
     'cartProductUnavailable' => 'One of the products in the cart is not available for ordering.',
     'pageExpired' => 'The page has expired. Please check your details and submit again.',
 
