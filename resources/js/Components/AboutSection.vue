@@ -14,7 +14,7 @@
 						}"
 					>
 						<img
-							src="@/assets/home-about-balon-3.png"
+							src="@/assets/home-about-balon-3.webp"
 							:style="{
 								transform: `rotate(${balonRotate}deg)`
 							}"
@@ -29,7 +29,7 @@
 						}"
 					>
 						<img
-							src="@/assets/home-about-balon-2.png"
+							src="@/assets/home-about-balon-2.webp"
 							:style="{
 								transform: `rotate(${balonRotate}deg)`
 							}"
@@ -44,7 +44,7 @@
 						}"
 					>
 						<img
-							src="@/assets/home-about-balon-1.png"
+							src="@/assets/home-about-balon-1.webp"
 							:style="{
 								transform: `rotate(${balonRotate}deg)`
 							}"
@@ -229,7 +229,6 @@ onUnmounted(() => {
 		top: 189px;
 		right: 639px;
 		width: 215px;
-		height: 222px;
 		filter: drop-shadow(38px -10px 66px rgba(0, 0, 0, 0.58));
 
 		@media (max-width: $large-mobile-width) {
@@ -237,14 +236,12 @@ onUnmounted(() => {
 			top: 114px;
 			right: 384px;
 			width: 129px;
-			height: 133px;
 		}
 	}
 	&[data-index='2'] {
 		top: 155px;
 		right: 412px;
 		width: 248px;
-		height: 256px;
 		filter: drop-shadow(38px -10px 66px rgba(0, 0, 0, 0.28));
 
 		@media (max-width: $large-mobile-width) {
@@ -252,14 +249,12 @@ onUnmounted(() => {
 			top: 93px;
 			right: 247px;
 			width: 149px;
-			height: 153px;
 		}
 	}
 	&[data-index='1'] {
 		top: 95px;
 		right: 110px;
 		width: 334px;
-		height: 331px;
 		filter: drop-shadow(-18px -10px 66px rgba(0, 0, 0, 0.38));
 
 		@media (max-width: $large-mobile-width) {
@@ -267,11 +262,14 @@ onUnmounted(() => {
 			top: 57px;
 			right: 66px;
 			width: 200px;
-			height: 199px;
 		}
 	}
+	aspect-ratio: 1 / 1;
 	img {
-		max-width: 100%;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
 	}
 	&,
 	img {

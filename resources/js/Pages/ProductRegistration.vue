@@ -161,7 +161,7 @@
 				<aside class="aside">
 					<div class="aside__card">
 						<img
-							src="@/assets/home-about-balon-1.png"
+							src="@/assets/home-about-balon-1.webp"
 							alt=""
 							class="aside__image"
 							loading="lazy"

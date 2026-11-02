@@ -30,7 +30,7 @@ class GlobalSettingsSeeder extends Seeder
                 'url' => '/',
             ],
             [
-                'title' => 'Каталог балонів',
+                'title' => 'Каталог',
                 'url' => '/catalog',
             ],
             [
@@ -40,10 +40,6 @@ class GlobalSettingsSeeder extends Seeder
             [
                 'title' => 'Інструкції',
                 'url' => '/instructions',
-            ],
-            [
-                'title' => 'Реєстрація продукту',
-                'url' => '/ua/registration',
             ],
         ]));
 
@@ -63,10 +59,6 @@ class GlobalSettingsSeeder extends Seeder
             [
                 'title' => 'Instructions',
                 'url' => '/instructions',
-            ],
-            [
-                'title' => 'Product registration',
-                'url' => '/registration',
             ],
         ]));
 
@@ -138,6 +130,10 @@ class GlobalSettingsSeeder extends Seeder
                     [
                         'title' => 'Інструкції',
                         'url' => '/instructions',
+                    ],
+                    [
+                        'title' => 'Реєстрація продукту',
+                        'url' => '/ua/registration',
                     ],
                 ]
             ]
@@ -211,6 +207,10 @@ class GlobalSettingsSeeder extends Seeder
                     [
                         'title' => 'Instructions',
                         'url' => '/instructions',
+                    ],
+                    [
+                        'title' => 'Product registration',
+                        'url' => '/registration',
                     ],
                 ]
             ]
