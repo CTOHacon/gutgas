@@ -51,6 +51,12 @@ Route::prefix('{locale?}')->middleware([
     Route::get('/checkout', CheckoutController::class)->name('checkout');
 
     Route::get('/registration', [ProductRegistrationController::class, 'create'])->name('productRegistration');
+    // Signed link from the confirmation email; the signature is checked in the controller
+    // so a broken link gets a friendly page instead of a bare 403.
+    Route::get('/registration/confirm/{registration}', [ProductRegistrationController::class, 'confirm'])
+        ->whereNumber('registration')
+        ->middleware('throttle:20,1')
+        ->name('productRegistration.confirm');
 
     Route::get('/thank-you', function () {
         return Inertia::render('ThankYou')->with('thankYouTranslations', trans('thank-you'));

@@ -19,7 +19,10 @@
 					<path d="M14 24.5l7 7 13-14" />
 				</svg>
 				<h2 class="fs-h5 mb-12">{{ __('success_title') }}</h2>
-				<p class="success__text mb-32">{{ __('success_text') }}</p>
+				<p class="success__text mb-12">
+					{{ __('success_text', { email: submittedEmail }) }}
+				</p>
+				<p class="success__hint mb-32">{{ __('success_spam_hint') }}</p>
 				<div class="success__actions">
 					<BaseButton class="p-16 fs-medium" @click="submitted = false">
 						{{ __('another') }}
@@ -198,6 +201,7 @@ const { __ } = useTranslations([props.registrationTranslations]);
 const locale = usePage().props.locale as string;
 
 const submitted = ref(false);
+const submittedEmail = ref('');
 const successRef = ref<HTMLElement | null>(null);
 
 const form = useForm<TProductRegistrationForm>({
@@ -225,6 +229,8 @@ const onSubmit = () => {
 	form.post(route('productRegistration.store'), {
 		preserveScroll: true,
 		onSuccess: () => {
+			// Shown in the "check your inbox" message so a typo in the address is easy to spot
+			submittedEmail.value = form.email;
 			form.reset();
 			submitted.value = true;
 			// Bring the confirmation into view below the fixed header
@@ -372,6 +378,10 @@ const onSubmit = () => {
 	max-width: 460px;
 	margin-left: auto;
 	margin-right: auto;
+}
+.success__hint {
+	font-size: 0.875rem;
+	color: #828282;
 }
 .success__actions {
 	display: flex;

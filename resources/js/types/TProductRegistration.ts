@@ -31,6 +31,7 @@ export type TProductRegistration = {
 	subscription_consent: boolean;
 	locale: string | null;
 	ip: string | null;
+	confirmed_at: string | null;
 	created_at: string;
 	updated_at: string;
 };

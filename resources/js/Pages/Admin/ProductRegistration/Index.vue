@@ -19,6 +19,7 @@
 						<th>Телефон</th>
 						<th>Модель / Серійний номер</th>
 						<th>Дата покупки</th>
+						<th>Статус</th>
 						<th>Створено</th>
 						<th class="text-right">Дії</th>
 					</tr>
@@ -33,6 +34,18 @@
 							{{ item.serial_number }}
 						</td>
 						<td>{{ item.purchase_date }}</td>
+						<td>
+							<span
+								v-if="item.confirmed_at"
+								class="status status--confirmed"
+								:title="formatDate(item.confirmed_at)"
+							>
+								Підтверджено
+							</span>
+							<span v-else class="status status--pending">
+								Очікує
+							</span>
+						</td>
 						<td>{{ formatDate(item.created_at) }}</td>
 						<td class="text-right">
 							<div class="btn-group">
@@ -83,3 +96,24 @@ const onDelete = (id: number) => {
 	}
 };
 </script>
+
+<style scoped>
+/* Own classes, not bootstrap .badge/.bg-*: purgecss may drop newly used utilities from long-cached CSS */
+.status {
+	display: inline-block;
+	padding: 0.2em 0.6em;
+	border-radius: 0.375rem;
+	font-size: 0.8rem;
+	font-weight: 600;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.status--confirmed {
+	background: #d1e7dd;
+	color: #0f5132;
+}
+.status--pending {
+	background: #fff3cd;
+	color: #664d03;
+}
+</style>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendProductRegistrationConfirmation;
 use App\Models\ProductRegistration;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -37,6 +38,22 @@ class ProductRegistrationController extends Controller
         return Inertia::render('Admin/ProductRegistration/Show', [
             'registration' => $productRegistration,
         ]);
+    }
+
+    public function resendConfirmation(ProductRegistration $productRegistration): RedirectResponse
+    {
+        if ($productRegistration->isConfirmed()) {
+            return redirect()->back()->with('message', [
+                'type' => 'warning',
+                'text' => 'Реєстрацію вже підтверджено',
+            ]);
+        }
+
+        $sent = (new SendProductRegistrationConfirmation($productRegistration))->handle();
+
+        return redirect()->back()->with('message', $sent
+            ? ['type' => 'success', 'text' => "Лист підтвердження надіслано на {$productRegistration->email}"]
+            : ['type' => 'error', 'text' => 'Не вдалося надіслати лист, деталі в логах']);
     }
 
     public function destroy(ProductRegistration $productRegistration): RedirectResponse

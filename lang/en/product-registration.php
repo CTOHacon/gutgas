@@ -26,8 +26,29 @@ return [
     'consent' => 'I agree to receive news and offers from GUTGAS',
     'submit' => 'Register product',
     'required' => '* — required fields',
-    'success_title' => 'Product registered',
-    'success_text' => 'Your details are saved. If you need warranty service, give the manager your serial number.',
+    'success_title' => 'One more step — check your inbox',
+    'success_text' => 'We have sent an email to :email. Follow the link in it to complete the registration and activate your extended warranty.',
+    'success_spam_hint' => 'Can\'t see the email? Check your Spam or Promotions folder.',
     'another' => 'Register another product',
     'home' => 'Back to home page',
+
+    // Confirmation email (double opt-in)
+    'email_subject' => 'Confirm your GUTGAS product registration',
+    'email_preheader' => 'One more step: confirm your registration to activate your extended warranty.',
+    'email_heading' => 'Congratulations on your purchase and thank you for choosing GUTGAS!',
+    'email_data_intro' => 'You entered the following details:',
+    'email_label_subscription' => 'News subscription',
+    'email_yes' => 'Yes',
+    'email_no' => 'No',
+    'email_cta_intro' => 'To complete the registration and activate your extended warranty, please follow the link:',
+    'email_button' => 'Confirm',
+    'email_link_fallback' => 'If the button does not work, copy this link and open it in your browser:',
+    'email_ignore' => 'If you did not register a GUTGAS product, simply ignore this email.',
+
+    // Page behind the link from the email
+    'confirm_page_title' => 'Registration confirmation',
+    'confirm_success_title' => 'Registration confirmed',
+    'confirm_success_text' => 'Your extended warranty is now active. Keep your receipt — you will need it for a warranty claim.',
+    'confirm_error_title' => 'Invalid link',
+    'confirm_error_text' => 'We could not confirm the registration: the link is broken or incomplete. Open it from the email again or call us: 0 (800) 35-35-05.',
 ];

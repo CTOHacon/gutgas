@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRegistration\StoreRequest;
+use App\Jobs\SendProductRegistrationConfirmation;
 use App\Models\ProductRegistration;
 use App\Services\TelegramNotifier;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class ProductRegistrationController extends Controller
 {
@@ -38,7 +41,61 @@ class ProductRegistrationController extends Controller
 
         $this->telegram->send($this->telegramMessage($registration));
 
+        // After the response: the customer never waits on SMTP, and a mail failure is only logged.
+        SendProductRegistrationConfirmation::dispatch($registration)->afterResponse();
+
         return redirect()->back();
+    }
+
+    /**
+     * Target of the signed link in the confirmation email. Idempotent: only the first
+     * valid click sets confirmed_at and notifies Telegram; later clicks just show the result.
+     */
+    public function confirm(Request $request): HttpResponse
+    {
+        $registration = $request->hasValidRelativeSignature()
+            ? ProductRegistration::find($request->route('registration'))
+            : null;
+
+        if (!$registration) {
+            return $this->confirmPage(false)->toResponse($request)->setStatusCode(403);
+        }
+
+        // Conditional update so double clicks / parallel requests confirm (and notify) once.
+        $justConfirmed = ProductRegistration::whereKey($registration->id)
+            ->whereNull('confirmed_at')
+            ->update(['confirmed_at' => now()]) === 1;
+
+        if ($justConfirmed) {
+            $registration->refresh();
+            $this->telegram->send(self::telegramConfirmedMessage($registration));
+        }
+
+        return $this->confirmPage(true)->toResponse($request);
+    }
+
+    private function confirmPage(bool $confirmed): Response
+    {
+        return Inertia::render('ProductRegistrationConfirm', [
+            'confirmed'                => $confirmed,
+            'registrationTranslations' => trans('product-registration'),
+        ]);
+    }
+
+    public static function telegramConfirmedMessage(ProductRegistration $registration): string
+    {
+        return TelegramNotifier::format(
+            "✅ Реєстрацію #{$registration->id} підтверджено",
+            [
+                [
+                    'Клієнт'         => trim($registration->first_name . ' ' . $registration->last_name),
+                    'Email'          => $registration->email,
+                    'Серійний номер' => $registration->serial_number,
+                ],
+            ],
+            route('admin.productRegistration.show', $registration->id),
+            'Відкрити в адмінці'
+        );
     }
 
     private function telegramMessage(ProductRegistration $registration): string
@@ -64,6 +121,9 @@ class ProductRegistrationController extends Controller
                 ],
                 '📬 Згода' => [
                     'Підписка на новини' => $registration->subscription_consent ? 'так' : 'ні',
+                ],
+                [
+                    'Статус' => 'очікує підтвердження email',
                 ],
             ],
             route('admin.productRegistration.show', $registration->id),

@@ -256,6 +256,7 @@ Route::group([
                     Route::get('/search/{search}', 'index')->name('search')->middleware('permission:admin.productRegistration.index');
 
                     Route::delete('/delete/{productRegistration}', 'destroy')->name('destroy')->middleware('permission:admin.productRegistration.manage');
+                    Route::post('/{productRegistration}/resend-confirmation', 'resendConfirmation')->name('resendConfirmation')->middleware(['permission:admin.productRegistration.manage', 'throttle:10,1']);
 
                     Route::get('{productRegistration}', 'show')->name('show')->middleware('permission:admin.productRegistration.index');
                 }
