@@ -3878,6 +3878,10 @@
       {
        "title": "Контакти",
        "url": "/ua/contacts"
+      },
+      {
+       "title": "Реєстрація продукту",
+       "url": "/ua/registration"
       }
      ]
     }
@@ -3927,6 +3931,10 @@
       {
        "title": "კონტაქტები",
        "url": "/ua/contacts"
+      },
+      {
+       "title": "პროდუქტის რეგისტრაცია",
+       "url": "/ua/registration"
       }
      ]
     }
@@ -3947,7 +3955,7 @@
      "url": "/ua"
     },
     {
-     "title": "Каталог балонів",
+     "title": "Каталог",
      "url": "/ua/catalog"
     },
     {
@@ -3957,10 +3965,6 @@
     {
      "title": "Інструкції",
      "url": "/ua/instructions"
-    },
-    {
-     "title": "Реєстрація продукту",
-     "url": "/ua/registration"
     }
    ],
    "translation": [
@@ -3969,7 +3973,7 @@
      "url": "/ua"
     },
     {
-     "title": "ბალონების კატალოგი",
+     "title": "კატალოგი",
      "url": "/ua/catalog"
     },
     {
@@ -3979,10 +3983,6 @@
     {
      "title": "ინსტრუქციები",
      "url": "/ua/instructions"
-    },
-    {
-     "title": "პროდუქტის რეგისტრაცია",
-     "url": "/ua/registration"
     }
    ]
   },

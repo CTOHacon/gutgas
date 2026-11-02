@@ -26,8 +26,29 @@ return [
     'consent' => 'Sunt de acord să primesc știri și oferte de la GUTGAS',
     'submit' => 'Înregistrați produsul',
     'required' => '* — câmpuri obligatorii',
-    'success_title' => 'Produs înregistrat',
-    'success_text' => 'Datele au fost salvate. Dacă va fi nevoie de service în garanție, comunicați managerului numărul de serie.',
+    'success_title' => 'Mai rămâne un pas — verificați e-mailul',
+    'success_text' => 'Am trimis un e-mail la :email. Pentru a finaliza înregistrarea și a activa garanția extinsă, urmați linkul din e-mail.',
+    'success_spam_hint' => 'Nu vedeți e-mailul? Verificați folderul „Spam” sau „Promoții”.',
     'another' => 'Înregistrați încă un produs',
     'home' => 'Reveniți la pagina principală',
+
+    // Confirmation email (double opt-in)
+    'email_subject' => 'Confirmați înregistrarea produsului GUTGAS',
+    'email_preheader' => 'Mai rămâne un pas: confirmați înregistrarea pentru a activa garanția extinsă.',
+    'email_heading' => 'Felicitări pentru cumpărare și vă mulțumim că ați ales GUTGAS!',
+    'email_data_intro' => 'Ați introdus următoarele date:',
+    'email_label_subscription' => 'Abonare la noutăți',
+    'email_yes' => 'Da',
+    'email_no' => 'Nu',
+    'email_cta_intro' => 'Pentru a finaliza înregistrarea și a activa garanția extinsă, vă rugăm să urmați linkul:',
+    'email_button' => 'CONFIRMAȚI',
+    'email_link_fallback' => 'Dacă butonul nu funcționează, copiați acest link și deschideți-l în browser:',
+    'email_ignore' => 'Dacă nu ați înregistrat un produs GUTGAS, pur și simplu ignorați acest e-mail.',
+
+    // Page behind the link from the email
+    'confirm_page_title' => 'Confirmarea înregistrării',
+    'confirm_success_title' => 'Înregistrarea a fost confirmată',
+    'confirm_success_text' => 'Garanția extinsă a fost activată. Păstrați chitanța — va fi necesară pentru solicitarea de garanție.',
+    'confirm_error_title' => 'Linkul nu este valid',
+    'confirm_error_text' => 'Nu am putut confirma înregistrarea: linkul este deteriorat sau incomplet. Deschideți-l din e-mail încă o dată sau sunați-ne la: 0 (800) 35-35-05.',
 ];

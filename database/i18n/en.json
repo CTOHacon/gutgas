@@ -3878,6 +3878,10 @@
       {
        "title": "Контакти",
        "url": "/ua/contacts"
+      },
+      {
+       "title": "Реєстрація продукту",
+       "url": "/ua/registration"
       }
      ]
     }
@@ -3927,6 +3931,10 @@
       {
        "title": "Contacts",
        "url": "/ua/contacts"
+      },
+      {
+       "title": "Product registration",
+       "url": "/ua/registration"
       }
      ]
     }
@@ -3947,7 +3955,7 @@
      "url": "/ua"
     },
     {
-     "title": "Каталог балонів",
+     "title": "Каталог",
      "url": "/ua/catalog"
     },
     {
@@ -3957,10 +3965,6 @@
     {
      "title": "Інструкції",
      "url": "/ua/instructions"
-    },
-    {
-     "title": "Реєстрація продукту",
-     "url": "/ua/registration"
     }
    ],
    "translation": [
@@ -3969,7 +3973,7 @@
      "url": "/ua"
     },
     {
-     "title": "Cylinder catalog",
+     "title": "Catalog",
      "url": "/ua/catalog"
     },
     {
@@ -3979,10 +3983,6 @@
     {
      "title": "Instructions",
      "url": "/ua/instructions"
-    },
-    {
-     "title": "Product registration",
-     "url": "/ua/registration"
     }
    ]
   },
