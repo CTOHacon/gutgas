@@ -70,7 +70,7 @@ const onSubmit = () => {
 .submit {
 	padding: 0.75rem 2.75rem;
 	font-weight: 700;
-	margin-left: auto;
+	// left-aligned with the fields and the policy note below
 	margin-right: auto;
 }
 .policy-message {
