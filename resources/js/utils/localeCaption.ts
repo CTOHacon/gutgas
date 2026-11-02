@@ -6,5 +6,9 @@ export default function localeCaption(key: string) {
 			return 'Рус';
 		case 'ua':
 			return 'Укр';
+		case 'ka':
+			return 'ქარ';
+		default:
+			return key;
 	}
 }

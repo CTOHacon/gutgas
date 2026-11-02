@@ -65,7 +65,7 @@
 			<button class="lh-0" @click="removeProductFromCart(cartProduct)">
 				<img
 					src="@/assets/cart-trash.svg"
-					alt="Видалити"
+					:alt="__('delete')"
 					class="ml-8 mr-8"
 				/>
 			</button>
@@ -95,7 +95,7 @@ const { _t, __ } = useTranslations();
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-family: Mulish;
+	font-family: Mulish, 'Noto Sans Georgian';
 	font-size: 15px;
 }
 

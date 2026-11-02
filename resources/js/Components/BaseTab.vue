@@ -11,7 +11,7 @@
 				v-if="collapsed"
 				@click="toggleCollapse"
 			>
-				Розгорнути
+				{{ __('expand') }}
 				<svg width="33" height="32" viewBox="0 0 33 32" fill="none">
 					<path
 						opacity="0.56"
@@ -60,6 +60,8 @@ const toggleCollapse = () => {
 	collapsed.value = !collapsed.value;
 	maxHeight.value = collapsed.value ? defaultMaxHeight : fullHeight.value;
 };
+
+const { __ } = useTranslations();
 </script>
 
 <style scoped lang="scss">

@@ -29,7 +29,7 @@ const props = defineProps<{
 .description {
 	color: #838d97;
 	text-align: center;
-	font-family: Mulish;
+	font-family: Mulish, 'Noto Sans Georgian';
 	font-weight: 300;
 }
 </style>

@@ -1,0 +1,19 @@
+<?php
+return [
+     'checkoutTitle' => 'შეკვეთის გაფორმება',
+     'requiredComponents' => 'სავალდებულო ველები',
+     'shippingAndPayment' => 'მიწოდება და გადახდა',
+     'shippingDescription' => 'აირჩიეთ თქვენთვის მოსახერხებელი მიწოდების მეთოდი',
+     'shippingExample' => 'კიევი, ნოვა პოშტის განყოფილება 80...',
+     'formSurname' => 'გვარი',
+     'shippingNpDepartment' => 'ნოვა პოშტის განყოფილება',
+     'shippingNpPostalMachine' => 'ნოვა პოშტის ამანათების ტერმინალი',
+     'shippingNpCourier' => 'ნოვა პოშტის კურიერი',
+     'shippingOther' => 'სხვა',
+     'shippingCity' => 'ქალაქი',
+     'shippingDepartment' => 'განყოფილება',
+     'shippingPostalMachine' => 'ამანათების ტერმინალი',
+     'shippingAddress' => 'ქუჩა, სახლი, ბინა',
+     'shippingSearching' => 'ძებნა...',
+     'shippingNothingFound' => 'ვერაფერი მოიძებნა',
+];

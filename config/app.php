@@ -90,6 +90,7 @@ return [
     'locales'         => [
         'ua' => 'uk-UA',
         'ru' => 'ru-UA',
+        'ka' => 'ka-GE',
     ],
 
     /*

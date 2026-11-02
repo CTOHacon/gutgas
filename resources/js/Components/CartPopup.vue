@@ -24,7 +24,7 @@
 						}}</small>
 						<p class="fs-medium">
 							<span class="total-ammount"> {{ cartTotal }} </span>
-							<small class="total-currency">грн</small>
+							<small class="total-currency">{{ __('uah') }}</small>
 						</p>
 						<button
 							class="lh-100 underline color-danger fs-small mt-12"

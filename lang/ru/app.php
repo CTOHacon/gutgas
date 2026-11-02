@@ -84,6 +84,10 @@ return [
 
     'menu' => 'Меню',
 
+    'answer' => 'Ответ',
+    'expand' => 'Развернуть',
+    'characteristic' => 'Характеристика',
+
     'shipping' => 'Доставка',
     'free' => 'Бесплатно',
     'shippingByCarrierRates' => 'По тарифам перевозчика',

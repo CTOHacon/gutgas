@@ -84,6 +84,10 @@ return [
 
     'menu' => 'Menu',
 
+    'answer' => 'Answer',
+    'expand' => 'Expand',
+    'characteristic' => 'Characteristic',
+
     'shipping' => 'Shipping',
     'free' => 'Free',
     'shippingByCarrierRates' => 'At carrier rates',

@@ -25,7 +25,7 @@
 			property="og:image"
 			:content="_t(seoEntity.og_image)"
 		/>
-		<meta property="og:locale" :content="usePage().props.locale" />
+		<meta property="og:locale" :content="ogLocale" />
 		<link rel="canonical" :href="currentLocation" />
 
 		<component :is="'script'" type="application/ld+json">
@@ -47,6 +47,15 @@ const { _t, __ } = useTranslations();
 const props = defineProps<{
 	seoEntity: TSeoEntity;
 }>();
+
+const OG_LOCALES: Record<string, string> = {
+	ua: 'uk_UA',
+	ru: 'ru_RU',
+	ka: 'ka_GE',
+	en: 'en_US'
+};
+const locale = usePage().props.locale as string;
+const ogLocale = OG_LOCALES[locale] ?? locale;
 
 const fullUrl = usePage().props.currentUrl;
 const currentLocation = ref<string>(fullUrl.split('?')[0]);

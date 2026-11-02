@@ -24,7 +24,7 @@
 					/>
 				</svg>
 			</button>
-			<h4 class="title fs-semi-large">Меню</h4>
+			<h4 class="title fs-semi-large">{{ __('menu') }}</h4>
 			<LocaleSelect class="lang-switch fs-semi-large" />
 		</div>
 	</div>
@@ -35,6 +35,8 @@ import useNavigationModal from '@/composables/navigationModal';
 import LocaleSelect from '@/Components/LocaleSelect.vue';
 
 const { toggleNavigationModal } = useNavigationModal();
+
+const { __ } = useTranslations();
 </script>
 
 <style scoped lang="scss">

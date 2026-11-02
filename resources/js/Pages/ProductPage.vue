@@ -42,7 +42,7 @@
 					<BaseTabs controlsBackground="#141414">
 						<BaseTab
 							name="description"
-							label="Опис"
+							:label="__('description')"
 							:active="true"
 							class="pt-40 fs-typography-content typography-content lh-160 color-typography-secondary"
 						>
@@ -50,7 +50,7 @@
 						</BaseTab>
 						<BaseTab
 							name="stats"
-							label="Характеристика"
+							:label="__('characteristic')"
 							:active="true"
 						>
 							<div class="pt-40">
@@ -72,7 +72,7 @@
 						<template v-if="productPage.documentations.length">
 							<BaseTab
 								name="docs"
-								label="Документація"
+								:label="__('documentation')"
 								class="pt-40"
 								:active="true"
 							>

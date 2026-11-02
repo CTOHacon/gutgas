@@ -13,7 +13,7 @@
 				{{ question }}
 			</h4>
 			<button class="view-answer">
-				<span class="view-answer__text">Відповідь</span>
+				<span class="view-answer__text">{{ __('answer') }}</span>
 			</button>
 		</div>
 		<div
@@ -76,6 +76,8 @@ const props = defineProps<{
 const emit = defineEmits({
 	click: (value: boolean) => true
 });
+
+const { __ } = useTranslations();
 </script>
 
 <style scoped lang="scss">

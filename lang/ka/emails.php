@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'orderConfirmationSubject' => 'შეკვეთის დადასტურება №:order_id',
+    'orderReceiptTitle'        => 'შეკვეთის დადასტურება',
+    'orderReceiptSubtitle'     => 'გმადლობთ შეკვეთისთვის!',
+    'orderNumber'              => 'შეკვეთის ნომერი',
+    'orderDate'                => 'შეკვეთის თარიღი',
+    'customerName'             => 'მომხმარებლის სახელი',
+    'customerEmail'            => 'ელფოსტა',
+    'customerPhone'            => 'ტელეფონი',
+    'customerMessage'          => 'შეტყობინება',
+    'shippingInstructions'     => 'მიწოდების ინსტრუქციები',
+    'orderItems'               => 'შეკვეთაში შემავალი პროდუქტები',
+    'productName'              => 'პროდუქტი',
+    'productSku'               => 'არტიკული',
+    'quantity'                 => 'რაოდენობა',
+    'unitPrice'                => 'ერთეულის ფასი',
+    'totalPrice'               => 'ჯამი',
+    'orderTotal'               => 'შეკვეთის ჯამი',
+    'thankYouMessage'          => 'გმადლობთ შეკვეთისთვის!',
+    'contactMessage'           => 'შეკვეთის დასადასტურებლად და მიწოდების ორგანიზებისთვის უმოკლეს ვადაში დაგიკავშირდებით.',
+    'companyName'              => 'Gutgas',
+    'companyContact'           => 'ელფოსტა: info@gutgas.eu | ტელეფონი: 0 (800) 35-35-05',
+    'shippingMethod'           => 'მიწოდების მეთოდი',
+    'shippingMethods'          => [
+        'np_department'     => 'ნოვა პოშტის განყოფილება',
+        'np_postal_machine' => 'ნოვა პოშტის ამანათების ტერმინალი',
+        'np_courier'        => 'ნოვა პოშტის კურიერი',
+    ],
+    'customerSurname'          => 'გვარი',
+];

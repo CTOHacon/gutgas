@@ -153,7 +153,7 @@ const hasDiscount = computed(() => {
 	margin-left: auto;
 	color: #fff;
 	&__currency {
-		font-family: 'Mulish';
+		font-family: 'Mulish', 'Noto Sans Georgian';
 		font-weight: 800;
 		font-size: 0.875rem;
 		line-height: 100%;
