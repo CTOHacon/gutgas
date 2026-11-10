@@ -45,6 +45,8 @@ return [
         'key' => env('SALESDRIVE_API_KEY'),
         // "Сайт" option id in the CRM that marks orders as coming from gutgas.eu
         'site_option' => env('SALESDRIVE_SITE_OPTION', 'id_45'),
+        // Order form ("База заявок") the orders land in; used for web links to orders
+        'form_id' => env('SALESDRIVE_FORM_ID', 1),
     ],
 
 ];

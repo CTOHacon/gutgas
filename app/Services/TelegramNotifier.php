@@ -51,13 +51,15 @@ class TelegramNotifier
     }
 
     /**
-     * Build a message: bold title, sections of "label: value" lines, optional link and timestamp.
+     * Build a message: bold title, sections of "label: value" lines, optional links and timestamp.
      * Section keys (non-numeric) become underlined section headings. Empty values are skipped.
+     * $url is a single URL (labelled by $urlLabel) or a [label => url] map; empty urls are skipped.
      * All user supplied text is HTML-escaped.
      *
      * @param array<int|string, array<string, mixed>> $sections
+     * @param string|array<string, string|null>|null $url
      */
-    public static function format(string $title, array $sections, ?string $url = null, ?string $urlLabel = null): string
+    public static function format(string $title, array $sections, string|array|null $url = null, ?string $urlLabel = null): string
     {
         $blocks = ['<b>' . self::escape($title) . '</b>'];
 
@@ -79,9 +81,17 @@ class TelegramNotifier
             $blocks[] = implode("\n", $block);
         }
 
-        if ($url) {
-            $blocks[] = '<a href="' . htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">'
-                . self::escape($urlLabel ?? $url) . '</a>';
+        $links = is_array($url) ? $url : ($url ? [$urlLabel ?? $url => $url] : []);
+        $anchors = [];
+        foreach ($links as $label => $href) {
+            if (blank($href)) {
+                continue;
+            }
+            $anchors[] = '<a href="' . htmlspecialchars($href, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">'
+                . self::escape((string) $label) . '</a>';
+        }
+        if ($anchors) {
+            $blocks[] = implode("\n", $anchors);
         }
 
         $blocks[] = '<i>' . now()->format('d/m/Y H:i') . '</i>';

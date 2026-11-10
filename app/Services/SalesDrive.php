@@ -22,6 +22,20 @@ class SalesDrive
     }
 
     /**
+     * Web link to the order card in the CRM (needs a logged-in CRM user).
+     */
+    public function orderUrl(int $crmOrderId): ?string
+    {
+        $base = config('services.salesdrive.url');
+        if (blank($base)) {
+            return null;
+        }
+
+        return rtrim((string) $base, '/') . '/ua/index.html?formId='
+            . (int) config('services.salesdrive.form_id', 1) . '#/order/update/' . $crmOrderId;
+    }
+
+    /**
      * Push the order unless it was already sent. Never throws.
      *
      * @return bool true when the order is in the CRM after the call

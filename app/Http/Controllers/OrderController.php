@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Order\StoreRequest;
 use App\Http\Requests\Order\UpdateRequest;
 use App\Interfaces\EmailServiceInterface;
-use App\Jobs\PushOrderToCrm;
+use App\Jobs\ProcessNewOrder;
 use App\Models\Order;
 use App\Models\Product;
 use App\Services\SalesDrive;
-use App\Services\TelegramNotifier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -20,7 +19,7 @@ class OrderController extends Controller
 {
     protected EmailServiceInterface $emailService;
 
-    public function __construct(EmailServiceInterface $emailService, private TelegramNotifier $telegram)
+    public function __construct(EmailServiceInterface $emailService)
     {
         $this->emailService = $emailService;
     }
@@ -88,11 +87,8 @@ class OrderController extends Controller
         $this->emailService->sendOrderNotification($order);
         $this->emailService->sendOrderConfirmation($order);
 
-        // Send Telegram notification
-        $this->sendTelegramNotification($order);
-
-        // CRM push runs after the response is sent; failures never reach the customer
-        PushOrderToCrm::dispatch($order)->afterResponse();
+        // CRM push + Telegram run after the response is sent; failures never reach the customer
+        ProcessNewOrder::dispatch($order)->afterResponse();
 
         return redirect()->route('thankYou')
             ->with('order', $order)->with('thankYouTranslations', trans('thank-you'));
@@ -242,50 +238,6 @@ class OrderController extends Controller
             DB::rollBack();
             throw $e;
         }
-    }
-
-    /**
-     * Send Telegram notification for new order
-     *
-     * @param Order $order
-     * @return void
-     */
-    private function sendTelegramNotification(Order $order): void
-    {
-        $products = [];
-        foreach (array_values($order->cart_content) as $index => $product) {
-            $label = ($index + 1) . '. ' . Order::itemName($product, 'ua');
-            $products[$label] = "{$product['quantity']} шт. × " . number_format($product['price'], 0, '', ' ') . ' грн';
-        }
-
-        $this->telegram->send(TelegramNotifier::format(
-            "🛒 Нове замовлення №{$order->id}",
-            [
-                '👤 Клієнт' => [
-                    "Ім'я"    => trim($order->client_name . ' ' . $order->client_surname),
-                    'Телефон' => $order->client_phone,
-                    'Email'   => $order->client_email,
-                    'Коментар' => $order->client_message,
-                ],
-                '🚚 Доставка' => [
-                    'Спосіб'    => $order->shipping_method === Order::SHIPPING_METHOD_OTHER
-                        ? 'Інше'
-                        : ($order->shipping_method ? __('emails.shippingMethods.' . $order->shipping_method, [], 'ua') : null),
-                    'Місто'     => $order->shipping_city
-                        ? trim($order->shipping_city . ($order->shipping_area ? " ({$order->shipping_area})" : ''))
-                        : null,
-                    'Відділення' => $order->shipping_warehouse,
-                    'Адреса'    => $order->shipping_address,
-                    'Деталі'    => $order->shipping_message,
-                ],
-                '📦 Товари' => $products,
-                '💰 Разом' => [
-                    'Сума' => number_format($order->total(), 0, '', ' ') . ' грн',
-                ],
-            ],
-            route('admin.order.edit', $order->id),
-            'Відкрити в адмінці'
-        ));
     }
 
 }

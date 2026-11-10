@@ -262,6 +262,46 @@ class SalesDriveTest extends TestCase
             && $r['products'][0]['id'] === 'SKU-1');
     }
 
+    public function test_order_url_points_to_crm_order_card(): void
+    {
+        config(['services.salesdrive.form_id' => 1]);
+
+        $this->assertSame(
+            self::CRM_URL . '/ua/index.html?formId=1#/order/update/1439',
+            app(SalesDrive::class)->orderUrl(1439)
+        );
+    }
+
+    public function test_telegram_message_has_crm_number_and_link(): void
+    {
+        config(['services.telegram.bot_token' => 'tg', 'services.telegram.chat_id' => '1']);
+        Http::fake([
+            self::CRM_URL . '/*' => $this->crmOk(1439),
+            '*'                  => Http::response(['ok' => true]),
+        ]);
+
+        $this->post('/order/store', $this->storePayload())->assertRedirect(route('thankYou'));
+
+        Http::assertSent(fn(Request $r) => str_contains($r->url(), 'api.telegram.org')
+            && str_contains($r['text'], 'Заявка:</b> №1439')
+            && str_contains($r['text'], 'href="' . self::CRM_URL . '/ua/index.html?formId=1#/order/update/1439"'));
+    }
+
+    public function test_telegram_message_reports_crm_failure(): void
+    {
+        config(['services.telegram.bot_token' => 'tg', 'services.telegram.chat_id' => '1']);
+        Http::fake([
+            self::CRM_URL . '/*' => Http::response(['error' => 'X-Api-Key is invalid'], 401),
+            '*'                  => Http::response(['ok' => true]),
+        ]);
+
+        $this->post('/order/store', $this->storePayload())->assertRedirect(route('thankYou'));
+
+        Http::assertSent(fn(Request $r) => str_contains($r->url(), 'api.telegram.org')
+            && str_contains($r['text'], 'Не відправлено')
+            && !str_contains($r['text'], 'Відкрити в CRM'));
+    }
+
     public function test_checkout_succeeds_when_crm_is_down(): void
     {
         Http::fake([
