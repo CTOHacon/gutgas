@@ -16,8 +16,7 @@ class MailController extends Controller
     {
         $data = request()->validate([
             'name'     => 'required|string|max:255|min:3',
-            // phone should be +38 (###) ###-##-## where # is a digit
-            'phone'    => 'required|regex:/^\+38 \(\d{3}\) \d{3}-\d{2}-\d{2}$/',
+            'phone'    => 'required|string|max:32',
             'email'    => 'nullable|email',
             'question' => 'nullable|string'
         ]);
@@ -49,7 +48,7 @@ class MailController extends Controller
     public function requestCallMail(Request $request)
     {
         $data = request()->validate([
-            'phone' => 'required|min:9|max:9',
+            'phone' => 'required|string|max:32',
         ]);
 
         Mail::send('emails.consultation', $data, function ($message) {

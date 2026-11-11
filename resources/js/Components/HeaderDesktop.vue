@@ -116,8 +116,7 @@ const { isCartModalOpened, toggleCartModal } = useCart();
 	}
 }
 .right__phone {
-	align-self: flex-end;
-	margin-bottom: 4px;
+	align-self: center;
 }
 
 .language-switch {

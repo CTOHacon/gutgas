@@ -1,57 +1,36 @@
 <template>
-	<div class="desktop-header-phone">
-		<a class="inner" :href="`tel:${phone}`">
-			<strong class="phone">{{ phone }}</strong>
-			<small class="caption fs-semi-small">{{ __('orderCall') }}</small>
-		</a>
-	</div>
+	<a class="header-phone" :href="`tel:${phoneHref}`">{{ phone }}</a>
 </template>
 
 <script setup lang="ts">
 import { getGlobalSetting } from '@/utils/getGlobalSetting';
 
-const { __ } = useTranslations();
 const phone = getGlobalSetting('phone') ?? '';
+const phoneHref = phone.replace(/[^\d+]/g, '');
 </script>
 
 <style scoped lang="scss">
 @import '@/styles/variables.scss';
-.desktop-header-phone {
-	text-align: right;
+.header-phone {
+	display: inline-block;
+	position: relative;
+	font-size: calc(1em + 2px);
+	font-weight: 700;
+	line-height: 1.2;
 	white-space: nowrap;
 	@media (max-width: $small-desktop-width) {
-		font-size: 16px;
+		font-size: 18px;
 	}
-	@media (max-width: $tablet-width) {
-		text-align: left;
-	}
-}
-.inner {
-	display: block;
-	padding-bottom: 10px;
-	position: relative;
-	&::before {
+	&::after {
 		content: '';
-		width: 100%;
 		position: absolute;
-		bottom: 0;
 		left: 0;
+		bottom: -6px;
+		width: 100%;
 		height: 2px;
 		border-radius: 2px;
 		background-color: #f24942;
-		transition: transform 0.2s ease-in-out,
-			background-color 0.2s ease-in-out;
+		pointer-events: none;
 	}
-}
-.phone {
-	font-weight: 700;
-	margin-bottom: 2px;
-	display: block;
-}
-.caption {
-	font-weight: 500;
-	line-height: 100%;
-	opacity: 0.4;
-	display: block;
 }
 </style>
