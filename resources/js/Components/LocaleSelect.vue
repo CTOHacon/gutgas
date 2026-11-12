@@ -1,5 +1,6 @@
 <template>
 	<div
+		ref="rootRef"
 		class="language-switch"
 		:class="{
 			active: isActive
@@ -40,9 +41,9 @@
 					<a
 						:href="localeUrl(locale[0])"
 						class="option-link"
-						@click.prevent="
+						@click.prevent.stop="
 							router.get(localeUrl(locale[0]));
-							toggle();
+							close();
 						"
 					>
 						{{ localeCaption(locale[0]) }}</a
@@ -54,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onBeforeUnmount, ref } from 'vue';
 import BaseVerticalSlidable from '@/Components/BaseVerticalSlidable.vue';
 import { router, useForm, usePage } from '@inertiajs/vue3';
 import { onMounted } from 'vue';
@@ -98,6 +99,27 @@ const localeUrl = (target: string): string => {
 const toggle = () => {
 	isActive.value = !isActive.value;
 };
+const close = () => {
+	isActive.value = false;
+};
+
+// Close on a click/tap outside the switch or on Escape
+const rootRef = ref<HTMLElement | null>(null);
+const onDocumentPointerDown = (event: PointerEvent) => {
+	if (isActive.value && !rootRef.value?.contains(event.target as Node))
+		close();
+};
+const onKeydown = (event: KeyboardEvent) => {
+	if (event.key === 'Escape') close();
+};
+onMounted(() => {
+	document.addEventListener('pointerdown', onDocumentPointerDown);
+	document.addEventListener('keydown', onKeydown);
+});
+onBeforeUnmount(() => {
+	document.removeEventListener('pointerdown', onDocumentPointerDown);
+	document.removeEventListener('keydown', onKeydown);
+});
 </script>
 
 <style scoped lang="scss">
