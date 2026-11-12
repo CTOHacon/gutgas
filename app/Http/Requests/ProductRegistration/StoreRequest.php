@@ -55,17 +55,12 @@ class StoreRequest extends FormRequest
     private function phoneRule(): callable
     {
         $locale = Phone::resolveLocale($this->input('locale'));
-        $uaMask = Phone::usesUaMask($locale);
 
-        return function (string $attribute, mixed $value, callable $fail) use ($locale, $uaMask) {
-            $value = (string) $value;
-            // Keep the strict mask on ua/ru, as before.
-            $ok = $uaMask
-                ? (bool) preg_match('/^\+38 \(\d{3}\) \d{3}-\d{2}-\d{2}$/', $value)
-                : Phone::validationError($value, $locale) === null;
+        return function (string $attribute, mixed $value, callable $fail) use ($locale) {
+            $error = Phone::validationError((string) $value, $locale);
 
-            if (!$ok) {
-                $fail(__($uaMask ? 'validation.phone' : 'validation.phone_international', ['attribute' => mb_strtolower(__('product-registration.label_phone'))], $locale));
+            if ($error !== null) {
+                $fail(__($error, ['attribute' => mb_strtolower(__('product-registration.label_phone', [], $locale))], $locale));
             }
         };
     }

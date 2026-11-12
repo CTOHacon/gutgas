@@ -8,13 +8,10 @@
 				:is-valid="form.name.length > 3"
 				class="mb-12"
 			/>
-			<BaseFormInput
+			<BasePhoneInput
 				v-model="form.phone"
 				:placeholder="__('formPhone')"
-				mask="+38 (###) ###-##-##"
-				type="tel"
 				:error-message="form.errors.phone"
-				:is-valid="form.phone.length === 19"
 				class="mb-12"
 			/>
 			<BaseFormInput
@@ -45,6 +42,7 @@
 
 <script setup lang="ts">
 import BaseFormInput from './BaseFormInput.vue';
+import BasePhoneInput from './BasePhoneInput.vue';
 import BaseFormTextarea from './BaseFormTextarea.vue';
 import BaseButton from './BaseButton.vue';
 import { useForm, usePage } from '@inertiajs/vue3';

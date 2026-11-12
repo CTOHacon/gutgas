@@ -4,6 +4,7 @@ return [
     'orderConfirmationSubject' => 'Confirmarea comenzii nr. :order_id',
     'orderReceiptTitle'        => 'Confirmarea comenzii',
     'orderReceiptSubtitle'     => 'Vă mulțumim pentru comandă!',
+    'orderDetailsTitle'        => 'Comanda dumneavoastră',
     'orderNumber'              => 'Numărul comenzii',
     'orderDate'                => 'Data comenzii',
     'customerName'             => 'Numele clientului',

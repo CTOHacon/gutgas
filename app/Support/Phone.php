@@ -4,7 +4,7 @@ namespace App\Support;
 
 class Phone
 {
-    /** Locales whose forms accept Ukrainian numbers only (config('app.ua_phone_locales')). */
+    /** Locales whose phone picker defaults to Ukraine (config('app.ua_phone_locales')). */
     public static function usesUaMask(?string $locale = null): bool
     {
         $locale = $locale ?: app()->getLocale();
@@ -39,19 +39,12 @@ class Phone
     }
 
     /**
-     * Returns null when valid, otherwise the validation message key for the locale.
-     * A Ukrainian number is always valid.
+     * Returns null when valid, otherwise the validation message key.
+     * Deliberately lenient: the form sends "+<country code> <number>" from the
+     * country picker, so any Ukrainian or international (E.164) number passes.
      */
-    public static function validationError(string $value, string $locale): ?string
+    public static function validationError(string $value, ?string $locale = null): ?string
     {
-        if (static::usesUaMask($locale)) {
-            return static::isUkrainian($value) ? null : 'validation.phone';
-        }
-
-        if (static::isUkrainian($value) || static::isInternational($value)) {
-            return null;
-        }
-
-        return 'validation.phone_international';
+        return static::isUkrainian($value) || static::isInternational($value) ? null : 'validation.phone';
     }
 }

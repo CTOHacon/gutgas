@@ -163,7 +163,7 @@ class CompleteOrderFlowTest extends TestCase
     }
 
     /** @dataProvider intlPhoneProvider */
-    public function test_international_phone_is_accepted_on_international_locales(string $phone, string $locale): void
+    public function test_international_phone_is_accepted_on_every_locale(string $phone, string $locale): void
     {
         $this->post('/order/store', $this->payload(['client_phone' => $phone, 'locale' => $locale]))
             ->assertSessionDoesntHaveErrors('client_phone');
@@ -171,13 +171,20 @@ class CompleteOrderFlowTest extends TestCase
     }
 
     /** @dataProvider intlPhoneProvider */
-    public function test_international_phone_is_rejected_on_ua_and_ru(string $phone): void
+    public function test_international_phone_is_accepted_on_ua_and_ru(string $phone): void
     {
+        $this->withoutMiddleware(\Illuminate\Routing\Middleware\ThrottleRequests::class);
         foreach (['ua', 'ru'] as $locale) {
             $this->post('/order/store', $this->payload(['client_phone' => $phone, 'locale' => $locale]))
-                ->assertSessionHasErrors('client_phone');
+                ->assertSessionDoesntHaveErrors('client_phone');
         }
-        $this->assertDatabaseCount('orders', 0);
+    }
+
+    public function test_country_picker_format_is_accepted(): void
+    {
+        $this->post('/order/store', $this->payload(['client_phone' => '+380 67 123 45 67']))
+            ->assertSessionDoesntHaveErrors('client_phone');
+        $this->assertDatabaseHas('orders', ['client_phone' => '+380 67 123 45 67']);
     }
 
     public function test_ukrainian_phone_is_accepted_on_every_locale(): void
@@ -201,18 +208,17 @@ class CompleteOrderFlowTest extends TestCase
         }
     }
 
-    public function test_international_phone_error_uses_international_message(): void
+    public function test_phone_error_uses_generic_message(): void
     {
         $this->post('/order/store', $this->payload(['client_phone' => '12345', 'locale' => 'en']))
-            ->assertSessionHasErrors(['client_phone' => __('validation.phone_international', ['attribute' => 'phone'], 'en')]);
+            ->assertSessionHasErrors(['client_phone' => __('validation.phone', ['attribute' => 'phone'], 'en')]);
     }
 
-    public function test_full_length_phone_without_leading_zero_is_rejected_and_logged(): void
+    public function test_rejected_phone_is_logged(): void
     {
-        // The checkout mask accepts "+38 (123) ...": complete-looking but not a UA number
         Log::spy();
 
-        $this->post('/order/store', $this->payload(['client_phone' => '+38 (123) 123-12-31']))
+        $this->post('/order/store', $this->payload(['client_phone' => '12345']))
             ->assertSessionHasErrors(['client_phone' => __('validation.phone', ['attribute' => 'телефон'], 'ua')]);
 
         $this->assertDatabaseCount('orders', 0);

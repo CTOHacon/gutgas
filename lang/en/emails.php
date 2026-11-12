@@ -4,6 +4,7 @@ return [
     'orderConfirmationSubject' => 'Order Confirmation #:order_id',
     'orderReceiptTitle'        => 'Order Confirmation',
     'orderReceiptSubtitle'     => 'Thank you for your order!',
+    'orderDetailsTitle'        => 'Your order',
     'orderNumber'              => 'Order Number',
     'orderDate'                => 'Order Date',
     'customerName'             => 'Customer Name',

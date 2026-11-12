@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductRegistrationController;
 use App\Http\Controllers\SeoEndpoint;
 use App\Http\Controllers\StaticHtmlController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,15 @@ Route::prefix('api/nova-poshta')->middleware('throttle:60,1')->as('novaPoshta.')
 Route::post('/registration', [ProductRegistrationController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('productRegistration.store');
+
+// Documents (manuals) linked from page content as "https://gutgas.eu/<file>.pdf" live in
+// the media library; "/ua/<file>.pdf" covers old 301s cached by browsers.
+Route::get('/{path}', function (string $path) {
+    $file = basename($path);
+    abort_unless(Storage::disk('public')->exists('media/' . $file), 404);
+
+    return redirect('/storage/media/' . rawurlencode($file), 301);
+})->where('path', '(?:[a-z]{2}/)?[A-Za-z0-9_\-.]+\.pdf');
 
 Route::prefix('{locale?}')->middleware([
     'seoRedirect',

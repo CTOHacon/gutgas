@@ -67,8 +67,8 @@ class StoreRequest extends FormRequest
     }
 
     /**
-     * ua/ru: Ukrainian phone (mask "+38 (###) ###-##-##").
-     * Other locales: international E.164 (a Ukrainian number is still accepted).
+     * Any Ukrainian or international (E.164) number; the checkout sends
+     * "+<country code> <number>" from the country picker.
      */
     private function phoneRule(): callable
     {

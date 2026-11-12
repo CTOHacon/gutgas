@@ -22,14 +22,25 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         .header {
-            background-color: #2563eb;
+            background-color: #111111;
             color: white;
             padding: 30px 20px;
             text-align: center;
         }
         .header h1 {
-            margin: 0;
+            margin: 0 0 12px 0;
             font-size: 24px;
+        }
+        .header p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #e5e7eb;
+        }
+        .order-info h2 {
+            margin: 0 0 16px 0;
+            font-size: 18px;
+            color: #111111;
         }
         .content {
             padding: 30px 20px;
@@ -81,9 +92,26 @@
             background-color: #f8fafc;
             font-weight: 600;
         }
+        .products-table .num {
+            white-space: nowrap;
+        }
+        .products-table .qty {
+            text-align: center;
+        }
+        .product-image {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+        .total-label {
+            text-align: center !important;
+        }
         .total-amount {
             font-size: 18px;
-            color: #2563eb;
+            color: #111111;
+            white-space: nowrap;
         }
         .footer {
             background-color: #f8fafc;
@@ -109,12 +137,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>{{ __('emails.orderReceiptTitle') }}</h1>
-            <p>{{ __('emails.orderReceiptSubtitle') }}</p>
+            <h1>{{ __('emails.thankYouMessage') }}</h1>
+            <p>{{ __('emails.contactMessage') }}</p>
         </div>
 
         <div class="content">
             <div class="order-info">
+                <h2>{{ __('emails.orderDetailsTitle') }}</h2>
                 <div class="info-row">
                     <span class="info-label">{{ __('emails.orderNumber') }}:</span>
                     <span class="info-value">#{{ $order_id }}</span>
@@ -166,34 +195,39 @@
             <table class="products-table">
                 <thead>
                     <tr>
-                        <th>{{ __('emails.productName') }}</th>
-                        <th>{{ __('emails.productSku') }}</th>
-                        <th>{{ __('emails.quantity') }}</th>
+                        <th colspan="2">{{ __('emails.productName') }}</th>
                         <th>{{ __('emails.unitPrice') }}</th>
+                        <th class="qty" title="{{ __('emails.quantity') }}">#</th>
                         <th>{{ __('emails.totalPrice') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($cart_content as $item)
+                        @php($imageUrl = $item['media_file']['thumbnail']['url'] ?? null)
                         <tr>
-                            <td class="product-name">{{ $item['name'][app()->getLocale()] ?? $item['name']['ua'] ?? $item['name']['en'] ?? 'Product' }}</td>
-                            <td>{{ $item['sku'] }}</td>
-                            <td>{{ $item['quantity'] }}</td>
-                            <td>{{ number_format($item['price'], 2) }} {{ $currency }}</td>
-                            <td>{{ number_format($item['price'] * $item['quantity'], 2) }} {{ $currency }}</td>
+                            <td style="width: 56px; padding-right: 0;">
+                                @if($imageUrl)
+                                    <img class="product-image" src="{{ url($imageUrl) }}" alt="" width="56" height="56">
+                                @endif
+                            </td>
+                            <td class="product-name">
+                                {{ $item['name'][app()->getLocale()] ?? $item['name']['ua'] ?? $item['name']['en'] ?? 'Product' }}
+                                @if(!empty($item['sku']))
+                                    <strong>({{ $item['sku'] }})</strong>
+                                @endif
+                            </td>
+                            <td class="num">{{ number_format($item['price'], 2) }} {{ $currency }}</td>
+                            <td class="num qty">{{ $item['quantity'] }}</td>
+                            <td class="num">{{ number_format($item['price'] * $item['quantity'], 2) }} {{ $currency }}</td>
                         </tr>
                     @endforeach
                     <tr class="total-row">
-                        <td colspan="4" style="text-align: right;">{{ __('emails.orderTotal') }}:</td>
+                        <td colspan="4" class="total-label">{{ __('emails.orderTotal') }}:</td>
                         <td class="total-amount">{{ number_format($total_price, 2) }} {{ $currency }}</td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="order-info">
-                <p><strong>{{ __('emails.thankYouMessage') }}</strong></p>
-                <p>{{ __('emails.contactMessage') }}</p>
-            </div>
         </div>
 
         <div class="footer">

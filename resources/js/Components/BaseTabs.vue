@@ -2,9 +2,10 @@
 	<div class="tabs">
 		<div
 			class="controls"
-			:class="{
-				'border-bottom': controlsBordered
-			}"
+			:class="[
+				`controls--${variant ?? 'underline'}`,
+				{ 'border-bottom': controlsBordered && variant !== 'chips' }
+			]"
 		>
 			<button
 				v-for="tab in tabs"
@@ -32,6 +33,8 @@ const props = defineProps<{
 	controlsBordered?: boolean;
 	controlsBackground?: 'none' | '#141414' | string;
 	modelValue?: string;
+	/** chips: wrapping pill buttons that never squeeze labels onto two lines */
+	variant?: 'underline' | 'chips';
 }>();
 
 const emit = defineEmits<{
@@ -98,6 +101,42 @@ provide('activeTabName', activeTabName);
 	@media (max-width: $mobile-width) {
 		padding: 0.8rem 0 0.8rem 0;
 		font-size: 1rem;
+	}
+}
+.controls--chips {
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	.control-button {
+		flex: 0 0 auto;
+		align-items: center;
+		white-space: nowrap;
+		font-size: 0.9375rem;
+		padding: 0.625rem 0.875rem;
+		border: 1px solid rgba(131, 141, 151, 0.4);
+		border-radius: 999px;
+		transition: color 0.3s ease, border-color 0.3s ease,
+			background-color 0.3s ease;
+		img {
+			margin-bottom: 0;
+			width: 1.25rem;
+			height: 1.25rem;
+		}
+		&::before {
+			display: none;
+		}
+		&:hover {
+			color: #fff;
+		}
+		&.active {
+			border-color: #f24942;
+			background-color: rgba(242, 73, 66, 0.12);
+		}
+		@media (max-width: $large-mobile-width) {
+			flex: 1 1 auto;
+			justify-content: center;
+			font-size: 0.9375rem;
+			padding: 0.5rem 0.875rem;
+		}
 	}
 }
 </style>

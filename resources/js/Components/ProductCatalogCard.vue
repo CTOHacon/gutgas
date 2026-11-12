@@ -9,7 +9,7 @@
 		]"
 	>
 		<ProductSpecialStatusBar
-			v-if="_t(product.price_label)"
+			v-if="+product.stock && _t(product.price_label)"
 			class="price-label"
 		>
 			{{ _t(product.price_label) }}

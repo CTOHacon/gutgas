@@ -96,7 +96,7 @@ return [
         'kk' => 'kk-KZ',
     ],
 
-    // Locales whose forms use the Ukrainian phone mask; all other locales accept international numbers.
+    // Locales whose phone country picker defaults to Ukraine (mirrors LOCALE_COUNTRY in resources/js/utils/phoneCountries.ts).
     'ua_phone_locales' => ['ua', 'ru'],
 
     /*

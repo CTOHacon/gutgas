@@ -27,13 +27,12 @@
 								v-model="checkoutData.client_surname"
 								:error-message="checkoutData.errors.client_surname"
 							/>
-							<BaseFormInput
-								:placeholder="phonePlaceholder"
+							<BasePhoneInput
+								:placeholder="__('formPhone')"
 								class="mb-12"
-								:model-value="checkoutData.client_phone"
-								@update:model-value="onPhoneInput"
+								v-model="checkoutData.client_phone"
+								:locale="checkoutData.locale"
 								:error-message="checkoutData.errors.client_phone"
-								type="tel"
 							/>
 							<BaseFormInput
 								:placeholder="__('formEmail')"
@@ -72,7 +71,7 @@
 					</p>
 					<BaseTabs
 						v-model="checkoutData.shipping_method"
-						:controls-bordered="true"
+						variant="chips"
 						class="mb-32"
 					>
 						<BaseTab
@@ -233,7 +232,7 @@ import { TProduct } from '@/types/TProduct';
 import { watch } from 'vue';
 import ICartProduct from '@/types/ICartProduct';
 import { TOrderForm } from '@/types/TOreder';
-import { formatPhone, usesUaPhoneMask } from '@/utils/formatPhone';
+import BasePhoneInput from '@/Components/BasePhoneInput.vue';
 import {
 	TNovaPoshtaSettlement,
 	TNovaPoshtaWarehouse
@@ -415,14 +414,6 @@ watch(
 		resetWarehouse();
 	}
 );
-
-const phonePlaceholder = computed(() =>
-	usesUaPhoneMask(checkoutData.locale) ? __('formPhone') : __('phonePlaceholderIntl')
-);
-
-const onPhoneInput = (value?: string) => {
-	checkoutData.client_phone = formatPhone(value ?? '', checkoutData.locale);
-};
 
 const canSubmit = computed(() => {
 	const baseFilled =

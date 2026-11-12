@@ -4,6 +4,7 @@ return [
     'orderConfirmationSubject' => 'შეკვეთის დადასტურება №:order_id',
     'orderReceiptTitle'        => 'შეკვეთის დადასტურება',
     'orderReceiptSubtitle'     => 'გმადლობთ შეკვეთისთვის!',
+    'orderDetailsTitle'        => 'თქვენი შეკვეთა',
     'orderNumber'              => 'შეკვეთის ნომერი',
     'orderDate'                => 'შეკვეთის თარიღი',
     'customerName'             => 'მომხმარებლის სახელი',

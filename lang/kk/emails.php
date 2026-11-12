@@ -4,6 +4,7 @@ return [
     'orderConfirmationSubject' => 'Тапсырысты растау №:order_id',
     'orderReceiptTitle'        => 'Тапсырысты растау',
     'orderReceiptSubtitle'     => 'Тапсырысыңыз үшін рахмет!',
+    'orderDetailsTitle'        => 'Сіздің тапсырысыңыз',
     'orderNumber'              => 'Тапсырыс нөмірі',
     'orderDate'                => 'Тапсырыс күні',
     'customerName'             => 'Клиенттің аты',

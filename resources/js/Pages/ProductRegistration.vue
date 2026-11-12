@@ -53,13 +53,11 @@
 								:placeholder="`${__('label_last_name')} *`"
 								:error-message="form.errors.last_name"
 							/>
-							<BaseFormInput
-								:model-value="form.phone"
-								:placeholder="phonePlaceholder"
-								type="tel"
+							<BasePhoneInput
+								v-model="form.phone"
+								:placeholder="`${__('label_phone')} *`"
+								:locale="locale"
 								:error-message="form.errors.phone"
-								:is-valid="isPhoneValid"
-								@update:model-value="onPhoneInput"
 							/>
 							<BaseFormInput
 								v-model="form.email"
@@ -180,7 +178,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue';
+import { nextTick, ref } from 'vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import WebsitePage from '@/Layouts/WebsitePage.vue';
 import PageHeadSpacer from '@/Components/PageHeadSpacer.vue';
@@ -190,7 +188,7 @@ import BaseFormTextarea from '@/Components/BaseFormTextarea.vue';
 import BaseCheckboxField from '@/Components/BaseCheckboxField.vue';
 import BaseButton from '@/Components/BaseButton.vue';
 import { isEmailValid } from '@/utils/IsEmailValid';
-import { formatPhone, usesUaPhoneMask, isIntlPhoneValid } from '@/utils/formatPhone';
+import BasePhoneInput from '@/Components/BasePhoneInput.vue';
 import { TProductRegistrationForm } from '@/types/TProductRegistration';
 
 const props = defineProps<{
@@ -220,17 +218,6 @@ const form = useForm<TProductRegistrationForm>({
 	locale,
 	website: ''
 });
-
-const phonePlaceholder = computed(() =>
-	usesUaPhoneMask(locale) ? `${__('label_phone')} *` : `${__('placeholder_phone_intl')} *`
-);
-const isPhoneValid = computed(() =>
-	usesUaPhoneMask(locale) ? form.phone.length === 19 : isIntlPhoneValid(form.phone)
-);
-
-const onPhoneInput = (value?: string) => {
-	form.phone = formatPhone(value ?? '', locale);
-};
 
 const onSubmit = () => {
 	form.post(route('productRegistration.store'), {

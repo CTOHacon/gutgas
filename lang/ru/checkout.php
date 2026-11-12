@@ -4,7 +4,7 @@ return [
      'requiredComponents' => 'Обязательные компоненты',
      'shippingAndPayment' => 'Доставка и оплата',
      'shippingDescription' => 'Опишите удобный для вас способ доставки',
-     'shippingExample' => 'Киев, Новая Почта отделение 80...',
+     'shippingExample' => 'Введите другой адрес',
      'formSurname' => 'Фамилия',
      'shippingNpDepartment' => 'Отделение Новой Почты',
      'shippingNpPostalMachine' => 'Почтомат Новой Почты',

@@ -14,13 +14,10 @@
 			:is-valid="form.name.length > 3"
 			class="mt-40 mb-8"
 		/>
-		<BaseFormInput
+		<BasePhoneInput
 			v-model="form.phone"
 			:placeholder="__('formPhone')"
 			:error-message="form.errors.phone"
-			:is-valid="form.phone.length === 19"
-			type="tel"
-			mask="+38 (###) ###-##-##"
 			class="mt-20"
 		/>
 		<BaseButton class="submit mt-24" :class="submitButtonClasses">
@@ -35,6 +32,7 @@
 
 <script setup lang="ts">
 import BaseFormInput from './BaseFormInput.vue';
+import BasePhoneInput from './BasePhoneInput.vue';
 import BaseButton from './BaseButton.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 

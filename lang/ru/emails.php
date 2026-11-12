@@ -4,6 +4,7 @@ return [
     'orderConfirmationSubject' => 'Подтверждение заказа №:order_id',
     'orderReceiptTitle'        => 'Подтверждение заказа',
     'orderReceiptSubtitle'     => 'Спасибо за ваш заказ!',
+    'orderDetailsTitle'        => 'Ваш заказ',
     'orderNumber'              => 'Номер заказа',
     'orderDate'                => 'Дата заказа',
     'customerName'             => 'Имя клиента',

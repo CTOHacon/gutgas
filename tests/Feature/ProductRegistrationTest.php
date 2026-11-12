@@ -65,7 +65,7 @@ class ProductRegistrationTest extends TestCase
     }
 
     /** @dataProvider intlPhoneProvider */
-    public function test_international_phone_is_accepted_on_international_locales(string $phone, string $locale): void
+    public function test_international_phone_is_accepted_on_every_locale(string $phone, string $locale): void
     {
         Http::fake(['api.telegram.org/*' => Http::response(['ok' => true])]);
 
@@ -75,14 +75,14 @@ class ProductRegistrationTest extends TestCase
     }
 
     /** @dataProvider intlPhoneProvider */
-    public function test_international_phone_is_rejected_on_ua_and_ru(string $phone): void
+    public function test_international_phone_is_accepted_on_ua_and_ru(string $phone): void
     {
+        Http::fake(['api.telegram.org/*' => Http::response(['ok' => true])]);
         $this->withoutMiddleware(\Illuminate\Routing\Middleware\ThrottleRequests::class);
         foreach (['ua', 'ru'] as $locale) {
             $this->post(route('productRegistration.store'), $this->validData(['phone' => $phone, 'locale' => $locale]))
-                ->assertSessionHasErrors('phone');
+                ->assertSessionDoesntHaveErrors('phone');
         }
-        $this->assertDatabaseCount('product_registrations', 0);
     }
 
     public function test_garbage_phone_is_rejected_on_every_locale(): void
