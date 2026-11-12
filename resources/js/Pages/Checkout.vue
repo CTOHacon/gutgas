@@ -225,6 +225,7 @@ import BaseTab from '@/Components/BaseTab.vue';
 import novaPoshtaTabIcon from '@/assets/nova-poshta-tab-icon.svg';
 import BaseTabs from '@/Components/BaseTabs.vue';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
+import { trackCheckoutOrderSubmitted } from '@/utils/analytics';
 import debounce from 'lodash.debounce';
 import { geRequiredProducts } from '@/api/requiredProductsService';
 import { computed, ref } from 'vue';
@@ -474,6 +475,7 @@ const submitCheckout = () => {
 	checkoutData.post(route('order.store'), {
 		preserveScroll: true,
 		onSuccess: () => {
+			trackCheckoutOrderSubmitted();
 			checkoutData.reset();
 			cityQuery.value = '';
 			resetWarehouse();

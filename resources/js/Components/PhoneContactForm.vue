@@ -20,6 +20,7 @@ import { ref, watch } from 'vue';
 import BaseButton from '@/Components/BaseButton.vue';
 import PhoneField from '@/Components/PhoneField.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
+import { trackLeadFormSubmitted } from '@/utils/analytics';
 
 const { __ } = useTranslations();
 
@@ -31,7 +32,9 @@ const isSubmiting = ref(false);
 const onSubmit = () => {
 	isSubmiting.value = true;
 	form.post(route('requestCallMail'), {
-		onSuccess: () => {},
+		onSuccess: () => {
+			trackLeadFormSubmitted();
+		},
 		onError: () => {
 			isSubmiting.value = false;
 		},

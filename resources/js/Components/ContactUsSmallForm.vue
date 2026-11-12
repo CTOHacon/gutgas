@@ -35,6 +35,7 @@ import BaseFormInput from './BaseFormInput.vue';
 import BasePhoneInput from './BasePhoneInput.vue';
 import BaseButton from './BaseButton.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
+import { trackLeadFormSubmitted } from '@/utils/analytics';
 
 const { __, _t } = useTranslations();
 
@@ -50,7 +51,9 @@ const form = useForm({
 });
 const onSubmit = () => {
 	form.post(route('consultationMail'), {
-		onSuccess: () => {},
+		onSuccess: () => {
+			trackLeadFormSubmitted();
+		},
 		preserveScroll: true
 	});
 };
