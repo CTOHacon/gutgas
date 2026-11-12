@@ -474,8 +474,9 @@ const requiredProducts = ref<TProduct[]>([]);
 const submitCheckout = () => {
 	checkoutData.post(route('order.store'), {
 		preserveScroll: true,
-		onSuccess: () => {
-			trackCheckoutOrderSubmitted();
+		onSuccess: page => {
+			const order = page.props.order as { id?: number } | undefined;
+			trackCheckoutOrderSubmitted({ orderId: order?.id, value: cartTotal.value });
 			checkoutData.reset();
 			cityQuery.value = '';
 			resetWarehouse();

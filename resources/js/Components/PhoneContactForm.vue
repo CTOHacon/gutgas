@@ -33,7 +33,7 @@ const onSubmit = () => {
 	isSubmiting.value = true;
 	form.post(route('requestCallMail'), {
 		onSuccess: () => {
-			trackLeadFormSubmitted();
+			trackLeadFormSubmitted('phone_contact_form');
 		},
 		onError: () => {
 			isSubmiting.value = false;

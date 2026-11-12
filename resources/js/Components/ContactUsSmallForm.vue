@@ -52,7 +52,7 @@ const form = useForm({
 const onSubmit = () => {
 	form.post(route('consultationMail'), {
 		onSuccess: () => {
-			trackLeadFormSubmitted();
+			trackLeadFormSubmitted('contact_us_small_form');
 		},
 		preserveScroll: true
 	});
