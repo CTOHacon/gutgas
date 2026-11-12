@@ -55,6 +55,12 @@ const tabs =
 
 const activeTabName = ref<string>(props.modelValue ?? tabs[0].name);
 watch(activeTabName, name => emit('update:modelValue', name));
+watch(
+	() => props.modelValue,
+	name => {
+		if (name && name !== activeTabName.value) activeTabName.value = name;
+	}
+);
 provide('activeTabName', activeTabName);
 </script>
 

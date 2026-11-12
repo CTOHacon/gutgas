@@ -33,6 +33,7 @@
 								v-model="checkoutData.client_phone"
 								:locale="checkoutData.locale"
 								:error-message="checkoutData.errors.client_phone"
+								@country="onPhoneCountry"
 							/>
 							<BaseFormInput
 								:placeholder="__('formEmail')"
@@ -414,6 +415,29 @@ watch(
 		resetWarehouse();
 	}
 );
+
+// A foreign phone usually means delivery outside Ukraine, where Nova Poshta
+// autocompletes don't work: switch to "Other" while nothing NP-specific is
+// filled in, and switch back if the customer returns to a Ukrainian number.
+const autoSwitchedToOther = ref(false);
+const hasNovaPoshtaInput = () =>
+	!!checkoutData.shipping_city_ref || !!checkoutData.shipping_address;
+
+const onPhoneCountry = (code: string) => {
+	if (code !== 'UA') {
+		if (isNovaPoshta.value && !hasNovaPoshtaInput()) {
+			checkoutData.shipping_method = 'other';
+			autoSwitchedToOther.value = true;
+		}
+	} else if (
+		autoSwitchedToOther.value &&
+		checkoutData.shipping_method === 'other' &&
+		!checkoutData.shipping_message
+	) {
+		checkoutData.shipping_method = 'np_department';
+		autoSwitchedToOther.value = false;
+	}
+};
 
 const canSubmit = computed(() => {
 	const baseFilled =

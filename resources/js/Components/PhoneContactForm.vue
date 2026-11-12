@@ -57,6 +57,7 @@ const onSubmit = () => {
 }
 .phone-field {
 	flex: 1;
+	min-width: 0;
 }
 .phone-field-wrapper {
 	background: linear-gradient(
@@ -73,9 +74,9 @@ const onSubmit = () => {
 
 .button {
 	padding: 0 2.75rem;
+	flex-shrink: 0;
 	@media (max-width: $large-mobile-width) {
-		flex: 1;
-		padding: 0 1rem;
+		padding: 0 1.25rem;
 	}
 }
 
