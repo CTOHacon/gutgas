@@ -475,8 +475,8 @@ const submitCheckout = () => {
 	checkoutData.post(route('order.store'), {
 		preserveScroll: true,
 		onSuccess: page => {
-			const order = page.props.order as { id?: number } | undefined;
-			trackCheckoutOrderSubmitted({ orderId: order?.id, value: cartTotal.value });
+			const orderId = page.props.analyticsOrderId as number | null | undefined;
+			trackCheckoutOrderSubmitted({ orderId: orderId ?? undefined, value: cartTotal.value });
 			checkoutData.reset();
 			cityQuery.value = '';
 			resetWarehouse();

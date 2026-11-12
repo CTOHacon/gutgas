@@ -68,6 +68,25 @@ class CompleteOrderFlowTest extends TestCase
         $this->assertContains('ivan.petrenko@example.com', $recipients);
     }
 
+    public function test_thank_you_page_exposes_order_id_for_analytics_only(): void
+    {
+        // Follow the whole redirect chain exactly like the browser does
+        // (store -> thank-you -> locale-prefixed thank-you).
+        $response = $this->withoutVite()->followingRedirects()->post('/order/store', $this->payload());
+        $order = Order::latest('id')->firstOrFail();
+
+        // The order id is shared for the GTM checkout_order_submitted event,
+        // but never as the `order` prop (ThankYou.vue would render it).
+        $response->assertInertia(fn ($page) => $page
+            ->component('ThankYou')
+            ->where('analyticsOrderId', $order->id)
+            ->missing('order'));
+
+        // Flash is one-shot: reloading the thank-you page carries no id.
+        $this->withoutVite()->followingRedirects()->get(route('thankYou'))
+            ->assertInertia(fn ($page) => $page->where('analyticsOrderId', null));
+    }
+
     public function test_client_supplied_price_and_name_are_ignored(): void
     {
         $product = $this->product(1500, 'REAL-SKU');

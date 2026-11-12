@@ -40,6 +40,11 @@ class HandleInertiaRequests extends Middleware {
             // message
             'message' => $request->session()->get('message'),
 
+            // Order id for the GTM checkout_order_submitted event only (flashed by
+            // OrderController@store). Deliberately NOT named `order`: ThankYou.vue
+            // renders the order number when an `order` prop is present.
+            'analyticsOrderId' => $request->session()->get('analytics_order_id'),
+
             'baseUrl' => url('/'),
             'currentUrl' => $request->fullUrl(),
 

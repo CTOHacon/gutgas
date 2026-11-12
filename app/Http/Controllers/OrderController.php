@@ -91,7 +91,8 @@ class OrderController extends Controller
         ProcessNewOrder::dispatch($order)->afterResponse();
 
         return redirect()->route('thankYou')
-            ->with('order', $order)->with('thankYouTranslations', trans('thank-you'));
+            ->with('order', $order)->with('thankYouTranslations', trans('thank-you'))
+            ->with('analytics_order_id', $order->id);
     }
 
     /**

@@ -27,6 +27,11 @@ class UrlLocaleHandler
             $defaultLocale = config('app.fallback_locale');
 
             $newUrl = $defaultLocale . '/' . $request->path();
+            // Keep flash data (e.g. analytics_order_id after checkout) alive
+            // across this hop; otherwise it is consumed by the 301 request.
+            if ($request->hasSession()) {
+                $request->session()->reflash();
+            }
             return Redirect::to($newUrl, 301);
         } else {
             App::setLocale($locale);
