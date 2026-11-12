@@ -1,6 +1,6 @@
 <template>
 	<nav class="container">
-		<ul
+		<ol
 			class="base-breadcrumbs fw-600 lh-150"
 			itemscope
 			itemtype="https://schema.org/BreadcrumbList"
@@ -14,45 +14,42 @@
 				itemtype="https://schema.org/ListItem"
 			>
 				<Link
-					v-if="currentUrl !== breadcrumb.slug"
+					v-if="!isCurrent(breadcrumb.slug)"
 					:href="breadcrumb.slug || ''"
-					itemscope
-					itemtype="http://schema.org/Thing"
 					itemprop="item"
-					:itemid="breadcrumb.slug"
 					class="link"
 				>
 					<span itemprop="name">
 						{{ breadcrumb.title }}
 					</span>
 				</Link>
-				<span v-else itemprop="name">
+				<span v-else itemprop="name" aria-current="page">
 					{{ breadcrumb.title }}
 				</span>
 				<meta itemprop="position" :content="`${index + 1}`" />
 			</li>
-		</ul>
+		</ol>
 	</nav>
 </template>
 
 <script setup lang="ts">
-import { usePage } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
-import { onMounted } from 'vue';
-const {
-	props: { breadcrumbs }
-} = usePage();
+import { Link, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
-const currentUrl = ref('');
-onMounted(() => {
-	currentUrl.value = window.location.href.replace(window.location.origin, '');
-	console.log(currentUrl.value);
-});
+const page = usePage();
+const breadcrumbs = computed(() => page.props.breadcrumbs ?? []);
+
+// page.url is available during SSR too, so the current item is rendered as
+// plain text in the initial HTML (not only after hydration).
+const currentPath = computed(() => page.url.split('?')[0].replace(/\/+$/, ''));
+const isCurrent = (slug: string) => slug.replace(/\/+$/, '') === currentPath.value;
 </script>
 
 <style scoped lang="scss">
 .base-breadcrumbs {
+	list-style: none;
+	padding: 0;
+	margin: 0;
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;

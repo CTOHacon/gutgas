@@ -12,6 +12,10 @@
 			v-if="productsCatalogData.products.next_page_url"
 		/>
 	</Head>
+	<ProductsItemListJsonLd
+		:products="productsCatalogData.products"
+		:name="_t(page.title)"
+	/>
 	<WebsitePage>
 		<PageHeadSpacer class="mb-60" />
 		<BaseBreadcrumbs class="mb-40" />
@@ -37,7 +41,7 @@
 			<div v-html="_t(page.content)"></div>
 		</PageContentSection>
 		<PageSeparator v-if="faqItems.length" class="mb-116" />
-		<FaqSection v-if="faqItems" :faq-items="faqItems" class="mb-116" />
+		<FaqSection v-if="faqItems.length" :faq-items="faqItems" class="mb-116" />
 		<PageSeparator class="mb-116" />
 	</WebsitePage>
 </template>
@@ -56,6 +60,7 @@ import { TproductsCatalogData } from '@/types/TproductsCatalogData';
 import ProductsCatalog from '@/Components/ProductsCatalog.vue';
 import SeoEntityMetaFields from '@/Components/SeoEntityMetaFields.vue';
 import BaseBreadcrumbs from '@/Components/BaseBreadcrumbs.vue';
+import ProductsItemListJsonLd from '@/Components/ProductsItemListJsonLd.vue';
 
 const { _t, __ } = useTranslations();
 

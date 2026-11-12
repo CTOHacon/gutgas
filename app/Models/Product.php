@@ -125,46 +125,69 @@ class Product extends Model
         $this->save();
     }
 
-    public function generateStructuredData()
+    public function generateStructuredData(?ProductPage $productPage = null)
     {
-        $attributes                  = $this->attributes()->get();
-        $attributesForStructuredData = [];
-        foreach ($attributes as $attribute) {
-            $attributesForStructuredData[] = [
-                'name'  => $attribute->attributeGroup->name,
-                'value' => $attribute->name
-            ];
-        }
-        return [
-            "@context"           => "https://schema.org/",
+        $locale = app()->currentLocale();
+        $slug = $productPage?->seoEntity?->slug ?? $this->seoEntity?->slug;
+
+        $images = collect([$this->mediaFile?->url])
+            ->merge($productPage?->mediaGallery?->pluck('url') ?? [])
+            ->filter()
+            ->map(fn ($path) => url($path))
+            ->unique()
+            ->values()
+            ->all();
+
+        $additionalProperty = $this->attributes()->with('attributeGroup')->get()
+            ->map(fn ($attribute) => [
+                "@type" => "PropertyValue",
+                "name"  => $attribute->attributeGroup->name,
+                "value" => $attribute->name,
+            ])
+            ->values()
+            ->all();
+
+        return array_filter([
+            "@context"           => "https://schema.org",
             "@type"              => "Product",
             "name"               => $this->name,
-            "image"              => [
-                url($this->mediaFile->thumbnail->url)
-            ],
-            "description"        => $this->description,
+            "image"              => $images,
+            "description"        => trim(strip_tags((string) $this->description)),
             "sku"                => $this->sku,
-            "mpn"                => $this->sku,
             "brand"              => [
                 "@type" => "Brand",
-                "name"  => "Gutgas"
+                "name"  => "GUTGAS",
             ],
             "offers"             => [
-                "@type"         => "Offer",
-                "url"           => url(app()->currentLocale() . '/' . $this->seoEntity->slug),
-                "priceCurrency" => "UAH",
-                "price"         => $this->price,
-                "availability"  => $this->stock > 0 ?
-                    "https://schema.org/InStock" :
-                    "https://schema.org/OutOfStock",
+                "@type"                   => "Offer",
+                "url"                     => url($locale . '/' . $slug),
+                "priceCurrency"           => "UAH",
+                "price"                   => $this->price,
+                "itemCondition"           => "https://schema.org/NewCondition",
+                "availability"            => $this->stock > 0
+                    ? "https://schema.org/InStock"
+                    : "https://schema.org/OutOfStock",
+                "seller"                  => ["@id" => url('/') . '/#organization'],
+                "hasMerchantReturnPolicy" => self::merchantReturnPolicy($locale),
             ],
-            "additionalProperty" => array_map(function ($attribute) {
-                return [
-                    "@type" => "PropertyValue",
-                    "name"  => $attribute['name'],
-                    "value" => $attribute['value']
-                ];
-            }, $attributesForStructuredData)
+            "additionalProperty" => $additionalProperty,
+        ], fn ($value) => $value !== null && $value !== '' && $value !== []);
+    }
+
+    /**
+     * Mirrors the public returns page (/{locale}/return): 14 days, returned
+     * by post, the buyer pays the return shipping (Consumer Protection Law, art. 9).
+     */
+    public static function merchantReturnPolicy(string $locale): array
+    {
+        return [
+            "@type"                => "MerchantReturnPolicy",
+            "applicableCountry"    => "UA",
+            "returnPolicyCategory" => "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays"   => 14,
+            "returnMethod"         => "https://schema.org/ReturnByMail",
+            "returnFees"           => "https://schema.org/ReturnFeesCustomerResponsibility",
+            "merchantReturnLink"   => url($locale . '/return'),
         ];
     }
 

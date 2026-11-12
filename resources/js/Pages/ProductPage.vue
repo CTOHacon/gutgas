@@ -1,5 +1,9 @@
 <template>
-	<SeoEntityMetaFields :seo-entity="seoEntity"/>
+	<SeoEntityMetaFields
+		:seo-entity="seoEntity"
+		og-type="product"
+		:fallback-image="productStructuredData?.image?.[0]"
+	/>
 	<Head>
 		<component :is="'script'" type="application/ld+json">
 			{{ JSON.stringify(productStructuredData) }}

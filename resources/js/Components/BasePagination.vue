@@ -8,7 +8,6 @@
 			}"
 			preserve-scroll
 			aria-label="Previous"
-			itemprop="url"
 		>
 			<svg width="6" height="10" viewBox="0 0 6 10" fill="none">
 				<path
@@ -27,7 +26,6 @@
 			class="item"
 			:class="{ current: link.active, disabled: link.url === null }"
 			preserve-scroll
-			itemprop="url"
 		>
 			{{ link.label }}
 		</Link>
@@ -39,7 +37,6 @@
 			}"
 			preserve-scroll
 			aria-label="Next"
-			itemprop="url"
 		>
 			<svg width="6" height="10" viewBox="0 0 6 10" fill="none">
 				<path

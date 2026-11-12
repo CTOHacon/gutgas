@@ -12,6 +12,10 @@
 			v-if="productsCatalogData.products.next_page_url"
 		/>
 	</Head>
+	<ProductsItemListJsonLd
+		:products="productsCatalogData.products"
+		:name="getMeta(productsGroup.meta, 'title') || _t(productsGroup.name)"
+	/>
 	<WebsitePage>
 		<PageHeadSpacer class="mb-60" />
 		<BaseBreadcrumbs class="mb-40" />
@@ -63,6 +67,7 @@ import ProductsCatalog from '@/Components/ProductsCatalog.vue';
 import { TProductsGroup } from '@/types/TProductsGroup';
 import SeoEntityMetaFields from '@/Components/SeoEntityMetaFields.vue';
 import BaseBreadcrumbs from '@/Components/BaseBreadcrumbs.vue';
+import ProductsItemListJsonLd from '@/Components/ProductsItemListJsonLd.vue';
 
 const { _t, __ } = useTranslations();
 

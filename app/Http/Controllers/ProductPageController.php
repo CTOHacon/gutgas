@@ -13,7 +13,7 @@ class ProductPageController extends Controller
         $product = $productPage->product;
         return Inertia::render('ProductPage', [
             'product' => $product,
-            'productStructuredData' => $product->generateStructuredData(),
+            'productStructuredData' => $product->generateStructuredData($productPage),
             'productPage' => $productPage,
             'seoEntity' => $productPage->seoEntity,
             'attributeGroups' => $product->attributeGroups(),

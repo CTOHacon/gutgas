@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\ProductPage;
 use App\Models\SeoEntity;
 use Closure;
 use Illuminate\Http\Request;
@@ -18,29 +19,32 @@ class ShareSeoEntityBreadcrumbs
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $route = ltrim(str_replace(App::currentLocale(), '', request()->path()), '/');
+        $locale = App::currentLocale();
 
-        $urlParts = explode('/', $route);
+        // Strip only the leading locale segment: str_replace() would also cut
+        // the locale out of slugs (e.g. "ro" inside "/ro/catalog/profesiinii-...").
+        $route = trim(preg_replace('#^' . preg_quote($locale, '#') . '(/|$)#', '', ltrim($request->path(), '/')), '/');
+
+        $urlParts = $route === '' ? [] : explode('/', $route);
 
         $urlPathesArray = ['/'];
         for ($i = 0; $i < count($urlParts); $i++) {
             $urlPathesArray[] = implode('/', array_slice($urlParts, 0, $i + 1));
         }
 
-        $breadcrumbs = collect($urlPathesArray)->map(function ($item, $key) {
+        $breadcrumbs = collect($urlPathesArray)->map(function ($item) use ($locale) {
             $seoEntity = SeoEntity::where('slug', 'LIKE', $item)->first();
-            if ($seoEntity) {
-                return [
-                    'title' =>
-                        $seoEntity->breadcrumbs_title
-                        ? $seoEntity->breadcrumbs_title
-                        : $seoEntity->title,
-                    'slug' => '/' . App::currentLocale() . '/' . $seoEntity->slug,
-                ];
+            if (!$seoEntity) {
+                return null;
             }
-        })->filter(function ($item) {
-            return $item !== null;
-        })->toArray();
+
+            return [
+                'title' => $seoEntity->breadcrumbs_title ?: $this->entityName($seoEntity),
+                'slug'  => $seoEntity->slug === '/'
+                    ? '/' . $locale
+                    : '/' . $locale . '/' . $seoEntity->slug,
+            ];
+        })->filter()->values()->toArray();
 
         // $homePage = SeoEntity::where('slug', 'LIKE', '/')->first();
         // if ($homePage)
@@ -51,5 +55,19 @@ class ShareSeoEntityBreadcrumbs
 
         Inertia::share('breadcrumbs', $breadcrumbs);
         return $next($request);
+    }
+
+    /**
+     * Product pages fall back to the product name (as in the H1) instead of
+     * the SEO title, which carries "- Купити в Україні"-style suffixes.
+     */
+    private function entityName(SeoEntity $seoEntity): string
+    {
+        $entity = $seoEntity->seoEntiteable;
+        if ($entity instanceof ProductPage) {
+            return $entity->title ?: ($entity->product?->name ?: $seoEntity->title);
+        }
+
+        return (string) $seoEntity->title;
     }
 }
